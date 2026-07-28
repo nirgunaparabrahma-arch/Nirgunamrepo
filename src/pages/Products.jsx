@@ -79,7 +79,7 @@ export default function Products() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative min-h-screen w-full flex overflow-hidden bg-[#2A1F18]">
+      <section className="relative min-h-screen w-full flex flex-col justify-center items-start px-[5%] lg:px-[8%] pt-[90px] overflow-hidden bg-[#2A1F18]">
         {/* Split Background */}
         <HeroBackground
           src="/cvrproducts.png"
@@ -88,7 +88,7 @@ export default function Products() {
         />
 
         {/* Left-aligned Content Container */}
-        <div className="relative z-10 flex flex-col justify-center px-[5%] lg:px-[8%] w-full h-full pt-[90px]">
+        <div className="relative z-10 w-full">
 
           {/* Left Content */}
           <div className="w-full max-w-[520px]">

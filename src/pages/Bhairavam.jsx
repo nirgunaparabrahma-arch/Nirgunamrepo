@@ -16,7 +16,7 @@ export default function Bhairavam() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen w-full flex overflow-hidden">
+      <section className="relative min-h-screen w-full flex flex-col justify-center items-start px-[5%] lg:px-[8%] pt-[90px] overflow-hidden">
         {/* Cinematic Background */}
         <HeroBackground
           src="/cvrbhairavam.png"
@@ -28,7 +28,7 @@ export default function Bhairavam() {
         />
 
         {/* Left Content */}
-        <div className="relative z-10 flex flex-col justify-center px-[5%] lg:px-[8%] w-full h-full pt-[90px]">
+        <div className="relative z-10 w-full">
           <div className="w-full max-w-[520px]">
             <span className="text-[13px] uppercase tracking-[0.2em] text-white/80 font-semibold mb-6 block">The Essence</span>
             <h1 className="font-display font-medium text-[72px] leading-[1] text-white tracking-[-0.03em] mb-4">

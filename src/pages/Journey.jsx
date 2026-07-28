@@ -72,7 +72,7 @@ export default function Journey() {
     <div className="bg-[#F7F2EB] text-[#2C2119] font-body selection:bg-[#C89A58]/30 overflow-x-hidden min-h-screen">
       <Navbar />
 
-      <section className="relative min-h-screen w-full flex overflow-hidden">
+      <section className="relative min-h-screen w-full flex flex-col justify-center items-start px-[5%] lg:px-[8%] pt-[90px] overflow-hidden">
         <HeroBackground
           src="/cvrjourney.png"
           mobileSrc="/cvrjourney.png"
@@ -80,7 +80,7 @@ export default function Journey() {
           imageClassName="object-right"
           overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
         />
-        <div className="relative z-10 flex flex-col justify-center px-[5%] w-full h-full pt-[90px]">
+        <div className="relative z-10 w-full">
           <div className="w-full max-w-[520px]">
             <span className="text-[13px] uppercase tracking-[0.2em] text-white/80 font-semibold mb-6 block">{pageData.heroSubtitle}</span>
             <h1 className="font-display font-medium text-[56px] md:text-[72px] leading-[1] text-white tracking-[-0.03em] mb-8">
