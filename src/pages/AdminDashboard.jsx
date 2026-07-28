@@ -25,6 +25,7 @@ export default function AdminDashboard() {
   const [volunteers, setVolunteers] = useState([]);
   const [yatras, setYatras] = useState([]);
   const [personalLetters, setPersonalLetters] = useState([]);
+  const [events, setEvents] = useState([]);
   
   // Modal State
   const [selectedItem, setSelectedItem] = useState(null);
@@ -47,8 +48,9 @@ export default function AdminDashboard() {
     const unsubscribeProducts = onSnapshot(collection(db, 'productEnquiries'), (snapshot) => {
       const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       list.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-      setProductEnquiries(list.filter(item => item.submissionType !== 'personalLetter'));
+      setProductEnquiries(list.filter(item => !['personalLetter', 'eventRegistration'].includes(item.submissionType)));
       setPersonalLetters(list.filter(item => item.submissionType === 'personalLetter'));
+      setEvents(list.filter(item => item.submissionType === 'eventRegistration'));
     }, (error) => {
       console.error("Error listening to product enquiries:", error);
     });
@@ -119,7 +121,8 @@ export default function AdminDashboard() {
     productEnquiries.filter(e => e.status === 'New').length +
     volunteers.filter(v => v.status === 'New').length +
     yatras.filter(y => y.status === 'New').length +
-    personalLetters.filter(letter => letter.status === 'New').length;
+    personalLetters.filter(letter => letter.status === 'New').length +
+    events.filter(event => event.status === 'New').length;
 
   // Handles Firestore updates (Mark Contacted)
   const handleMarkContacted = async (id, tab) => {
@@ -128,6 +131,7 @@ export default function AdminDashboard() {
     else if (tab === 'volunteers') collectionName = 'volunteers';
     else if (tab === 'yatras') collectionName = 'yatraRegistrations';
     else if (tab === 'letters') collectionName = 'productEnquiries';
+    else if (tab === 'events') collectionName = 'productEnquiries';
 
     try {
       await updateDoc(doc(db, collectionName, id), { status: 'Contacted' });
@@ -149,6 +153,7 @@ export default function AdminDashboard() {
       else if (tab === 'volunteers') collectionName = 'volunteers';
       else if (tab === 'yatras') collectionName = 'yatraRegistrations';
       else if (tab === 'letters') collectionName = 'productEnquiries';
+      else if (tab === 'events') collectionName = 'productEnquiries';
 
       try {
         await deleteDoc(doc(db, collectionName, id));
@@ -198,6 +203,18 @@ export default function AdminDashboard() {
                             (item.phone || '').toLowerCase().includes(query) ||
                             (item.email || '').toLowerCase().includes(query) ||
                             (item.message || '').toLowerCase().includes(query);
+      const matchesStatus = statusFilter === 'All' || item.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  };
+
+  const getFilteredEvents = () => {
+    const query = searchQuery.toLowerCase();
+    return events.filter(item => {
+      const matchesSearch = (item.name || '').toLowerCase().includes(query) ||
+                            (item.phone || '').toLowerCase().includes(query) ||
+                            (item.event || '').toLowerCase().includes(query) ||
+                            (item.comment || '').toLowerCase().includes(query);
       const matchesStatus = statusFilter === 'All' || item.status === statusFilter;
       return matchesSearch && matchesStatus;
     });
@@ -517,7 +534,7 @@ export default function AdminDashboard() {
                   <tr className="border-b border-black/5 bg-[#FCFAF6]/50 text-[11px] uppercase tracking-widest text-[#776D64] font-bold">
                     <th className="px-8 py-5">{activeTab === 'letters' ? 'Sender' : activeTab === 'events' ? 'Registrant' : 'Applicant / Submitter'}</th>
                     <th className="px-6 py-5">{activeTab === 'products' ? 'Product Ordered' : activeTab === 'volunteers' ? 'Interest Area' : activeTab === 'yatras' ? 'Destination' : activeTab === 'letters' ? 'Phone Number' : 'Event'}</th>
-                    <th className="px-6 py-5">{activeTab === 'products' ? 'Qty' : activeTab === 'volunteers' ? 'Availability' : activeTab === 'yatras' ? 'Pilgrims' : activeTab === 'letters' ? 'Letter' : 'Event Date'}</th>
+                    <th className="px-6 py-5">{activeTab === 'products' ? 'Qty' : activeTab === 'volunteers' ? 'Availability' : activeTab === 'yatras' ? 'Pilgrims' : activeTab === 'letters' ? 'Letter' : 'Phone No'}</th>
                     <th className="px-6 py-5">Date</th>
                     <th className="px-6 py-5">Status</th>
                     <th className="px-8 py-5 text-right">Actions</th>
@@ -715,12 +732,58 @@ export default function AdminDashboard() {
                     </tr>
                   ))}
 
+                  {/* Render Event Registrations */}
+                  {activeTab === 'events' && getFilteredEvents().map((item) => (
+                    <tr key={item.id} className="hover:bg-black/[0.005] transition-colors">
+                      <td className="px-8 py-5">
+                        <div className="font-medium text-[#2A1F18]">{item.name}</div>
+                      </td>
+                      <td className="px-6 py-5">
+                        <span className="font-display font-medium text-[15px] text-[#C7954D]">{item.event}</span>
+                      </td>
+                      <td className="px-6 py-5 text-[#776D64]">{item.phone}</td>
+                      <td className="px-6 py-5 text-[#776D64] font-light">{item.date}</td>
+                      <td className="px-6 py-5">
+                        <span className={`px-2.5 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest ${item.status === 'New' ? 'bg-[#D87428]/10 text-[#D87428]' : item.status === 'Contacted' ? 'bg-[#5F6A46]/10 text-[#5F6A46]' : 'bg-black/5 text-[#776D64]'}`}>
+                          {item.status}
+                        </span>
+                      </td>
+                      <td className="px-8 py-5 text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          <button
+                            onClick={() => setSelectedItem({ ...item, tab: 'events' })}
+                            className="w-9 h-9 rounded-full bg-black/5 hover:bg-[#C7954D]/10 hover:text-[#C7954D] text-[#776D64] transition-colors flex items-center justify-center"
+                            title="View full details"
+                          >
+                            <span className="material-symbols-outlined text-[18px]">visibility</span>
+                          </button>
+                          {item.status === 'New' && (
+                            <button
+                              onClick={() => handleMarkContacted(item.id, 'events')}
+                              className="w-9 h-9 rounded-full bg-black/5 hover:bg-[#5F6A46]/10 hover:text-[#5F6A46] text-[#776D64] transition-colors flex items-center justify-center"
+                              title="Mark as contacted"
+                            >
+                              <span className="material-symbols-outlined text-[18px]">done</span>
+                            </button>
+                          )}
+                          <button
+                            onClick={() => handleDeleteItem(item.id, 'events')}
+                            className="w-9 h-9 rounded-full bg-black/5 hover:bg-red-500/10 hover:text-red-600 text-[#776D64] transition-colors flex items-center justify-center"
+                            title="Delete event registration"
+                          >
+                            <span className="material-symbols-outlined text-[18px]">delete</span>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+
                   {/* Empty State */}
                   {((activeTab === 'products' && getFilteredProducts().length === 0) ||
                     (activeTab === 'volunteers' && getFilteredVolunteers().length === 0) ||
                     (activeTab === 'yatras' && getFilteredYatras().length === 0) ||
                     (activeTab === 'letters' && getFilteredPersonalLetters().length === 0) ||
-                    activeTab === 'events') && (
+                    (activeTab === 'events' && getFilteredEvents().length === 0)) && (
                     <tr>
                       <td colSpan="6" className="px-8 py-16 text-center text-[#776D64]">
                         <span className="material-symbols-outlined text-4xl mb-3 text-black/20 block">inbox</span>
@@ -844,13 +907,29 @@ export default function AdminDashboard() {
                 </div>
               )}
 
+              {/* Event registration specific fields */}
+              {selectedItem.tab === 'events' && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <span className="text-[11px] uppercase tracking-wider text-white/40 font-bold block mb-1">Event</span>
+                    <span className="font-medium text-white">{selectedItem.event}</span>
+                  </div>
+                  <div>
+                    <span className="text-[11px] uppercase tracking-wider text-white/40 font-bold block mb-1">Phone No</span>
+                    <a className="text-white font-medium hover:text-[#C7954D] transition-colors" href={`tel:${selectedItem.phone}`}>
+                      {selectedItem.phone}
+                    </a>
+                  </div>
+                </div>
+              )}
+
               {/* Message content */}
               <div>
                 <span className="text-[11px] uppercase tracking-wider text-white/40 font-bold block mb-1">
-                  {selectedItem.tab === 'products' ? 'Message / Questions' : selectedItem.tab === 'volunteers' ? 'About Himself/Herself' : selectedItem.tab === 'letters' ? 'Personal Letter' : 'Special Requirements'}
+                  {selectedItem.tab === 'products' ? 'Message / Questions' : selectedItem.tab === 'volunteers' ? 'About Himself/Herself' : selectedItem.tab === 'letters' ? 'Personal Letter' : selectedItem.tab === 'events' ? 'Comment' : 'Special Requirements'}
                 </span>
                 <p className="bg-[#1C120C]/80 border border-white/5 rounded-[12px] p-4 text-[14px] text-white/95 max-h-[160px] overflow-y-auto font-light leading-relaxed">
-                  {selectedItem.tab === 'products' ? selectedItem.message : selectedItem.tab === 'volunteers' ? selectedItem.about : selectedItem.tab === 'letters' ? selectedItem.message : selectedItem.requirements}
+                  {selectedItem.tab === 'products' ? selectedItem.message : selectedItem.tab === 'volunteers' ? selectedItem.about : selectedItem.tab === 'letters' ? selectedItem.message : selectedItem.tab === 'events' ? (selectedItem.comment || 'No comment provided.') : selectedItem.requirements}
                 </p>
               </div>
 

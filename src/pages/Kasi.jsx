@@ -318,7 +318,7 @@ export default function KasiYatra() {
 
         <div className="absolute inset-0">
           <img
-            src="/kashihero.jpg"
+            src="/kasi cover.png"
             alt="Sampoorna Kashi Yatra"
             className="w-full h-full object-cover"
           />

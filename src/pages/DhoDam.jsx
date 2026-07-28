@@ -100,55 +100,55 @@ export default function DhoDham() {
       date: "Day 1",
       title: "Arriving Delhi",
       description:
-        "Yatra starts from 8 PM — heading towards Haridwar."
+        "Yatra starts from 8 PM — Heading towards Haridwar."
     },
     {
       date: "Day 2",
       title: "Arriving Haridwar",
       description:
-        "Explore Haridwar — experience the sacred Ganga Aarti — overnight stay."
+        "Explore Haridwar — Experience the sacred Ganga Aarti — Overnight stay."
     },
     {
       date: "Day 3",
       title: "Departure to Tungnath",
       description:
-        "Explore Tungnath and Chandrashila — hotel stay."
+        "Explore Tungnath and Chandrashila — Hotel stay."
     },
     {
       date: "Day 4",
       title: "Departure to Sonprayag",
       description:
-        "Proceed towards Gaurikund — trekking to Kedarnath — overnight stay."
+        "Proceed towards Gaurikund — Trek to Kedarnath — Overnight stay."
     },
     {
       date: "Day 5",
       title: "Kedarnath",
       description:
-        "Kedarnath Darshan — visit Kalabhairav — night trek down."
+        "Kedarnath Darshan — Visit Kalabhairav — Night trek down."
     },
     {
       date: "Day 6",
       title: "Departure to Bhadrinath",
       description:
-        "Visit Dhari Devi — sightseeing — stay at Bhadrinath."
+        "Visit Dhari Devi — Sightseeing — Stay at Bhadrinath."
     },
     {
       date: "Day 7",
       title: "Bhadrinath",
       description:
-        "Darshan — explore Bhadrinath — visit Mana Village — overnight stay."
+        "Darshan — Explore Bhadrinath — Visit Mana Village — Overnight stay."
     },
     {
       date: "Day 8",
       title: "Departure to Rishikesh",
       description:
-        "Explore Rishikesh — gaming time — shopping."
+        "Explore Rishikesh — Gaming time — Shopping."
     },
     {
       date: "Day 9",
       title: "Departure to Delhi",
       description:
-        "Explore Delhi (optional) — stay."
+        "Explore Delhi (optional) — Stay."
     },
     {
       date: "Day 10",
@@ -185,13 +185,13 @@ export default function DhoDham() {
   // PERSONAL ITEMS
   // -----------------------------
   const personalItems = [
-    "Toiletries — Soap, shampoo, toothbrush, toothpaste, etc.",
+    "Toiletries — Soap, shampoo, toothbrush, toothpaste etc.",
     "Sunscreen (SPF 50+) — To protect against strong UV rays.",
     "Lip Balm with SPF — To prevent chapped lips.",
     "Sunglasses — To shield your eyes from glare.",
     "Hand Sanitizer — For hygiene.",
     "Personal Medications — Any prescribed medications.",
-    "First-Aid Kit — Bandages, antiseptic cream, pain relievers, etc.",
+    "First-Aid Kit — Bandages, Antiseptic cream, Pain relievers, Electrol Powder etc.",
     "Water Bottle — To stay hydrated.",
     "Torch or Headlamp — With extra batteries.",
     "Walking Stick or Trekking Pole — For support during treks.",
@@ -221,7 +221,7 @@ export default function DhoDham() {
     {
       title: "Weight",
       description:
-        "Pack light to make trekking easier."
+        "Pack light to make trek easier."
     },
     {
       title: "Weather",
@@ -244,7 +244,7 @@ export default function DhoDham() {
   // ADDITIONAL TIPS
   // -----------------------------
   const additionalTips = [
-    "Carry dry fruits and energy bars for quick snacks.",
+    "Carry dry fruits and energy bars for quick snacking.",
     "Use plastic bags to waterproof your belongings.",
     "Respect the local customs and traditions."
   ];
@@ -253,14 +253,14 @@ export default function DhoDham() {
   // EXCLUSIONS
   // -----------------------------
   const exclusions = [
-    "Additional hotel accommodation and meals for extra stay in the event of delay of the trip due to any unforeseen reason or changes.",
+    "Additional hotel accommodation and meals for extra stay in the event of delay of the trip due to any unforeseen conditions or situations.",
     "Any expenses of a personal nature.",
     "Transport services for any additional sightseeing service which is not mentioned in the itinerary.",
     "Emergency evacuation expenses.",
     "Emergency medical expenses in the event of hospitalization.",
-    "All additional expenses for returning early from the trip due to any personal reasons.",
-    "All additional expenses or increases in cost of any trip item or service due to sudden hike in permit fee, hotel prices or prices for other trip services by concerned authorities, flight companies, hotel owners, vendors or due to any other reason beyond our control.",
-    "Any additional expenses due to unforeseen circumstances such as weather, natural disasters, Acts of God, technical failures, flight delays or cancellations, permits, strikes, riots, political closures, lockdowns, war or any uncontrollable situation.",
+    "Any additional expenses for returning early from the trip due to any personal reasons.",
+    "Any additional expenses or increases in the cost of any trip item or service due to sudden hike in permit fee, hotel prices or prices for other trip services by concerned authorities, flight companies, hotel owners, vendors or due to any other reason beyond our control.",
+    "Any additional expenses due to unforeseen circumstances such as weather, natural disasters, Acts of God, technical failures, flight delays or cancellations, permits, strikes, riots, political closures, lockdowns, war or any uncontrollable situations.",
     "Any service not listed in the package cost inclusions is not the company's liability and must be paid by the traveller in advance or at the time of use.",
     "Other costs that may have to be borne by travellers in extreme cases."
   ];
@@ -417,9 +417,9 @@ export default function DhoDham() {
               <span className="text-[#C89A58] mx-3">→</span>
               Haridwar
               <span className="text-[#C89A58] mx-3">→</span>
-              Gaurikund
-              <span className="text-[#C89A58] mx-3">→</span>
               Tungnath
+              <span className="text-[#C89A58] mx-3">→</span>
+              Gaurikund
               <span className="text-[#C89A58] mx-3">→</span>
               Kedarnath
               <span className="text-[#C89A58] mx-3">→</span>
@@ -431,6 +431,10 @@ export default function DhoDham() {
             </p>
 
           </div>
+
+          <p className="font-display italic font-medium text-[20px] md:text-[24px] text-[#D87428] mt-6 text-center">
+            This trip includes more than 12 Kshetras.
+          </p>
 
         </div>
 
@@ -536,8 +540,8 @@ export default function DhoDham() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-12">
 
             {[
-              "Vasudhara Falls",
               "Triyuginarayan",
+              "Vasudhara Falls",
               "Mathura"
             ].map((place, index) => (
 
@@ -560,10 +564,6 @@ export default function DhoDham() {
 
           </div>
 
-
-          <p className="font-display italic text-[#C89A58] mt-10">
-            This trip includes more than 12 Kshetras.
-          </p>
 
         </div>
 

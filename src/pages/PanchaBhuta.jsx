@@ -161,7 +161,7 @@ export default function PanchaBhuta() {
   ];
 
   const personalItems = [
-    "Toiletries: Soap, shampoo, toothbrush, toothpaste, etc.",
+    "Toiletries: Soap, shampoo, toothbrush, toothpaste etc.",
     "Sunscreen and sunglasses.",
     "Hand sanitizer.",
     "Personal prescribed medications.",

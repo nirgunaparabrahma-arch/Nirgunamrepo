@@ -1,11 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { db } from '../firebase';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
+  const [joinForm, setJoinForm] = useState({ name: '', phone: '', event: '', comment: '' });
+  const [joinSubmitting, setJoinSubmitting] = useState(false);
   const location = useLocation();
+
+  const handleJoinChange = (e) => {
+    setJoinForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleJoinSubmit = async (e) => {
+    e.preventDefault();
+    setJoinSubmitting(true);
+
+    try {
+      await addDoc(collection(db, 'productEnquiries'), {
+        submissionType: 'eventRegistration',
+        name: joinForm.name.trim(),
+        phone: joinForm.phone.trim(),
+        event: joinForm.event,
+        comment: joinForm.comment.trim(),
+        status: 'New',
+        date: new Date().toISOString().split('T')[0],
+        timestamp: serverTimestamp()
+      });
+
+      alert('Event registration submitted successfully! Our team will contact you shortly.');
+      setJoinForm({ name: '', phone: '', event: '', comment: '' });
+      setIsJoinModalOpen(false);
+    } catch (error) {
+      console.error('Error submitting event registration:', error);
+      alert('Unable to submit the form. Please try again.');
+    } finally {
+      setJoinSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,18 +132,18 @@ export default function Navbar() {
             <h2 className="font-display text-3xl text-[#2C2119] mb-2">Join Nirgunam</h2>
             <p className="font-body text-[#776D64] text-sm mb-8">Fill out the form below to register your interest.</p>
             
-            <form onSubmit={(e) => { e.preventDefault(); alert("Form submitted!"); setIsJoinModalOpen(false); }} className="flex flex-col gap-5">
+            <form onSubmit={handleJoinSubmit} className="flex flex-col gap-5">
               <div className="flex flex-col gap-2">
                 <label className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Full Name</label>
-                <input type="text" required className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent font-body text-[#2C2119]" placeholder="Your Name" />
+                <input type="text" name="name" value={joinForm.name} onChange={handleJoinChange} required className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent font-body text-[#2C2119]" placeholder="Your Name" />
               </div>
               <div className="flex flex-col gap-2">
                 <label className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Phone No</label>
-                <input type="tel" required className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent font-body text-[#2C2119]" placeholder="Your Phone Number" />
+                <input type="tel" name="phone" value={joinForm.phone} onChange={handleJoinChange} required className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent font-body text-[#2C2119]" placeholder="Your Phone Number" />
               </div>
               <div className="flex flex-col gap-2">
                 <label className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Event</label>
-                <select required defaultValue="" className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent font-body text-[#2C2119] cursor-pointer">
+                <select name="event" value={joinForm.event} onChange={handleJoinChange} required className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent font-body text-[#2C2119] cursor-pointer">
                   <option value="" disabled>Select an event</option>
                   <option value="Guru Poornima">Guru Poornima</option>
                   <option value="Bhairava Jayanti">Bhairava Jayanti</option>
@@ -119,10 +154,10 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col gap-2">
                 <label className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Comment</label>
-                <textarea rows="3" className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent font-body text-[#2C2119] resize-none" placeholder="Any comments or questions?"></textarea>
+                <textarea name="comment" value={joinForm.comment} onChange={handleJoinChange} rows="3" className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent font-body text-[#2C2119] resize-none" placeholder="Any comments or questions?"></textarea>
               </div>
-              <button type="submit" className="mt-4 bg-[#2C2119] text-white py-4 rounded-lg text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-[#B08955] transition-colors">
-                Send
+              <button type="submit" disabled={joinSubmitting} className="mt-4 bg-[#2C2119] text-white py-4 rounded-lg text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-[#B08955] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+                {joinSubmitting ? 'Sending...' : 'Send'}
               </button>
             </form>
           </div>
