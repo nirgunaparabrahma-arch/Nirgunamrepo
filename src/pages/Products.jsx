@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import HeroBackground from '../components/HeroBackground';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -78,16 +79,13 @@ export default function Products() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative w-full h-[850px] flex overflow-hidden bg-[#2A1F18]">
+      <section className="relative min-h-screen w-full flex overflow-hidden bg-[#2A1F18]">
         {/* Split Background */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/hero_bg.png"
-            alt="Temple Altar"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
-        </div>
+        <HeroBackground
+          src="/cvrproducts.png"
+          alt="Temple Altar"
+          overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
+        />
 
         {/* Left-aligned Content Container */}
         <div className="relative z-10 flex flex-col justify-center px-[5%] lg:px-[8%] w-full h-full pt-[90px]">
@@ -419,14 +417,11 @@ export default function Products() {
 
       {/* FINAL CTA SECTION */}
       <section className="relative w-full h-[420px] flex items-end pb-16 px-[5%] lg:px-[8%]">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/pro cover.png"
-            alt="Spiritual Landscape"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-        </div>
+        <HeroBackground
+          src="/pro cover.png"
+          alt="Spiritual Landscape"
+          overlayClassName="bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+        />
 
         <div className="relative z-10 max-w-[1400px] mx-auto w-full flex flex-col md:flex-row justify-between items-end gap-8">
           <div className="max-w-[600px]">

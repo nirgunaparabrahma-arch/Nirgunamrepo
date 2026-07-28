@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import HeroBackground from "../components/HeroBackground";
 
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -224,20 +225,17 @@ export default function PanchaBhuta() {
       <Navbar />
 
      {/* HERO SECTION */}
-<section className="relative w-full h-[600px] md:h-[700px] overflow-hidden">
+<section className="relative min-h-screen w-full overflow-hidden">
 
-  {/* Hero Image */}
-  <img
-    src="/panchabhuta.png"
+  <HeroBackground
+    src="/cvrpanchabutam.png"
     alt="Pancha Bhuta Sacred Yatra"
-    className="absolute inset-0 w-full h-full object-cover object-center"
+    imageClassName="object-center"
+    overlayClassName="bg-black/45"
   />
 
-  {/* Dark Overlay */}
-  <div className="absolute inset-0 bg-black/45"></div>
-
   {/* Hero Content */}
-  <div className="relative z-10 h-full flex items-center justify-center px-6">
+  <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
     <div className="text-center text-white max-w-4xl">
 
       <span className="text-[12px] uppercase tracking-[0.3em] text-[#E8C58B] font-semibold">

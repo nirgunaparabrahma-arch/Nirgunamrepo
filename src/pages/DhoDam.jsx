@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import HeroBackground from "../components/HeroBackground";
 
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
@@ -279,21 +280,14 @@ export default function DhoDham() {
       {/* ================================
           HERO SECTION
       ================================= */}
-      <section className="relative min-h-[650px] flex items-end overflow-hidden">
+      <section className="relative min-h-screen flex items-end overflow-hidden">
 
         {/* Background */}
-        <div className="absolute inset-0">
-
-          <img
-            src="/dhodhamhero.png"
-            alt="Dho Dham"
-            className="w-full h-full object-cover"
-          />
-
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
-
-        </div>
+        <HeroBackground
+          src="/cvrdhodham.png"
+          alt="Dho Dham"
+          overlayClassName="bg-gradient-to-t from-black/80 via-black/40 to-black/10"
+        />
 
 
         {/* Hero Content */}
@@ -924,17 +918,11 @@ export default function DhoDham() {
       ================================= */}
       <section className="relative py-[130px] px-[5%] lg:px-[8%] overflow-hidden">
 
-        <div className="absolute inset-0">
-
-          <img
-            src="/yatralast1.jpg"
-            alt="Sacred Himalayan Journey"
-            className="w-full h-full object-cover"
-          />
-
-          <div className="absolute inset-0 bg-black/65" />
-
-        </div>
+        <HeroBackground
+          src="/yatralast1.jpg"
+          alt="Sacred Himalayan Journey"
+          overlayClassName="bg-black/65"
+        />
 
 
         <div className="relative z-10 max-w-[800px] mx-auto text-center">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import HeroBackground from '../components/HeroBackground';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -57,15 +58,12 @@ export default function SpiritualActivities() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative w-full h-[700px] flex items-center overflow-hidden bg-[#241812]">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/activity4.png"
-            alt="Spiritual Gathering"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
-        </div>
+      <section className="relative min-h-screen w-full flex items-center overflow-hidden bg-[#241812]">
+        <HeroBackground
+          src="/cvractivities.png"
+          alt="Spiritual Gathering"
+          overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
+        />
 
         <div className="relative z-10 flex flex-col justify-center px-[5%] lg:px-[8%] w-full h-full pt-[90px]">
           <div className="w-full max-w-[520px]">

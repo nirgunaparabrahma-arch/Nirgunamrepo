@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import HeroBackground from '../components/HeroBackground';
 
 export default function Bhairavam() {
 
@@ -15,21 +16,16 @@ export default function Bhairavam() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative w-full h-[900px] flex overflow-hidden">
+      <section className="relative min-h-screen w-full flex overflow-hidden">
         {/* Cinematic Background */}
-        <div className="absolute inset-0 z-0">
-          <picture>
-            <source media="(max-width: 768px)" srcSet="/Bhairav cover.png" />
-            <img
-              alt="Bhairavam Meditation"
-              className="w-full h-full object-cover object-right lg:object-center"
-              src="/Bhairav cover.png"
-              onError={(e) => { e.target.src = "/Bhairav cover.png" }}
-            />
-          </picture>
-          {/* Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
-        </div>
+        <HeroBackground
+          src="/cvrbhairavam.png"
+          mobileSrc="/cvrbhairavam.png"
+          alt="Bhairavam Meditation"
+          imageClassName="object-right lg:object-center"
+          overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
+          onError={(e) => { e.currentTarget.src = "/cvrbhairavam.png"; }}
+        />
 
         {/* Left Content */}
         <div className="relative z-10 flex flex-col justify-center px-[5%] lg:px-[8%] w-full h-full pt-[90px]">
@@ -176,15 +172,11 @@ export default function Bhairavam() {
 
       {/* Quote Banner */}
       <section className="relative w-full h-[340px] flex items-center justify-start overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            alt="Mountain Sunrise"
-            className="w-full h-full object-cover"
-            src="/maneeshriver.jpeg"
-            onError={(e) => { e.target.src = "https://lh3.googleusercontent.com/aida-public/AB6AXuBH_5TIzLqfE67589gMkw7iBW7iurg_8Z9zW4dNofmATXR4G2FIUBKjs617lxlbFcArUk6ITEmjmCeS0K718dM2dB6t7E2gL9PbdJ4P80HeZ-t9ea0Cj3ZRsF81UAFoha5GvXE5rkJvUlMF4bAIqwUCYR2v_jE_g3esh2df5dufRf-pLn_T3hJDqQ4nszis18gajBN1XwfwZPQDOse3lbpXswdYBG0XHlYMStfvV2ilNJSQ7n90KzLg-sgq3bWNsT7Lr3kNgd6ADFJW" }}
-          />
-          <div className="absolute inset-0 bg-[#17120F]/50 backdrop-blur-[2px]"></div>
-        </div>
+        <HeroBackground
+          src="/maneeshriver.jpeg"
+          alt="Mountain Sunrise"
+          overlayClassName="bg-[#17120F]/50 backdrop-blur-[2px]"
+        />
 
         <div className="relative z-10 text-left px-[5%] max-w-[1000px] w-full">
           <p className="font-display font-medium text-[36px] md:text-[64px] leading-[1.1] text-white tracking-[-0.02em] mb-8 drop-shadow-lg">

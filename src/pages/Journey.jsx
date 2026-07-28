@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import HeroBackground from '../components/HeroBackground';
 
 export default function Journey() {
   const [pageData, setPageData] = useState({
@@ -71,18 +72,14 @@ export default function Journey() {
     <div className="bg-[#F7F2EB] text-[#2C2119] font-body selection:bg-[#C89A58]/30 overflow-x-hidden min-h-screen">
       <Navbar />
 
-      <section className="relative w-full h-[850px] flex overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <picture>
-            <source media="(max-width: 768px)" srcSet="/cvrjourney.png" />
-            <img
-              alt="Hero"
-              className="w-full h-full object-cover object-right"
-              src={"/cvrjourney.png"}
-            />
-          </picture>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
-        </div>
+      <section className="relative min-h-screen w-full flex overflow-hidden">
+        <HeroBackground
+          src="/cvrjourney.png"
+          mobileSrc="/cvrjourney.png"
+          alt="Hero"
+          imageClassName="object-right"
+          overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
+        />
         <div className="relative z-10 flex flex-col justify-center px-[5%] w-full h-full pt-[90px]">
           <div className="w-full max-w-[520px]">
             <span className="text-[13px] uppercase tracking-[0.2em] text-white/80 font-semibold mb-6 block">{pageData.heroSubtitle}</span>
@@ -151,16 +148,12 @@ export default function Journey() {
 <section className="relative w-full h-[500px] flex items-center justify-center overflow-hidden">
   
   {/* Background Image */}
-  <div className="absolute inset-0 z-0">
-    <img
-      src="/walk.png"
-      alt="Spiritual Journey"
-      className="w-full h-full object-cover object-center"
-    />
-
-    {/* Dark overlay for text readability */}
-    <div className="absolute inset-0 bg-black/40"></div>
-  </div>
+  <HeroBackground
+    src="/walk.png"
+    alt="Spiritual Journey"
+    imageClassName="object-center"
+    overlayClassName="bg-black/40"
+  />
 
   {/* Quote Content */}
   <div className="relative z-10 text-center px-6 max-w-[1000px]">

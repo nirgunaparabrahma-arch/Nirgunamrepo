@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import HeroBackground from '../components/HeroBackground';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
@@ -93,21 +94,15 @@ export default function Yatra() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative w-full h-[850px] flex overflow-hidden">
+      <section className="relative min-h-screen w-full flex overflow-hidden">
         {/* Cinematic Background */}
-        <div className="absolute inset-0 z-0">
-          <picture>
-            <source media="(max-width: 768px)" srcSet="/img2.webp" />
-            <img
-              alt="Yatra Meditation"
-              className="w-full h-full object-cover object-center"
-              src="/gold kailash.png"
-              onError={(e) => { e.target.src = "https://lh3.googleusercontent.com/aida-public/AB6AXuDQq0s45XzZ-Qz7l9q3R475_H6g47t8P6Z_9239WfX2062x28x_8992_803fQx3446-f_904xQ_5H1Y96939b4bX9QW5Z-5_VzX6691461993444_2hG_y9-7_R7-0243_z28V1z-2y9x985qQ6_Z-4Q58bX5716W4-x_2209q93Wq990xZ-y-V3Qy7Z3_0b2z6-23V46_8-6fH-Q91_qXz-189_01b22XfH-xX2q-Q1Z-W35x4QW44Q" }}
-            />
-          </picture>
-          {/* Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
-        </div>
+        <HeroBackground
+          src="/cvryatra.png"
+          mobileSrc="/cvryatra.png"
+          alt="Yatra Meditation"
+          imageClassName="object-center"
+          overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
+        />
 
         {/* Left Content */}
         <div className="relative z-10 flex flex-col justify-center px-[5%] lg:px-[8%] w-full h-full pt-[90px]">
@@ -463,16 +458,12 @@ export default function Yatra() {
 
       {/* FINAL CTA BANNER */}
       <section className="relative w-full h-[420px] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            alt="Sacred Landscape"
-            className="w-full h-full object-cover"
-            src="/mansa sarovar.png"
-            onError={(e) => { e.target.src = "https://lh3.googleusercontent.com/aida-public/AB6AXuCFOVG69z_3LM2ZCWTThhbzFGdqPZQKqjE1LjJuHptKUkQkxOSdv50p1P5LC5nvGAsukhxEC1cZ2L0gSGthL9wfdbCEqXoXPJVfNKX1msjX4lCpQlrtUdMYXMBlWzx8oBOZ5uqxaFPPg_BeE7zcDKTDcBqNIMns3WzvDJl_810vzOMmYfMYDE8b2Dg605c1j7me7-h2bE5CiuJFjVLZm5BIkNhzzC6NpMdZiEnutbIeIjhqC_h7AiY5eeTlhGPABm66FB76pV-KV51i" }}
-          />
-          <div className="absolute inset-0 bg-[#7A5736]/40 backdrop-blur-[1px]"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#17120F]/80 to-transparent"></div>
-        </div>
+        <HeroBackground
+          src="/mansa sarovar.png"
+          alt="Sacred Landscape"
+          overlayClassName="bg-[#7A5736]/40 backdrop-blur-[1px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#17120F]/80 to-transparent"></div>
 
         <div className="relative z-10 px-[5%] lg:px-[8%] w-full max-w-[800px]">
           <h2 className="font-display font-medium text-[46px] md:text-[56px] leading-[1.1] text-white tracking-[-0.02em] mb-6">

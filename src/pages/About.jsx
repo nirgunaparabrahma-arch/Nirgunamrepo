@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import HeroBackground from '../components/HeroBackground';
 
 export default function About() {
   const observerRef = useRef(null);
@@ -65,18 +66,13 @@ export default function About() {
     <div className="bg-surface text-on-surface font-body selection:bg-primary-fixed/50 overflow-x-hidden">
       <Navbar />
 
-      <header className="relative w-full h-[850px] flex flex-col justify-center items-start px-[5%] pt-[90px] overflow-hidden bg-[#e6dfd1]">
-        <div className="absolute inset-0 z-0">
-          <picture>
-            <source media="(max-width: 768px)" srcSet="/cvrabout.png" />
-            <img
-              alt="Hero"
-              className="w-full h-full object-cover object-right"
-              src={"/cvrabout.png"}
-            />
-          </picture>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
-        </div>
+      <header className="relative min-h-screen w-full flex flex-col justify-center items-start px-[5%] pt-[90px] overflow-hidden bg-[#e6dfd1]">
+        <HeroBackground
+          src="/cvrabout.png"
+          mobileSrc="/cvrabout.png"
+          alt="Hero"
+          overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
+        />
 
         <div className="relative z-10 max-w-2xl scroll-reveal mt-16 md:mt-0">
           <span className="text-[10px] md:text-[12px] uppercase tracking-[0.4em] text-white/80 font-bold mb-4 md:mb-6 block">About The Founder</span>
@@ -253,10 +249,11 @@ export default function About() {
 
 
       <section className="relative py-32 lg:py-48 px-[5%] flex flex-col items-center justify-center text-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img alt="Temples at sunrise" className="w-full h-full object-cover" src="riverflow.png" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#e6dfd1]/90 via-[#e6dfd1]/60 to-[#e6dfd1]/90"></div>
-        </div>
+        <HeroBackground
+          src="/riverflow.png"
+          alt="Temples at sunrise"
+          overlayClassName="bg-gradient-to-b from-[#e6dfd1]/90 via-[#e6dfd1]/60 to-[#e6dfd1]/90"
+        />
         <div className="relative z-10 max-w-4xl scroll-reveal flex flex-col items-center w-full md:-translate-x-8">
           <p className="font-display text-4xl lg:text-5xl italic text-primary-container leading-snug mb-6" style={{ whiteSpace: 'pre-line' }}>
             "{pageData.bannerQuote}"

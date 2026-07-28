@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import HeroBackground from '../components/HeroBackground';
 import '../index.css';
 
 export default function Home() {
@@ -176,17 +177,12 @@ export default function Home() {
 
       {/* Hero Section */}
       <header className="relative min-h-screen w-full flex flex-col justify-center items-start px-[5%] pt-32 pb-[420px] sm:pb-[350px] lg:pb-[320px] overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <picture>
-            <source media="(max-width: 768px)" srcSet="/img1.webp" />
-            <img
-              alt="Hero Background"
-              className="w-full h-full object-cover"
-              src={"/heroimg.webp"}
-            />
-          </picture>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
-        </div>
+        <HeroBackground
+          src="/heroimg.webp"
+          mobileSrc="/img1.webp"
+          alt="Hero Background"
+          overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
+        />
         <div className="relative z-10 max-w-4xl scroll-reveal mt-10 md:mt-0">
           <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.95] text-white mb-2 md:mb-4">{pageData.heroTitle}</h1>
           <h2 className="font-display text-2xl md:text-4xl italic font-light text-white/90 mb-6 md:mb-8">{pageData.heroSubtitle}</h2>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import HeroBackground from "../components/HeroBackground";
 
 import { db } from "../firebase";
 import {
@@ -315,17 +316,13 @@ export default function KasiYatra() {
       {/* ================================
           HERO SECTION
       ================================= */}
-      <section className="relative min-h-[650px] flex items-end overflow-hidden">
+      <section className="relative min-h-screen flex items-end overflow-hidden">
 
-        <div className="absolute inset-0">
-          <img
-            src="/kasi cover.png"
-            alt="Sampoorna Kashi Yatra"
-            className="w-full h-full object-cover"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10" />
-        </div>
+        <HeroBackground
+          src="/cvrkashi.png"
+          alt="Sampoorna Kashi Yatra"
+          overlayClassName="bg-gradient-to-t from-black/85 via-black/45 to-black/10"
+        />
 
         <div className="relative z-10 w-full px-[5%] lg:px-[8%] pb-20">
 
@@ -1285,17 +1282,11 @@ export default function KasiYatra() {
       ================================= */}
       <section className="relative min-h-[520px] flex items-center overflow-hidden">
 
-        <div className="absolute inset-0">
-
-          <img
-            src="/kashi-cta.jpg"
-            alt="Kashi Ganga Aarti"
-            className="w-full h-full object-cover"
-          />
-
-          <div className="absolute inset-0 bg-black/65" />
-
-        </div>
+        <HeroBackground
+          src="/kashi-cta.jpg"
+          alt="Kashi Ganga Aarti"
+          overlayClassName="bg-black/65"
+        />
 
         <div className="relative z-10 w-full px-[5%] lg:px-[8%] py-20">
 
