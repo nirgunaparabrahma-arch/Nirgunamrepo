@@ -51,7 +51,7 @@ export default function Products() {
         timestamp: serverTimestamp()
       });
 
-      alert("Enquiry submitted successfully! Our team will contact you shortly.");
+      alert("Order submitted successfully! Our team will contact you shortly.");
       // Reset fields
       setFullName('');
       setQuantity(1);

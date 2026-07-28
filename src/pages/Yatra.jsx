@@ -216,7 +216,7 @@ export default function Yatra() {
               <div className="flex items-center gap-3 mb-8 pr-12">
                 <span className="material-symbols-outlined text-[#C89A58] text-[28px]">filter_vintage</span>
                 <h3 id="yatra-modal-title" className="font-display text-[28px] text-[#2C2119]">Register for Yatra
-                  
+
                 </h3>
               </div>
 
@@ -417,7 +417,7 @@ export default function Yatra() {
               More Than <br />A Journey
             </h2>
             <p className="font-body text-[#776D64] text-[15px] leading-[1.8] font-light mb-6">
-              Yatra is not about places, it is about ransformation.
+              Yatra is not about places, it is about Transformation.
             </p>
             <div className="flex flex-col gap-4">
               {[

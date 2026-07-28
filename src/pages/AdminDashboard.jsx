@@ -425,7 +425,7 @@ export default function AdminDashboard() {
             <div className="px-8 py-6 border-b border-black/5 bg-[#FCFAF6] flex flex-col lg:flex-row justify-between lg:items-center gap-6">
               
               {/* Navigation Tabs */}
-              <div className="flex border-b border-black/5 lg:border-none p-1 bg-black/5 rounded-[12px] self-start">
+              <div className="flex flex-wrap border-b border-black/5 lg:border-none p-1 bg-black/5 rounded-[12px] self-start">
                 <button
                   onClick={() => { setActiveTab('products'); setSearchQuery(''); }}
                   className={`h-11 px-5 rounded-[8px] text-[12px] uppercase font-bold tracking-wider transition-colors ${activeTab === 'products' ? 'bg-[#2A1F18] text-white' : 'text-[#776D64] hover:text-[#2A1F18]'}`}
@@ -444,6 +444,18 @@ export default function AdminDashboard() {
                 >
                   Yatra Registrations
                 </button>
+                <button
+                  onClick={() => { setActiveTab('letters'); setSearchQuery(''); }}
+                  className={`h-11 px-5 rounded-[8px] text-[12px] uppercase font-bold tracking-wider transition-colors ${activeTab === 'letters' ? 'bg-[#2A1F18] text-white' : 'text-[#776D64] hover:text-[#2A1F18]'}`}
+                >
+                  Personal Letters
+                </button>
+                <button
+                  onClick={() => { setActiveTab('events'); setSearchQuery(''); }}
+                  className={`h-11 px-5 rounded-[8px] text-[12px] uppercase font-bold tracking-wider transition-colors ${activeTab === 'events' ? 'bg-[#2A1F18] text-white' : 'text-[#776D64] hover:text-[#2A1F18]'}`}
+                >
+                  Events
+                </button>
               </div>
 
               {/* Search & Status Filters */}
@@ -455,7 +467,7 @@ export default function AdminDashboard() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={`Search ${activeTab === 'products' ? 'products or name' : activeTab === 'volunteers' ? 'interest or name' : 'destinations or name'}...`}
+                    placeholder={`Search ${activeTab === 'products' ? 'products or name' : activeTab === 'volunteers' ? 'interest or name' : activeTab === 'yatras' ? 'destinations or name' : activeTab === 'letters' ? 'letters or name' : 'events or name'}...`}
                     className="w-full sm:w-[260px] h-[48px] rounded-[10px] bg-white border border-black/10 pl-10 pr-4 text-[14px] outline-none focus:border-[#C7954D] transition-colors"
                   />
                   <span className="material-symbols-outlined text-lg absolute left-3.5 top-1/2 -translate-y-1/2 text-[#776D64]">search</span>
@@ -486,9 +498,9 @@ export default function AdminDashboard() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-black/5 bg-[#FCFAF6]/50 text-[11px] uppercase tracking-widest text-[#776D64] font-bold">
-                    <th className="px-8 py-5">Applicant / Submitter</th>
-                    <th className="px-6 py-5">{activeTab === 'products' ? 'Product Ordered' : activeTab === 'volunteers' ? 'Interest Area' : 'Destination'}</th>
-                    <th className="px-6 py-5">{activeTab === 'products' ? 'Qty' : activeTab === 'volunteers' ? 'Availability' : 'Pilgrims'}</th>
+                    <th className="px-8 py-5">{activeTab === 'letters' ? 'Sender' : activeTab === 'events' ? 'Registrant' : 'Applicant / Submitter'}</th>
+                    <th className="px-6 py-5">{activeTab === 'products' ? 'Product Ordered' : activeTab === 'volunteers' ? 'Interest Area' : activeTab === 'yatras' ? 'Destination' : activeTab === 'letters' ? 'Subject' : 'Event'}</th>
+                    <th className="px-6 py-5">{activeTab === 'products' ? 'Qty' : activeTab === 'volunteers' ? 'Availability' : activeTab === 'yatras' ? 'Pilgrims' : activeTab === 'letters' ? 'Email' : 'Event Date'}</th>
                     <th className="px-6 py-5">Date</th>
                     <th className="px-6 py-5">Status</th>
                     <th className="px-8 py-5 text-right">Actions</th>
@@ -643,11 +655,15 @@ export default function AdminDashboard() {
                   {/* Empty State */}
                   {((activeTab === 'products' && getFilteredProducts().length === 0) ||
                     (activeTab === 'volunteers' && getFilteredVolunteers().length === 0) ||
-                    (activeTab === 'yatras' && getFilteredYatras().length === 0)) && (
+                    (activeTab === 'yatras' && getFilteredYatras().length === 0) ||
+                    activeTab === 'letters' ||
+                    activeTab === 'events') && (
                     <tr>
                       <td colSpan="6" className="px-8 py-16 text-center text-[#776D64]">
                         <span className="material-symbols-outlined text-4xl mb-3 text-black/20 block">inbox</span>
-                        <div className="font-medium text-base text-[#2A1F18]">No submissions found</div>
+                        <div className="font-medium text-base text-[#2A1F18]">
+                          {activeTab === 'letters' ? 'No personal letters found' : activeTab === 'events' ? 'No event records found' : 'No submissions found'}
+                        </div>
                         <p className="text-sm mt-1 font-light">Try adjusting your search query or filters.</p>
                       </td>
                     </tr>
