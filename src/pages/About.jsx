@@ -68,11 +68,11 @@ export default function About() {
       <header className="relative w-full h-[850px] flex flex-col justify-center items-start px-[5%] pt-[90px] overflow-hidden bg-[#e6dfd1]">
         <div className="absolute inset-0 z-0">
           <picture>
-            <source media="(max-width: 768px)" srcSet="/about_img.webp" />
+            <source media="(max-width: 768px)" srcSet="/cvrabout.png" />
             <img
               alt="Hero"
               className="w-full h-full object-cover object-right"
-              src={"/abouthero.png"}
+              src={"/cvrabout.png"}
             />
           </picture>
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
