@@ -18,10 +18,16 @@ export default function Products() {
   const [cityState, setCityState] = useState('');
   const [message, setMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [showOrderModal, setShowOrderModal] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const openOrderModal = (product) => {
+    setSelectedProduct(product);
+    setShowOrderModal(true);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,6 +64,7 @@ export default function Products() {
       setPhone('');
       setCityState('');
       setMessage('');
+      setShowOrderModal(false);
     } catch (error) {
       console.error("Error submitting order enquiry:", error);
       alert("Submission failed. Please check your internet connection and try again.");
@@ -92,7 +99,7 @@ export default function Products() {
               Dharmic Products
             </h1>
             <p className="font-body text-white/80 text-[18px] leading-[1.9] font-light max-w-[480px] mb-12">
-              Every product is handcrafted with devotion and intention, using authentic materials and ancient knowledge — to support your spiritual journey and daily practice.
+              Every product is handcrafted with Devotion and Intention, using Authentic Materials and Ancient Knowledge — to support your Spiritual Journey and Daily Practices.
             </p>
           </div>
         </div>
@@ -135,10 +142,7 @@ export default function Products() {
 
             <div className="w-full lg:w-fit flex flex-col items-center">
             <button
-              onClick={() => {
-                setSelectedProduct('moksha-lakshmi');
-                document.getElementById('order-form-section')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={() => openOrderModal('moksha-lakshmi')}
               className="h-[56px] w-full lg:w-auto px-8 rounded-[12px] bg-[#D87428] hover:bg-[#c26723] text-white text-[13px] uppercase font-bold tracking-widest transition-colors mt-2 flex items-center justify-center gap-2"
             >
               <span>Order Now</span>
@@ -158,7 +162,7 @@ export default function Products() {
 
           {/* Left: Content & Form */}
           <div className="w-full lg:w-1/2 flex flex-col">
-            <span className="text-[13px] uppercase tracking-[0.2em] text-[#C7954D] font-semibold mb-4 block">Handmade</span>
+            <span className="text-[13px] uppercase tracking-[0.2em] text-[#C7954D] font-semibold mb-4 block">SACRED LINGAM</span>
             <h2 className="font-display font-medium text-[42px] md:text-[52px] leading-[1.1] text-[#2A1F18] tracking-[-0.03em] mb-4">
               Jagadadi Lingam
             </h2>
@@ -172,10 +176,7 @@ export default function Products() {
 
             <div className="w-full lg:w-fit flex flex-col items-center">
             <button
-              onClick={() => {
-                setSelectedProduct('aadi-lingam');
-                document.getElementById('order-form-section')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={() => openOrderModal('aadi-lingam')}
               className="h-[56px] w-full lg:w-auto px-8 rounded-[12px] bg-[#D87428] hover:bg-[#c26723] text-white text-[13px] uppercase font-bold tracking-widest transition-colors mt-2 flex items-center justify-center gap-2"
             >
               <span>Order Now</span>
@@ -217,7 +218,7 @@ export default function Products() {
 
           {/* Right: Content & Form */}
           <div className="w-full lg:w-1/2 flex flex-col pt-8">
-            <span className="text-[13px] uppercase tracking-[0.2em] text-[#C7954D] font-semibold mb-4 block">Coming Soon</span>
+            <span className="text-[13px] uppercase tracking-[0.2em] text-[#C7954D] font-semibold mb-4 block">PROTECTIVE SHIELD</span>
             <h2 className="font-display font-medium text-[42px] md:text-[52px] leading-[1.1] text-[#2A1F18] tracking-[-0.03em] mb-8">
               Bhairava Kavacham
             </h2>
@@ -229,10 +230,7 @@ export default function Products() {
 
             <div className="w-full lg:w-fit flex flex-col items-center">
             <button
-              onClick={() => {
-                setSelectedProduct('parad-lingam');
-                document.getElementById('order-form-section')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={() => openOrderModal('parad-lingam')}
               className="h-[56px] w-full lg:w-auto px-8 rounded-[12px] bg-[#D87428] hover:bg-[#c26723] text-white text-[13px] uppercase font-bold tracking-widest transition-colors mt-2 flex items-center justify-center gap-2"
             >
               <span>Order Now</span>
@@ -247,20 +245,34 @@ export default function Products() {
         </div>
       </section>
 
-      {/* ORDER & ENQUIRY FORM SECTION */}
-      <section id="order-form-section" className="py-[140px] px-[5%] lg:px-[8%] bg-[#FCFAF6] border-t border-black/5">
-        <div className="max-w-[800px] mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-[13px] uppercase tracking-[0.2em] text-[#C7954D] font-semibold mb-4 block">Order &amp; Enquiry</span>
-            <h2 className="font-display font-medium text-[42px] md:text-[52px] leading-[1.1] text-[#2A1F18] tracking-[-0.03em] mb-4">
-              Place Your  Order 
+      {/* ORDER FORM POPUP */}
+      {showOrderModal && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => !submitting && setShowOrderModal(false)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="order-modal-title"
+            className="relative bg-white border border-black/5 rounded-[24px] p-6 sm:p-8 lg:p-10 shadow-2xl w-full max-w-[800px] max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowOrderModal(false)}
+              disabled={submitting}
+              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-[#2C2119] transition-colors disabled:opacity-50"
+              aria-label="Close order form"
+            >
+              <span className="material-symbols-outlined">close</span>
+            </button>
+            <h2 id="order-modal-title" className="font-display text-3xl text-[#2C2119] mb-3 text-center pr-10">
+              Place Your Order
             </h2>
-            <p className="font-body text-[#776D64] text-[16px] max-w-[600px] mx-auto font-light">
-              Select your desired sacred product below, fill in your details and our team will get in touch with you shortly to guide you through the process.
+            <p className="font-body text-[#776D64] text-[12px] sm:text-[14px] lg:text-[16px] sm:whitespace-nowrap mx-auto mb-8 text-center font-light">
+              Select a sacred product and share your details. We'll reach out to guide you further.
             </p>
-          </div>
-
-          <div className="bg-white border border-black/5 rounded-[24px] p-8 lg:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.02)]">
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <div className="flex flex-col gap-2 relative">
                 <label className="text-[11px] uppercase tracking-widest text-[#776D64] font-bold">Select Product</label>
@@ -369,7 +381,7 @@ export default function Products() {
             </form>
           </div>
         </div>
-      </section>
+      )}
 
       {/* WHY OUR PRODUCTS ARE DIFFERENT */}
       <section className="py-[120px] px-[5%] border-t border-black/5 bg-[#FCFAF6]">
@@ -409,7 +421,7 @@ export default function Products() {
       <section className="relative w-full h-[420px] flex items-end pb-16 px-[5%] lg:px-[8%]">
         <div className="absolute inset-0 z-0">
           <img
-            src="/final_cta.png"
+            src="/pro cover.png"
             alt="Spiritual Landscape"
             className="w-full h-full object-cover"
           />
@@ -422,7 +434,7 @@ export default function Products() {
               Bring Home the Divine
             </h2>
             <p className="font-body text-white/80 text-[18px] leading-[1.7] font-light">
-              Every product becomes a reminder of the sacred and a companion on the path of inner transformation.
+              Every product becomes a Reminder of the Sacred and A Companion on the path of Inner Transformation.
             </p>
           </div>
 

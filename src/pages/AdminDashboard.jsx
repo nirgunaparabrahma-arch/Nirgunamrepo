@@ -24,6 +24,7 @@ export default function AdminDashboard() {
   const [productEnquiries, setProductEnquiries] = useState([]);
   const [volunteers, setVolunteers] = useState([]);
   const [yatras, setYatras] = useState([]);
+  const [personalLetters, setPersonalLetters] = useState([]);
   
   // Modal State
   const [selectedItem, setSelectedItem] = useState(null);
@@ -46,7 +47,8 @@ export default function AdminDashboard() {
     const unsubscribeProducts = onSnapshot(collection(db, 'productEnquiries'), (snapshot) => {
       const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       list.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-      setProductEnquiries(list);
+      setProductEnquiries(list.filter(item => item.submissionType !== 'personalLetter'));
+      setPersonalLetters(list.filter(item => item.submissionType === 'personalLetter'));
     }, (error) => {
       console.error("Error listening to product enquiries:", error);
     });
@@ -116,7 +118,8 @@ export default function AdminDashboard() {
   const pendingRequests = 
     productEnquiries.filter(e => e.status === 'New').length +
     volunteers.filter(v => v.status === 'New').length +
-    yatras.filter(y => y.status === 'New').length;
+    yatras.filter(y => y.status === 'New').length +
+    personalLetters.filter(letter => letter.status === 'New').length;
 
   // Handles Firestore updates (Mark Contacted)
   const handleMarkContacted = async (id, tab) => {
@@ -124,6 +127,7 @@ export default function AdminDashboard() {
     if (tab === 'products') collectionName = 'productEnquiries';
     else if (tab === 'volunteers') collectionName = 'volunteers';
     else if (tab === 'yatras') collectionName = 'yatraRegistrations';
+    else if (tab === 'letters') collectionName = 'productEnquiries';
 
     try {
       await updateDoc(doc(db, collectionName, id), { status: 'Contacted' });
@@ -144,6 +148,7 @@ export default function AdminDashboard() {
       if (tab === 'products') collectionName = 'productEnquiries';
       else if (tab === 'volunteers') collectionName = 'volunteers';
       else if (tab === 'yatras') collectionName = 'yatraRegistrations';
+      else if (tab === 'letters') collectionName = 'productEnquiries';
 
       try {
         await deleteDoc(doc(db, collectionName, id));
@@ -181,6 +186,18 @@ export default function AdminDashboard() {
       const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             item.destination.toLowerCase().includes(searchQuery.toLowerCase()) || 
                             item.city.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesStatus = statusFilter === 'All' || item.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  };
+
+  const getFilteredPersonalLetters = () => {
+    const query = searchQuery.toLowerCase();
+    return personalLetters.filter(item => {
+      const matchesSearch = (item.name || '').toLowerCase().includes(query) ||
+                            (item.phone || '').toLowerCase().includes(query) ||
+                            (item.email || '').toLowerCase().includes(query) ||
+                            (item.message || '').toLowerCase().includes(query);
       const matchesStatus = statusFilter === 'All' || item.status === statusFilter;
       return matchesSearch && matchesStatus;
     });
@@ -499,8 +516,8 @@ export default function AdminDashboard() {
                 <thead>
                   <tr className="border-b border-black/5 bg-[#FCFAF6]/50 text-[11px] uppercase tracking-widest text-[#776D64] font-bold">
                     <th className="px-8 py-5">{activeTab === 'letters' ? 'Sender' : activeTab === 'events' ? 'Registrant' : 'Applicant / Submitter'}</th>
-                    <th className="px-6 py-5">{activeTab === 'products' ? 'Product Ordered' : activeTab === 'volunteers' ? 'Interest Area' : activeTab === 'yatras' ? 'Destination' : activeTab === 'letters' ? 'Subject' : 'Event'}</th>
-                    <th className="px-6 py-5">{activeTab === 'products' ? 'Qty' : activeTab === 'volunteers' ? 'Availability' : activeTab === 'yatras' ? 'Pilgrims' : activeTab === 'letters' ? 'Email' : 'Event Date'}</th>
+                    <th className="px-6 py-5">{activeTab === 'products' ? 'Product Ordered' : activeTab === 'volunteers' ? 'Interest Area' : activeTab === 'yatras' ? 'Destination' : activeTab === 'letters' ? 'Phone Number' : 'Event'}</th>
+                    <th className="px-6 py-5">{activeTab === 'products' ? 'Qty' : activeTab === 'volunteers' ? 'Availability' : activeTab === 'yatras' ? 'Pilgrims' : activeTab === 'letters' ? 'Letter' : 'Event Date'}</th>
                     <th className="px-6 py-5">Date</th>
                     <th className="px-6 py-5">Status</th>
                     <th className="px-8 py-5 text-right">Actions</th>
@@ -652,11 +669,57 @@ export default function AdminDashboard() {
                     </tr>
                   ))}
 
+                  {/* Render Personal Letters */}
+                  {activeTab === 'letters' && getFilteredPersonalLetters().map((item) => (
+                    <tr key={item.id} className="hover:bg-black/[0.005] transition-colors">
+                      <td className="px-8 py-5">
+                        <div className="font-medium text-[#2A1F18]">{item.name}</div>
+                      </td>
+                      <td className="px-6 py-5 text-[#776D64]">{item.phone || item.email}</td>
+                      <td className="px-6 py-5">
+                        <p className="max-w-[280px] truncate text-[#776D64]" title={item.message}>{item.message}</p>
+                      </td>
+                      <td className="px-6 py-5 text-[#776D64] font-light">{item.date}</td>
+                      <td className="px-6 py-5">
+                        <span className={`px-2.5 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest ${item.status === 'New' ? 'bg-[#D87428]/10 text-[#D87428]' : item.status === 'Contacted' ? 'bg-[#5F6A46]/10 text-[#5F6A46]' : 'bg-black/5 text-[#776D64]'}`}>
+                          {item.status}
+                        </span>
+                      </td>
+                      <td className="px-8 py-5 text-right">
+                        <div className="flex items-center justify-end gap-2">
+                          <button
+                            onClick={() => setSelectedItem({ ...item, tab: 'letters' })}
+                            className="w-9 h-9 rounded-full bg-black/5 hover:bg-[#C7954D]/10 hover:text-[#C7954D] text-[#776D64] transition-colors flex items-center justify-center"
+                            title="View full letter"
+                          >
+                            <span className="material-symbols-outlined text-[18px]">visibility</span>
+                          </button>
+                          {item.status === 'New' && (
+                            <button
+                              onClick={() => handleMarkContacted(item.id, 'letters')}
+                              className="w-9 h-9 rounded-full bg-black/5 hover:bg-[#5F6A46]/10 hover:text-[#5F6A46] text-[#776D64] transition-colors flex items-center justify-center"
+                              title="Mark as contacted"
+                            >
+                              <span className="material-symbols-outlined text-[18px]">done</span>
+                            </button>
+                          )}
+                          <button
+                            onClick={() => handleDeleteItem(item.id, 'letters')}
+                            className="w-9 h-9 rounded-full bg-black/5 hover:bg-red-500/10 hover:text-red-600 text-[#776D64] transition-colors flex items-center justify-center"
+                            title="Delete letter"
+                          >
+                            <span className="material-symbols-outlined text-[18px]">delete</span>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+
                   {/* Empty State */}
                   {((activeTab === 'products' && getFilteredProducts().length === 0) ||
                     (activeTab === 'volunteers' && getFilteredVolunteers().length === 0) ||
                     (activeTab === 'yatras' && getFilteredYatras().length === 0) ||
-                    activeTab === 'letters' ||
+                    (activeTab === 'letters' && getFilteredPersonalLetters().length === 0) ||
                     activeTab === 'events') && (
                     <tr>
                       <td colSpan="6" className="px-8 py-16 text-center text-[#776D64]">
@@ -771,13 +834,23 @@ export default function AdminDashboard() {
                 </div>
               )}
 
+              {/* Personal letter specific fields */}
+              {selectedItem.tab === 'letters' && (
+                <div>
+                  <span className="text-[11px] uppercase tracking-wider text-white/40 font-bold block mb-1">{selectedItem.phone ? 'Phone Number' : 'Email'}</span>
+                  <a className="text-white font-medium hover:text-[#C7954D] transition-colors" href={selectedItem.phone ? `tel:${selectedItem.phone}` : `mailto:${selectedItem.email}`}>
+                    {selectedItem.phone || selectedItem.email}
+                  </a>
+                </div>
+              )}
+
               {/* Message content */}
               <div>
                 <span className="text-[11px] uppercase tracking-wider text-white/40 font-bold block mb-1">
-                  {selectedItem.tab === 'products' ? 'Message / Questions' : selectedItem.tab === 'volunteers' ? 'About Himself/Herself' : 'Special Requirements'}
+                  {selectedItem.tab === 'products' ? 'Message / Questions' : selectedItem.tab === 'volunteers' ? 'About Himself/Herself' : selectedItem.tab === 'letters' ? 'Personal Letter' : 'Special Requirements'}
                 </span>
                 <p className="bg-[#1C120C]/80 border border-white/5 rounded-[12px] p-4 text-[14px] text-white/95 max-h-[160px] overflow-y-auto font-light leading-relaxed">
-                  {selectedItem.tab === 'products' ? selectedItem.message : selectedItem.tab === 'volunteers' ? selectedItem.about : selectedItem.requirements}
+                  {selectedItem.tab === 'products' ? selectedItem.message : selectedItem.tab === 'volunteers' ? selectedItem.about : selectedItem.tab === 'letters' ? selectedItem.message : selectedItem.requirements}
                 </p>
               </div>
 

@@ -2,20 +2,40 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { FaPhoneAlt, FaEnvelope, FaInstagram, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
+import { db } from '../firebase';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real application, you would handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message. We will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    setSubmitting(true);
+
+    try {
+      await addDoc(collection(db, 'productEnquiries'), {
+        submissionType: 'personalLetter',
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        message: formData.message.trim(),
+        status: 'New',
+        date: new Date().toISOString().split('T')[0],
+        timestamp: serverTimestamp()
+      });
+
+      alert('Your personal letter was submitted successfully.');
+      setFormData({ name: '', phone: '', message: '' });
+    } catch (error) {
+      console.error('Error submitting personal letter:', error);
+      alert('Unable to submit your letter. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -88,7 +108,7 @@ export default function Contact() {
 </h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Name</label>
+              <label htmlFor="name" className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Full Name</label>
               <input
                 type="text"
                 id="name"
@@ -102,21 +122,21 @@ export default function Contact() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Email</label>
+              <label htmlFor="phone" className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Phone No</label>
               <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
                 onChange={handleChange}
                 required
                 className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent transition-colors font-body text-[#2C2119]"
-                placeholder="Your Email"
+                placeholder="Your Phone Number"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label htmlFor="message" className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Message</label>
+              <label htmlFor="message" className="text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold">Comment</label>
               <textarea
                 id="message"
                 name="message"
@@ -125,12 +145,12 @@ export default function Contact() {
                 required
                 rows="4"
                 className="border-b border-black/10 pb-2 focus:outline-none focus:border-[#B08955] bg-transparent transition-colors font-body text-[#2C2119] resize-none"
-                placeholder="Your Personal Letter to Nirgunam"
+                placeholder="Any comments or questions?"
               ></textarea>
             </div>
 
-            <button type="submit" className="mt-6 bg-[#2C2119] text-white py-4 rounded-lg text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-[#B08955] transition-colors">
-              Send Your Letter
+            <button type="submit" disabled={submitting} className="mt-6 bg-[#2C2119] text-white py-4 rounded-lg text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-[#B08955] transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+              {submitting ? 'Submitting...' : 'Submit Your Letter'}
             </button>
 
             <p className="text-center text-[12px] text-[#776D64] italic mt-2">

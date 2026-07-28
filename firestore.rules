@@ -20,5 +20,11 @@ service cloud.firestore {
       allow create: if true; // Seekers can register
       allow read, update, delete: if request.auth != null; // Only authenticated admins can read/manage
     }
+
+    // Personal Letters rules
+    match /personalLetters/{document} {
+      allow create: if true; // Seekers can submit personal letters
+      allow read, update, delete: if request.auth != null; // Only authenticated admins can read/manage
+    }
   }
 }
