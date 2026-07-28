@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .hero-gradient {
+    background: linear-gradient(to bottom, rgba(16, 6, 3, 0.4) 0%, rgba(16, 6, 3, 0) 50%, rgba(16, 6, 3, 0.6) 100%);
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .minimal-shadow {
+    box-shadow: 0 10px 40px rgba(42, 29, 23, 0.04);
+  }
+
+  .museum-shadow {
+    box-shadow: 0 30px 60px -12px rgba(131, 80, 30, 0.12);
+  }
+
+  .stone-texture {
+    background-color: #2a1d17;
+    background-image: radial-gradient(circle at 2px 2px, rgba(253, 249, 241, 0.03) 1px, transparent 0);
+    background-size: 48px 48px;
+  }
+
+  .nav-scrolled {
+    background-color: #f7f3eb; /* surface-container-low */
+    box-shadow: 0 4px 20px rgba(42, 29, 23, 0.05);
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
