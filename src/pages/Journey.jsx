@@ -74,11 +74,11 @@ export default function Journey() {
       <section className="relative w-full h-[850px] flex overflow-hidden">
         <div className="absolute inset-0 z-0">
           <picture>
-            <source media="(max-width: 768px)" srcSet="/journeyhero.webp" />
+            <source media="(max-width: 768px)" srcSet="/cvrjourney.png" />
             <img
               alt="Hero"
               className="w-full h-full object-cover object-right"
-              src={"/nandiman.png"}
+              src={"/cvrjourney.png"}
             />
           </picture>
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
