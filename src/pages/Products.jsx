@@ -4,6 +4,12 @@ import Footer from '../components/Footer';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
+const productPrices = {
+  'moksha-lakshmi': 5100,
+  'aadi-lingam': null,
+  'parad-lingam': null
+};
+
 export default function Products() {
   const [selectedProduct, setSelectedProduct] = useState('moksha-lakshmi');
   const [fullName, setFullName] = useState('');
@@ -36,6 +42,7 @@ export default function Products() {
         phone,
         product: selectedProduct,
         productLabel: productLabels[selectedProduct] || selectedProduct,
+        price: productPrices[selectedProduct] ?? null,
         quantity: parseInt(quantity) || 1,
         cityState,
         message,
@@ -115,7 +122,7 @@ export default function Products() {
 
           {/* Right: Content & Form */}
           <div className="w-full lg:w-1/2 flex flex-col">
-            <span className="text-[13px] uppercase tracking-[0.2em] text-[#C7954D] font-semibold mb-4 block">Sacred Product</span>
+            <span className="text-[13px] uppercase tracking-[0.2em] text-[#C7954D] font-semibold mb-4 block">DIVINE PRESENCE</span>
             <h2 className="font-display font-medium text-[42px] md:text-[52px] leading-[1.1] text-[#2A1F18] tracking-[-0.03em] mb-4">
               Moksha Lakshmi Photo Frame
             </h2>
@@ -126,6 +133,7 @@ export default function Products() {
               <p>With the grace of his beloved mother Aadi Shakti, the sadhaka completed this form. People who have purchased this frame are often experiencing miracles in their homes.</p>
             </div>
 
+            <div className="w-full lg:w-fit flex flex-col items-center">
             <button
               onClick={() => {
                 setSelectedProduct('moksha-lakshmi');
@@ -133,9 +141,13 @@ export default function Products() {
               }}
               className="h-[56px] w-full lg:w-auto px-8 rounded-[12px] bg-[#D87428] hover:bg-[#c26723] text-white text-[13px] uppercase font-bold tracking-widest transition-colors mt-2 flex items-center justify-center gap-2"
             >
-              <span>Enquire &amp; Order</span>
+              <span>Order Now</span>
               <span className="material-symbols-outlined text-lg">arrow_right_alt</span>
             </button>
+            <span className="mt-3 text-[12px] uppercase tracking-[0.15em] font-semibold text-[#5D6845]">
+              Available
+            </span>
+            </div>
           </div>
         </div>
       </section>
@@ -158,6 +170,7 @@ export default function Products() {
               <p>No modern mechanism is used in the manufacturing of the Jagadadi Lingam — it is completely handmade. We perform Rudrabhishekam to each and every Jagadadi Lingam at a Shiva temple before dispatching.</p>
             </div>
 
+            <div className="w-full lg:w-fit flex flex-col items-center">
             <button
               onClick={() => {
                 setSelectedProduct('aadi-lingam');
@@ -165,9 +178,13 @@ export default function Products() {
               }}
               className="h-[56px] w-full lg:w-auto px-8 rounded-[12px] bg-[#D87428] hover:bg-[#c26723] text-white text-[13px] uppercase font-bold tracking-widest transition-colors mt-2 flex items-center justify-center gap-2"
             >
-              <span>Enquire &amp; Order</span>
+              <span>Order Now</span>
               <span className="material-symbols-outlined text-lg">arrow_right_alt</span>
             </button>
+            <span className="mt-3 text-[12px] uppercase tracking-[0.15em] font-semibold text-[#5D6845]">
+              Coming Soon
+            </span>
+            </div>
           </div>
 
           {/* Right: Product Image */}
@@ -210,6 +227,7 @@ export default function Products() {
               <p> Specially designed to safeguard your household from negative energies, evil eye (drishti) and environmental stress, this four-in-one divine emblem combines the most potent symbols of protection and prosperity in Vedic tradition.</p>
             </div>
 
+            <div className="w-full lg:w-fit flex flex-col items-center">
             <button
               onClick={() => {
                 setSelectedProduct('parad-lingam');
@@ -217,9 +235,14 @@ export default function Products() {
               }}
               className="h-[56px] w-full lg:w-auto px-8 rounded-[12px] bg-[#D87428] hover:bg-[#c26723] text-white text-[13px] uppercase font-bold tracking-widest transition-colors mt-2 flex items-center justify-center gap-2"
             >
-              <span>Enquire Now / Notify Me</span>
+              <span>Order Now</span>
               <span className="material-symbols-outlined text-lg">arrow_right_alt</span>
             </button>
+            <span className="mt-3 text-[12px] uppercase tracking-[0.15em] font-semibold text-[#5D6845]">
+              Coming Soon
+
+            </span>
+            </div>
           </div>
         </div>
       </section>
@@ -230,7 +253,7 @@ export default function Products() {
           <div className="text-center mb-12">
             <span className="text-[13px] uppercase tracking-[0.2em] text-[#C7954D] font-semibold mb-4 block">Order &amp; Enquiry</span>
             <h2 className="font-display font-medium text-[42px] md:text-[52px] leading-[1.1] text-[#2A1F18] tracking-[-0.03em] mb-4">
-              Place an Order Enquiry
+              Place Your  Order 
             </h2>
             <p className="font-body text-[#776D64] text-[16px] max-w-[600px] mx-auto font-light">
               Select your desired sacred product below, fill in your details and our team will get in touch with you shortly to guide you through the process.
@@ -250,12 +273,23 @@ export default function Products() {
                   >
                     <option value="moksha-lakshmi">Moksha Lakshmii Photo Frame (Size: 24" × 20")</option>
                     <option value="aadi-lingam">Jagadadi Lingam (Size: 6cm × 5cm)</option>
-                    <option value="Bhairava Kavacham">Bhairava Kavacham </option>
+                    <option value="parad-lingam">Bhairava Kavacham</option>
                   </select>
                   <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-[#776D64]">
                     <span className="material-symbols-outlined">expand_more</span>
                   </div>
                 </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label className="text-[11px] uppercase tracking-widest text-[#776D64] font-bold">Price</label>
+                <input
+                  type="text"
+                  readOnly
+                  value={productPrices[selectedProduct] === null ? '' : '₹5,100/-'}
+                  placeholder="Not available"
+                  className="h-[56px] rounded-[12px] bg-[#F7F2EB] border border-black/5 px-4 outline-none cursor-default text-[15px] font-body font-medium text-[#2C2119] placeholder:text-[#9A948E]"
+                />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -326,10 +360,10 @@ export default function Products() {
                 {submitting ? (
                   <>
                     <span className="material-symbols-outlined text-lg animate-spin">sync</span>
-                    <span>Submitting Enquiry...</span>
+                    <span>Ordering...</span>
                   </>
                 ) : (
-                  <span>Submit Order Enquiry</span>
+                  <span>Order Now</span>
                 )}
               </button>
             </form>

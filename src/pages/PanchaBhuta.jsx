@@ -92,21 +92,28 @@ export default function PanchaBhuta() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const tripDetails = [
+    { label: "Duration", value: "4 Days" },
+    { label: "Arrival Place", value: "Bengaluru" },
+    { label: "Service Area", value: "Telangana & Andhra Pradesh" },
+    { label: "Transport", value: "Private AC Bus" },
+  ];
+
+  const regionalPricing = [
+    { region: "Bengaluru", price: "₹15,000" },
+    { region: "Hyderabad", price: "₹18,000" },
+    { region: "Andhra Pradesh", price: "₹15,000" },
+  ];
+
   const itinerary = [
-    {
-      day: "DAY 0",
-      title: "Arrival at Tiruvannamalai",
-      items: [
-        "Night Arrival at Tiruvannamalai",
-        "Dinner and rest",
-      ],
-    },
     {
       day: "DAY 1",
       title: "Tiruvannamalai",
       items: [
-        "Whole Day Exploring Thiruvannamalai",
-        "Girivalam",
+        "Arrival and journey towards Tiruvannamalai",
+        "Explore the sacred kshetras of Tiruvannamalai",
+        "Girivalam and temple darshan",
       ],
     },
     {
@@ -130,18 +137,19 @@ export default function PanchaBhuta() {
     },
     {
       day: "DAY 4",
-      title: "Thiruttani to Sri Kalahasti",
+      title: "Thiruttani, Gudimallam & Sri Kalahasti",
       items: [
         "Morning Slot — Thiruttani",
         "Noon — Gudimallam",
         "Evening — Sri Kalahasti",
+        "Return journey after completing the Pancha Bhuta circuit",
       ],
     },
   ];
 
   const clothing = [
-    "Comfortable cotton clothing suitable for temple visits.",
-    "Light shawl or sweater for early mornings and evenings.",
+    "Western wear such as jeans, shorts, sleeveless tops and tight leggings is strictly forbidden in most Pancha Bhuta temples.",
+    "Comfortable traditional clothing is preferred for all temple visits.",
     "Comfortable walking shoes with good grip.",
     "Slippers or sandals for use at hotels and temple premises.",
   ];
@@ -183,6 +191,33 @@ export default function PanchaBhuta() {
     },
   ];
 
+  const inclusions = [
+    "Bengaluru-to-Bengaluru transportation by private AC bus.",
+    "Sleeper AC bus from Hyderabad to Bengaluru and return.",
+    "Andhra Pradesh-to-Andhra Pradesh transportation by private AC bus.",
+    "Best available accommodation on a sharing basis during the Yatra.",
+    "Caretaker support and guidance throughout the Yatra.",
+  ];
+
+  const exclusions = [
+    "VIP Darshan and special Seva or Abhishekam tickets across all temples.",
+    "Food, snacks, water bottles and other refreshments.",
+    "Medical care or emergency evacuation if required.",
+    "Additional hotel accommodation.",
+    "Expenses for an early return from the Yatra due to personal reasons.",
+    "Expenses caused by unavoidable circumstances such as roadblocks, bad weather or natural calamities.",
+  ];
+
+  const cancellationPolicy = [
+    "Cancellation 40–26 days before departure: full payment refunded excluding the non-refundable deposit.",
+    "Cancellation 25–16 days before departure: 75% refunded excluding the non-refundable deposit.",
+    "Cancellation 15–8 days before departure: 50% refunded excluding the non-refundable deposit.",
+    "No refund for cancellations requested less than 7 days before departure.",
+    "Refunds will not be issued when a participant cannot attend due to heavy rain, floods, traffic jams, vehicle breakdowns or personal medical emergencies.",
+    "Bookings cannot be transferred to another date when a participant is unable to attend.",
+    "If the Yatra is cancelled due to natural calamities, political unrest or circumstances beyond our control, the same cancellation policy will apply.",
+  ];
+
   return (
     <div className="min-h-screen bg-[#F7F2EB] text-[#2C2119]">
       <Navbar />
@@ -221,6 +256,60 @@ export default function PanchaBhuta() {
   </div>
 
 </section>
+
+      {/* YATRA OVERVIEW */}
+      <section className="py-20 px-6 md:px-10 bg-[#F7F2EB]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <span className="text-[12px] uppercase tracking-[0.3em] text-[#C89A58] font-semibold">
+              More Than 10 Sacred Kshetras
+            </span>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">
+              The Pancha Bhuta Journey
+            </h2>
+            <p className="mt-6 text-[#776D64] text-[16px] leading-8">
+              In Vedic philosophy the material cosmos and the human body are composed of the five sacred elements—Earth, Water, Fire, Air and Space. Visiting all five kshetras is a transformative journey that harmonizes nature with the individual.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+            {tripDetails.map((detail) => (
+              <div key={detail.label} className="bg-[#FBF8F4] rounded-[18px] p-6 border border-black/5 text-center">
+                <span className="text-[10px] uppercase tracking-[0.18em] text-[#9A6F3E] font-bold">
+                  {detail.label}
+                </span>
+                <p className="font-display text-xl md:text-2xl mt-3">{detail.value}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-[#2C2119] rounded-[20px] p-8 md:p-10 text-white">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+              <div>
+                <span className="text-[11px] uppercase tracking-[0.2em] text-[#C89A58] font-bold">
+                  Sacred Route
+                </span>
+                <p className="font-display text-2xl md:text-3xl mt-4 leading-relaxed">
+                  Tiruvannamalai — Jambukeshwar — Chidambaram — Ekambareshwar — Sri Kalahasti
+                </p>
+              </div>
+              <div>
+                <span className="text-[11px] uppercase tracking-[0.2em] text-[#C89A58] font-bold">
+                  Regional Pricing
+                </span>
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {regionalPricing.map((item) => (
+                    <div key={item.region} className="rounded-[12px] bg-white/[0.06] p-4 text-center">
+                      <p className="text-white/60 text-[11px] uppercase tracking-wider">{item.region}</p>
+                      <p className="font-display text-xl mt-2">{item.price}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ITINERARY */}
       <section className="py-20 px-6 md:px-10 bg-[#FDFBF8]">
@@ -410,35 +499,70 @@ export default function PanchaBhuta() {
         </div>
       </section>
 
-      {/* IMPORTANT NOTE */}
-      <section className="px-6 md:px-10 pb-24 bg-[#FDFBF8]">
+      {/* INCLUSIONS & EXCLUSIONS */}
+      <section className="py-24 px-6 md:px-10 bg-[#F7F2EB]">
         <div className="max-w-6xl mx-auto">
-
-          <div className="bg-[#2C2119] rounded-[20px] p-8 md:p-12 text-white">
-
-            <div className="flex items-start gap-5">
-
-              <span className="material-symbols-outlined text-[#C89A58] text-3xl">
-                info
-              </span>
-
-              <div>
-                <h3 className="font-display text-2xl md:text-3xl mb-4">
-                  Important Note
-                </h3>
-
-                <p className="text-white/70 text-sm md:text-base leading-7">
-                  Additional hotel accommodation, meals, transportation,
-                  sightseeing, medical expenses, emergency expenses or other
-                  costs arising from unforeseen delays or changes are not
-                  included unless specifically mentioned in the itinerary.
-                </p>
-              </div>
-
-            </div>
-
+          <div className="text-center mb-14">
+            <span className="text-[12px] uppercase tracking-[0.3em] text-[#C89A58] font-semibold">
+              Plan With Clarity
+            </span>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">
+              Inclusions & Exclusions
+            </h2>
           </div>
 
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
+            {[
+              { title: "What Is Included", icon: "check_circle", items: inclusions },
+              { title: "What Is Not Included", icon: "cancel", items: exclusions },
+            ].map((group) => (
+              <div key={group.title} className="bg-[#FBF8F4] rounded-[20px] p-8 md:p-10 border border-black/5">
+                <div className="flex items-center gap-3 mb-7">
+                  <span className="material-symbols-outlined text-[#C89A58] text-3xl">{group.icon}</span>
+                  <h3 className="font-display text-2xl md:text-3xl">{group.title}</h3>
+                </div>
+                <div className="space-y-4">
+                  {group.items.map((item) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#C89A58] flex-shrink-0" />
+                      <p className="text-[#776D64] text-[14px] leading-7">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* REFUND & CANCELLATION POLICY */}
+      <section className="py-24 px-6 md:px-10 bg-[#FDFBF8]">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-[#2C2119] rounded-[24px] p-8 md:p-12 text-white">
+            <div className="flex flex-col md:flex-row gap-8 md:gap-12">
+              <div className="md:w-[32%]">
+                <span className="material-symbols-outlined text-[#C89A58] text-4xl mb-5">
+                  policy
+                </span>
+                <h2 className="font-display text-3xl md:text-4xl leading-tight">
+                  Refund & Cancellation Policy
+                </h2>
+                <p className="text-white/60 text-sm leading-7 mt-5">
+                  Our priority is to provide a smooth and enjoyable journey. The following policy applies to every booking.
+                </p>
+              </div>
+              <div className="md:w-[68%] space-y-4">
+                {cancellationPolicy.map((item, index) => (
+                  <div key={item} className="flex items-start gap-4 pb-4 border-b border-white/10 last:border-0 last:pb-0">
+                    <span className="text-[#C89A58] text-[12px] font-bold mt-1">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-white/70 text-[14px] leading-7">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -461,7 +585,7 @@ export default function PanchaBhuta() {
           onClick={() => setShowModal(true)}
           className="mt-8 h-[56px] px-10 rounded-[12px] bg-[#C56F2B] hover:bg-[#B06124] text-white text-[13px] uppercase font-bold tracking-widest transition-colors"
         >
-          Register for Yatra
+          Register Now
         </button>
       </section>
 
