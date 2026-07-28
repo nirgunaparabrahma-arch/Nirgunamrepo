@@ -4,19 +4,7 @@ import Footer from '../components/Footer';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
-
-const destinationDates = {
-  'Sampurna Kashi': '21st Dec 2026',
-  'Dho-Dham': '27th Sep 2026',
-  Panchabhutam: '29th Aug 2026',
-  'General Enquiry': null
-};
-
-const destinationCardDates = {
-  'Sampurna Kashi': '21st Dec 2026',
-  'Dho Dham': '27th Sep 2026',
-  Panchabhutam: '29th Aug 2026'
-};
+import { destinationDates, destinationCardDates } from '../data/yatraDates';
 
 export default function Yatra() {
   const [submitting, setSubmitting] = useState(false);

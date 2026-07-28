@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { destinationDates } from "../data/yatraDates";
 
 export default function DhoDham() {
   const [showYatraModal, setShowYatraModal] = useState(false);
@@ -16,7 +17,7 @@ export default function DhoDham() {
     destination: "Dho Dham",
     senior: "No",
     city: "",
-    dates: "",
+    dates: destinationDates["Dho-Dham"],
     requirements: ""
   });
 
@@ -72,7 +73,7 @@ export default function DhoDham() {
         destination: "Dho Dham",
         senior: "No",
         city: "",
-        dates: "",
+        dates: destinationDates["Dho-Dham"],
         requirements: ""
       });
 
@@ -947,8 +948,8 @@ export default function DhoDham() {
           </h2>
 
           <p className="text-white/75 text-[16px] leading-[1.8] max-w-[600px] mx-auto mt-6">
-            Walk ancient paths, experience sacred temples and discover
-            the stillness that lies within the Himalayan journey.
+            Walk Ancient Paths, Experience Sacred Temples and Discover
+            the Stillness that lies within the Himalayan journey.
           </p>
 
 
@@ -1119,19 +1120,18 @@ export default function DhoDham() {
           />
         </div>
 
-        {/* Preferred Dates */}
+        {/* Yatra Date */}
         <div>
           <label className="text-[11px] uppercase tracking-[0.15em] font-bold text-[#7A5736] mb-2 block">
-            Preferred Dates
+            Date
           </label>
 
           <input
             type="text"
             name="dates"
             value={formData.dates}
-            onChange={handleInputChange}
-            placeholder="Any preferred months or dates"
-            className="w-full h-[56px] px-4 rounded-[12px] border border-black/[0.08] bg-white text-[#2C2119] font-body text-[15px] outline-none focus:border-[#C89A58] transition-colors"
+            readOnly
+            className="w-full h-[56px] px-4 rounded-[12px] border border-black/[0.08] bg-[#F5F0E9] text-[#2C2119] font-body text-[15px] outline-none cursor-default"
           />
         </div>
 

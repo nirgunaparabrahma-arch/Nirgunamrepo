@@ -6,7 +6,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function SpiritualActivities() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRole, setSelectedRole] = useState('');
+  const [selectedRole, setSelectedRole] = useState('Event Management');
   const [phone, setPhone] = useState('');
   const [fullName, setFullName] = useState('');
   const [availability, setAvailability] = useState('');
@@ -41,7 +41,7 @@ export default function SpiritualActivities() {
       // Reset form
       setFullName('');
       setPhone('');
-      setSelectedRole('');
+      setSelectedRole('Event Management');
       setAvailability('');
       setAbout('');
     } catch (error) {
@@ -336,7 +336,6 @@ export default function SpiritualActivities() {
                       className="h-[56px] w-full rounded-[12px] bg-[#1C120C] border border-white/5 pl-4 pr-10 focus:outline-none focus:border-[#D8782B] transition-colors appearance-none cursor-pointer text-[15px] font-body text-white"
                       style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }}
                     >
-                      <option value="" disabled className="text-white">Select</option>
                       <option value="Event Management" className="text-white">Event Management</option>
                       <option value="Social Media / Content" className="text-white">Social Media / Content</option>
                       <option value="Teaching / Education" className="text-white">Teaching / Education</option>

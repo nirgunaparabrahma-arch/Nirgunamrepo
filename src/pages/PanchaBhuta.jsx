@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { destinationDates } from "../data/yatraDates";
 
 export default function PanchaBhuta() {
   const [showModal, setShowModal] = useState(false);
@@ -16,7 +17,7 @@ export default function PanchaBhuta() {
     destination: "Pancha Bhuta",
     senior: "No",
     city: "",
-    dates: "",
+    dates: destinationDates.Panchabhutam,
     requirements: ""
   });
 
@@ -72,7 +73,7 @@ export default function PanchaBhuta() {
         destination: "Pancha Bhuta",
         senior: "No",
         city: "",
-        dates: "",
+        dates: destinationDates.Panchabhutam,
         requirements: ""
       });
 
@@ -749,19 +750,18 @@ export default function PanchaBhuta() {
   </div>
 
 
-  {/* PREFERRED DATES */}
+  {/* YATRA DATE */}
   <div>
     <label className="block text-[11px] uppercase tracking-widest font-bold text-[#7A5736] mb-2">
-      Preferred Dates
+      Date
     </label>
 
     <input
       type="text"
       name="dates"
       value={formData.dates}
-      onChange={handleInputChange}
-      placeholder="Any preferred months or dates"
-      className="w-full h-[54px] px-4 rounded-[10px] border border-black/10 bg-white outline-none focus:border-[#C89A58]"
+      readOnly
+      className="w-full h-[54px] px-4 rounded-[10px] border border-black/10 bg-[#F5F0E9] outline-none cursor-default"
     />
   </div>
 

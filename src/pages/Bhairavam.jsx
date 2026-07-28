@@ -19,12 +19,12 @@ export default function Bhairavam() {
         {/* Cinematic Background */}
         <div className="absolute inset-0 z-0">
           <picture>
-            <source media="(max-width: 768px)" srcSet="/bairavamhero.webp" />
+            <source media="(max-width: 768px)" srcSet="/Bhairav cover.png" />
             <img
               alt="Bhairavam Meditation"
               className="w-full h-full object-cover object-right lg:object-center"
               src="/Bhairav cover.png"
-              onError={(e) => { e.target.src = "/bairavamhero.webp" }}
+              onError={(e) => { e.target.src = "/Bhairav cover.png" }}
             />
           </picture>
           {/* Gradient */}

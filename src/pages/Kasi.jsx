@@ -8,6 +8,7 @@ import {
   addDoc,
   serverTimestamp
 } from "firebase/firestore";
+import { destinationDates } from "../data/yatraDates";
 
 export default function KasiYatra() {
   const [showYatraModal, setShowYatraModal] = useState(false);
@@ -20,7 +21,7 @@ export default function KasiYatra() {
     destination: "Sampoorna Kashi Yatra",
     senior: "No",
     city: "",
-    dates: "",
+    dates: destinationDates["Sampurna Kashi"],
     requirements: ""
   });
 
@@ -76,7 +77,7 @@ export default function KasiYatra() {
         destination: "Sampoorna Kashi Yatra",
         senior: "No",
         city: "",
-        dates: "",
+        dates: destinationDates["Sampurna Kashi"],
         requirements: ""
       });
 
@@ -1552,14 +1553,14 @@ export default function KasiYatra() {
 
                 </div>
 
-                {/* Preferred Dates */}
+                {/* Yatra Date */}
                 <div className="md:col-span-2">
 
                   <label
                     htmlFor="dates"
                     className="block text-[12px] uppercase tracking-[0.12em] text-[#5F554C] font-bold mb-2"
                   >
-                    Preferred Travel Dates
+                    Date
                   </label>
 
                   <input
@@ -1567,9 +1568,8 @@ export default function KasiYatra() {
                     type="text"
                     name="dates"
                     value={formData.dates}
-                    onChange={handleInputChange}
-                    placeholder="Example: October 2026 or flexible dates"
-                    className="w-full h-[50px] px-4 rounded-[10px] bg-white border border-black/10 outline-none focus:border-[#C89A58] text-[14px]"
+                    readOnly
+                    className="w-full h-[50px] px-4 rounded-[10px] bg-[#F5F0E9] border border-black/10 outline-none text-[14px] cursor-default"
                   />
 
                 </div>

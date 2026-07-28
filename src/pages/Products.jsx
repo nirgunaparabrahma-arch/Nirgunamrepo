@@ -393,25 +393,25 @@ export default function Products() {
             <div className="flex flex-col items-center pt-8 sm:pt-0 px-4">
               <span className="material-symbols-outlined text-[40px] text-[#C7954D] mb-6 font-light">filter_vintage</span>
               <h4 className="font-display text-[22px] text-[#2A1F18] mb-3">Authentic &amp; Scriptural</h4>
-              <p className="font-body text-[#776D64] text-[15px] leading-[1.6] font-light">Based on Puranas, Vedas and Siddha traditions.</p>
+              <p className="font-body text-[#776D64] text-[15px] leading-[1.6] font-light">Based on Puranas and Vedas.</p>
             </div>
             {/* Feature 2 */}
             <div className="flex flex-col items-center pt-8 sm:pt-0 px-4">
               <span className="material-symbols-outlined text-[40px] text-[#C7954D] mb-6 font-light">pan_tool</span>
               <h4 className="font-display text-[22px] text-[#2A1F18] mb-3">Handcrafted with Devotion</h4>
-              <p className="font-body text-[#776D64] text-[15px] leading-[1.6] font-light">Made by skilled craftsmen with spiritual intention.</p>
+              <p className="font-body text-[#776D64] text-[15px] leading-[1.6] font-light">Made by Skilled Craftsmen with Spiritual Intention.</p>
             </div>
             {/* Feature 3 */}
             <div className="flex flex-col items-center pt-8 sm:pt-0 px-4">
               <span className="material-symbols-outlined text-[40px] text-[#C7954D] mb-6 font-light">self_improvement</span>
               <h4 className="font-display text-[22px] text-[#2A1F18] mb-3">Consecrated &amp; Energized</h4>
-              <p className="font-body text-[#776D64] text-[15px] leading-[1.6] font-light">Mantras and rituals infuse divine energy.</p>
+              <p className="font-body text-[#776D64] text-[15px] leading-[1.6] font-light">Mantras and Rituals Infused Divine Energy.</p>
             </div>
             {/* Feature 5 */}
             <div className="flex flex-col items-center pt-8 sm:pt-0 px-4">
               <span className="material-symbols-outlined text-[40px] text-[#C7954D] mb-6 font-light">temple_hindu</span>
               <h4 className="font-display text-[22px] text-[#2A1F18] mb-3">Supports Sacred Living</h4>
-              <p className="font-body text-[#776D64] text-[15px] leading-[1.6] font-light">Designed for daily spiritual practice.</p>
+              <p className="font-body text-[#776D64] text-[15px] leading-[1.6] font-light">Designed for daily Spiritual Practices.</p>
             </div>
           </div>
         </div>
