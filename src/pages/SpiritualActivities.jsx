@@ -79,6 +79,38 @@ export default function SpiritualActivities() {
         </div>
       </section>
 
+      {/* PROJECT TANDAVAM SECTION */}
+      <section className="py-[120px] px-[5%] lg:px-[8%] bg-[#FCFAF6] border-b border-black/5">
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          <div className="order-2 lg:order-1">
+            <span className="text-[13px] uppercase tracking-[0.2em] text-[#D8782B] font-semibold mb-6 block">
+              Sacred Action
+            </span>
+            <h2 className="font-display font-medium text-[46px] md:text-[58px] leading-[1.05] text-[#241812] tracking-[-0.03em] mb-8">
+              Project Tandavam
+            </h2>
+            <div className="font-body text-[#766C63] text-[18px] leading-[1.9] font-light space-y-5 max-w-[620px]">
+              <p>
+                Project Tandavam is a movement that transforms spiritual awareness into purposeful action. It brings seekers together to serve, learn and create meaningful change within the community.
+              </p>
+              <p>
+                Inspired by the rhythm of transformation, the project connects inner growth with collective responsibility—turning devotion into service and intention into impact.
+              </p>
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2">
+            <div className="w-full aspect-[4/3] rounded-[24px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
+              <img
+                src="/project-tandavam.png"
+                alt="Project Tandavam community initiative"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SERVICE INTRODUCTION SECTION */}
       <section className="relative py-[140px] px-[5%] lg:px-[8%] overflow-hidden">
         {/* Decorative Element */}
@@ -165,23 +197,23 @@ export default function SpiritualActivities() {
             {[
               {
                 title: 'Spiritual Gatherings',
-                description: 'Satsangs, kirtans and spiritual gatherings that uplift the heart and unite the community in devotion.',
+                description: 'Satsangs, Kirtans and Spiritual Gatherings that uplift the heart and unite the community in Devotion.',
                 image: '/service-spiritual-gatherings.png'
               },
               {
                 title: 'Spiritual Activities',
-                description: 'Dharmic sessions, guided meditations, chanting and spiritual practices to awaken inner awareness.',
-                image: '/service-spiritual-activities.png'
+                description: 'Dharmic Sessions, Guided Meditations, Chanting and Spiritual Practices to awaken Inner Awareness.',
+                image: '/guide med.png'
               },
               {
                 title: 'Community Service',
-                description: 'Food drives for those in need. We understand that selfless giving is the path to inner abundance.',
+                description: 'Food drives for those in need. We understand that Selfless Giving is the path to Inner Abundance.',
                 image: '/service-community.png'
               },
               {
                 title: 'Volunteering',
                 description: "Let's join our hands together and bring colors to others' lives.",
-                image: '/service-volunteering.png'
+                image: '/dance.png'
               }
             ].map((service) => (
               <article

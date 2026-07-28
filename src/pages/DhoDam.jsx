@@ -957,7 +957,7 @@ export default function DhoDham() {
   onClick={() => setShowYatraModal(true)}
   className="inline-flex items-center justify-center mt-10 h-[56px] px-10 rounded-[12px] bg-[#C56F2B] hover:bg-[#b06124] text-white text-[13px] uppercase font-bold tracking-widest transition-colors"
 >
-  Register for Yatra
+  Register Now
 </button>
 
         </div>

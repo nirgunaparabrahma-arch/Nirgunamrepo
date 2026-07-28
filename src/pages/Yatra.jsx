@@ -215,7 +215,9 @@ export default function Yatra() {
                 </button>
               <div className="flex items-center gap-3 mb-8 pr-12">
                 <span className="material-symbols-outlined text-[#C89A58] text-[28px]">filter_vintage</span>
-                <h3 id="yatra-modal-title" className="font-display text-[28px] text-[#2C2119]">Register for Yatra</h3>
+                <h3 id="yatra-modal-title" className="font-display text-[28px] text-[#2C2119]">Register for Yatra
+                  
+                </h3>
               </div>
 
               <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
