@@ -12,6 +12,7 @@ export default function DhoDham() {
   const [submitting, setSubmitting] = useState(false);
   const [showItinerary, setShowItinerary] = useState(false);
   const [openCarryGuides, setOpenCarryGuides] = useState({});
+  const [showImportantInformation, setShowImportantInformation] = useState(false);
 
   const toggleCarryGuide = (guide) => {
     setOpenCarryGuides((current) => ({
@@ -463,6 +464,34 @@ export default function DhoDham() {
             This trip includes more than 12 Kshetras.
           </p>
 
+          <div className="mt-8 rounded-[20px] border border-[#C89A58]/30 bg-[#FBF8F4] px-6 py-8 md:px-10 md:py-9">
+            <h3 className="font-display text-center text-[27px] md:text-[31px] text-[#2C2119]">
+              Highlights
+            </h3>
+
+            <div className="mt-7 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
+              {[
+                ["🪔", "Witness the evening Ganga Aarti in Haridwar."],
+                ["🌊", "Visit the sacred river confluences of Devprayag and Rudraprayag."],
+                ["🌺", "Step into Dhari Devi Temple, the powerful Devi of Dev Bhumi."],
+                ["🛕", "Visit the sacred Tungnath Temple."],
+                ["🔱", "Experience your true self at Kedarnath."],
+                ["🙏", "Take a dip in the Tapt Kund at Badrinath before entering the temple."],
+                ["🏔️", "Explore Mana, the first Indian village before the Tibetan border."],
+                ["🛍️", "Enjoy shopping in Rishikesh."]
+              ].map(([icon, highlight]) => (
+                <div key={highlight} className="flex items-start gap-3">
+                  <span aria-hidden="true" className="flex-shrink-0 text-[21px] leading-7">
+                    {icon}
+                  </span>
+                  <p className="text-[14px] md:text-[15px] font-medium leading-7 text-[#5F554C]">
+                    {highlight}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
 
       </section>
@@ -547,6 +576,23 @@ export default function DhoDham() {
 
           </div>
           )}
+
+          <div className="mt-8 rounded-[18px] border border-[#C89A58]/25 bg-[#FFF9F0] p-6 md:p-7">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <span className="material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#C56F2B] text-white">
+                payments
+              </span>
+
+              <div className="space-y-2">
+                <p className="text-[15px] md:text-[16px] leading-7 text-[#5F554C]">
+                  <span className="font-bold text-[#C56F2B]">₹2,999/- non-refundable</span> fee should be paid in advance at the time of registration.
+                </p>
+                <p className="text-[15px] md:text-[16px] font-semibold leading-7 text-[#2C2119]">
+                  The full payment must be cleared at least 20 days before your departure date.
+                </p>
+              </div>
+            </div>
+          </div>
 
         </div>
 
@@ -828,6 +874,69 @@ export default function DhoDham() {
       </section>
 
 
+      {/* REFUND AND CANCELLATION POLICY */}
+      <section className="pb-[110px] px-[5%] lg:px-[8%] bg-[#FDFBF8]">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="rounded-[22px] border border-[#C89A58]/25 bg-[#FFF9F0] p-7 md:p-10 shadow-[0_10px_35px_rgba(44,33,25,0.05)]">
+            <div className="flex flex-col md:flex-row md:items-start gap-5">
+              <div className="w-12 h-12 rounded-full bg-[#C56F2B] text-white flex items-center justify-center flex-shrink-0">
+                <span className="material-symbols-outlined text-[26px]">
+                  event_busy
+                </span>
+              </div>
+
+              <div>
+                <h2 className="font-display text-[30px] md:text-[36px] text-[#2C2119]">
+                  Refund and Cancellation Policy
+                </h2>
+                <p className="mt-3 max-w-[850px] text-[15px] md:text-[16px] leading-7 text-[#655A50]">
+                  Our priority is to ensure you have a smooth and enjoyable journey. However, the following cancellation policy applies.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                ["60–41 days", "Full payment refunded", "Excluding the non-refundable deposit"],
+                ["40–31 days", "75% refunded", "Excluding the non-refundable deposit"],
+                ["30–18 days", "50% refunded", "Excluding the non-refundable deposit"]
+              ].map(([period, refund, note]) => (
+                <div key={period} className="rounded-[16px] border border-[#C89A58]/20 bg-white p-5">
+                  <p className="text-[12px] uppercase tracking-[0.16em] font-bold text-[#C56F2B]">
+                    {period} before departure
+                  </p>
+                  <p className="mt-3 font-display text-[22px] text-[#2C2119]">
+                    {refund}
+                  </p>
+                  <p className="mt-2 text-[13px] leading-6 text-[#776D64]">
+                    {note}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 space-y-4 rounded-[16px] bg-[#2C2119] p-6 md:p-7 text-white">
+              {[
+                "No refund will be issued when cancellation is requested less than 17 days before departure.",
+                "Refunds will not be issued if you cannot attend the Yatra due to heavy rains, floods, traffic jams, vehicle breakdowns or personal medical emergencies.",
+                "Your booking cannot be transferred to another date if you are unable to attend the Yatra.",
+                "If the Yatra is cancelled due to natural calamities, political unrest or other circumstances beyond our control, the same cancellation policy will apply."
+              ].map((policy) => (
+                <div key={policy} className="flex gap-3">
+                  <span className="material-symbols-outlined text-[#E3B875] text-[20px] flex-shrink-0 mt-1">
+                    info
+                  </span>
+                  <p className="text-[14px] md:text-[15px] leading-7 text-white/75">
+                    {policy}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* ================================
           MEDICAL + CONSIDERATIONS
       ================================= */}
@@ -985,9 +1094,19 @@ export default function DhoDham() {
               Please Note
             </span>
 
-            <h2 className="font-display text-[42px] mt-4">
-              Important Information
-            </h2>
+            <button
+              type="button"
+              onClick={() => setShowImportantInformation(!showImportantInformation)}
+              aria-expanded={showImportantInformation}
+              className="mx-auto mt-4 flex items-center justify-center gap-4 text-center"
+            >
+              <span className="font-display text-[42px]">
+                Important Information
+              </span>
+              <span className={`material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#C56F2B] text-white transition-transform duration-300 ${showImportantInformation ? "rotate-180" : ""}`}>
+                expand_more
+              </span>
+            </button>
 
             <p className="text-[#655A50] text-[16px] max-w-[700px] mx-auto mt-5 leading-[1.8]">
               Please review these possible additional expenses before confirming your Himalayan Yatra.
@@ -996,6 +1115,7 @@ export default function DhoDham() {
           </div>
 
 
+          {showImportantInformation && (
           <div className="rounded-[22px] border border-[#C89A58]/20 bg-gradient-to-br from-[#FFF9F0] to-[#F8EFE3] p-6 md:p-10 shadow-[0_12px_38px_rgba(44,33,25,0.05)]">
 
             <div className="mb-7 flex flex-col sm:flex-row sm:items-center gap-4 rounded-[16px] bg-[#2C2119] px-5 py-5 text-white">
@@ -1055,11 +1175,11 @@ export default function DhoDham() {
             </div>
 
           </div>
+          )}
 
         </div>
 
       </section>
-
 
       {/* ================================
           FINAL CTA

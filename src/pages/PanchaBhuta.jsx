@@ -10,6 +10,15 @@ import { destinationDates } from "../data/yatraDates";
 export default function PanchaBhuta() {
   const [showModal, setShowModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [showItinerary, setShowItinerary] = useState(false);
+  const [openEssentials, setOpenEssentials] = useState({});
+
+  const toggleEssential = (essential) => {
+    setOpenEssentials((current) => ({
+      ...current,
+      [essential]: !current[essential]
+    }));
+  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -343,17 +352,28 @@ export default function PanchaBhuta() {
             </div>
           </div>
 
-          <div className="text-center mb-16">
-            <span className="text-[12px] uppercase tracking-[0.3em] text-[#C89A58] font-semibold">
-              The Sacred Route
+          <button
+            type="button"
+            onClick={() => setShowItinerary(!showItinerary)}
+            aria-expanded={showItinerary}
+            className="w-full rounded-[20px] border border-[#C89A58]/25 bg-[#FBF8F4] px-6 py-7 md:px-9 md:py-8 flex items-center justify-between gap-6 text-left shadow-[0_8px_28px_rgba(44,33,25,0.04)] hover:border-[#C89A58]/50 transition-colors"
+          >
+            <div>
+              <span className="text-[11px] uppercase tracking-[0.22em] text-[#C89A58] font-bold">
+                The Sacred Route
+              </span>
+              <h2 className="font-display text-[30px] md:text-[42px] text-[#2C2119] mt-1">
+                Yatra Itinerary
+              </h2>
+            </div>
+
+            <span className={`material-symbols-outlined flex-shrink-0 w-11 h-11 rounded-full bg-[#C56F2B] text-white flex items-center justify-center transition-transform duration-300 ${showItinerary ? "rotate-180" : ""}`}>
+              expand_more
             </span>
+          </button>
 
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">
-              Yatra Itinerary
-            </h2>
-          </div>
-
-          <div className="space-y-6">
+          {showItinerary && (
+          <div className="space-y-6 mt-10">
             {itinerary.map((day, index) => (
               <div
                 key={index}
@@ -392,6 +412,7 @@ export default function PanchaBhuta() {
               </div>
             ))}
           </div>
+          )}
 
           <div className="mt-12 rounded-[18px] border border-[#C89A58]/30 bg-[#FBF8F4] px-6 py-6 md:px-8 text-center">
             <p className="text-[15px] md:text-[16px] leading-7 text-[#5F554C]">
@@ -419,80 +440,52 @@ export default function PanchaBhuta() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+            {[
+              { key: "clothing", title: "Clothing", icon: "checkroom", items: clothing },
+              { key: "documents", title: "Documents", icon: "description", items: documents },
+              { key: "personal", title: "Personal Items", icon: "backpack", items: personalItems }
+            ].map((essential) => (
+              <div
+                key={essential.key}
+                className="bg-[#FBF8F4] rounded-[20px] p-7 md:p-8 border border-black/5 shadow-[0_8px_30px_rgba(44,33,25,0.04)]"
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleEssential(essential.key)}
+                  aria-expanded={Boolean(openEssentials[essential.key])}
+                  className="w-full flex items-center justify-between gap-4 text-left"
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="w-12 h-12 rounded-full bg-[#C89A58]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="material-symbols-outlined text-[#C89A58]">
+                        {essential.icon}
+                      </span>
+                    </span>
+                    <span className="font-display text-2xl">
+                      {essential.title}
+                    </span>
+                  </span>
 
-            {/* CLOTHING */}
-            <div className="bg-[#FBF8F4] rounded-[20px] p-7 md:p-8 border border-black/5 shadow-[0_8px_30px_rgba(44,33,25,0.04)]">
-              <div className="w-12 h-12 rounded-full bg-[#C89A58]/10 flex items-center justify-center mb-6">
-                <span className="material-symbols-outlined text-[#C89A58]">
-                  checkroom
-                </span>
-              </div>
+                  <span className={`material-symbols-outlined text-[#C56F2B] transition-transform duration-300 ${openEssentials[essential.key] ? "rotate-180" : ""}`}>
+                    expand_more
+                  </span>
+                </button>
 
-              <h3 className="font-display text-2xl mb-6">
-                Clothing
-              </h3>
-
-              <div className="divide-y divide-[#C89A58]/15">
-                {clothing.map((item, index) => (
-                  <div key={index} className="flex gap-3 py-3 first:pt-0 last:pb-0">
-                    <span className="material-symbols-outlined text-[#C56F2B] text-[17px] mt-0.5">check</span>
-                    <p className="text-[15px] text-[#5F554C] leading-6">
-                      {item}
-                    </p>
+                {openEssentials[essential.key] && (
+                  <div className="divide-y divide-[#C89A58]/15 mt-6">
+                    {essential.items.map((item, index) => (
+                      <div key={index} className="flex gap-3 py-3 first:pt-0 last:pb-0">
+                        <span className="material-symbols-outlined text-[#C56F2B] text-[17px] mt-0.5">check</span>
+                        <p className="text-[15px] text-[#5F554C] leading-6">
+                          {item}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
-            </div>
-
-            {/* DOCUMENTS */}
-            <div className="bg-[#FBF8F4] rounded-[20px] p-7 md:p-8 border border-black/5 shadow-[0_8px_30px_rgba(44,33,25,0.04)]">
-              <div className="w-12 h-12 rounded-full bg-[#C89A58]/10 flex items-center justify-center mb-6">
-                <span className="material-symbols-outlined text-[#C89A58]">
-                  description
-                </span>
-              </div>
-
-              <h3 className="font-display text-2xl mb-6">
-                Documents
-              </h3>
-
-              <div className="divide-y divide-[#C89A58]/15">
-                {documents.map((item, index) => (
-                  <div key={index} className="flex gap-3 py-3 first:pt-0 last:pb-0">
-                    <span className="material-symbols-outlined text-[#C56F2B] text-[17px] mt-0.5">check</span>
-                    <p className="text-[15px] text-[#5F554C] leading-6">
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* PERSONAL ITEMS */}
-            <div className="bg-[#FBF8F4] rounded-[20px] p-7 md:p-8 border border-black/5 shadow-[0_8px_30px_rgba(44,33,25,0.04)]">
-              <div className="w-12 h-12 rounded-full bg-[#C89A58]/10 flex items-center justify-center mb-6">
-                <span className="material-symbols-outlined text-[#C89A58]">
-                  backpack
-                </span>
-              </div>
-
-              <h3 className="font-display text-2xl mb-6">
-                Personal Items
-              </h3>
-
-              <div className="divide-y divide-[#C89A58]/15">
-                {personalItems.map((item, index) => (
-                  <div key={index} className="flex gap-3 py-3 first:pt-0 last:pb-0">
-                    <span className="material-symbols-outlined text-[#C56F2B] text-[17px] mt-0.5">check</span>
-                    <p className="text-[15px] text-[#5F554C] leading-6">
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
@@ -577,29 +570,58 @@ export default function PanchaBhuta() {
       {/* REFUND & CANCELLATION POLICY */}
       <section className="py-24 px-6 md:px-10 bg-[#FDFBF8]">
         <div className="max-w-6xl mx-auto">
-          <div className="bg-[#2C2119] rounded-[24px] p-8 md:p-12 text-white">
-            <div className="flex flex-col md:flex-row gap-8 md:gap-12">
-              <div className="md:w-[32%]">
-                <span className="material-symbols-outlined text-[#C89A58] text-4xl mb-5">
-                  policy
+          <div className="rounded-[22px] border border-[#C89A58]/25 bg-[#FFF9F0] p-7 md:p-10 shadow-[0_10px_35px_rgba(44,33,25,0.05)]">
+            <div className="flex flex-col md:flex-row md:items-start gap-5">
+              <div className="w-12 h-12 rounded-full bg-[#C56F2B] text-white flex items-center justify-center flex-shrink-0">
+                <span className="material-symbols-outlined text-[26px]">
+                  event_busy
                 </span>
-                <h2 className="font-display text-3xl md:text-4xl leading-tight">
+              </div>
+
+              <div>
+                <h2 className="font-display text-[30px] md:text-[36px] text-[#2C2119]">
                   Refund & Cancellation Policy
                 </h2>
-                <p className="text-white/60 text-sm leading-7 mt-5">
+                <p className="mt-3 max-w-[850px] text-[15px] md:text-[16px] leading-7 text-[#655A50]">
                   Our priority is to provide a smooth and enjoyable journey. The following policy applies to every booking.
                 </p>
               </div>
-              <div className="md:w-[68%] space-y-4">
-                {cancellationPolicy.map((item, index) => (
-                  <div key={item} className="flex items-start gap-4 pb-4 border-b border-white/10 last:border-0 last:pb-0">
-                    <span className="text-[#C89A58] text-[12px] font-bold mt-1">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <p className="text-white/70 text-[14px] leading-7">{item}</p>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                ["40–26 days", "Full payment refunded", "Excluding the non-refundable deposit"],
+                ["25–16 days", "75% refunded", "Excluding the non-refundable deposit"],
+                ["15–8 days", "50% refunded", "Excluding the non-refundable deposit"]
+              ].map(([period, refund, note]) => (
+                <div
+                  key={period}
+                  className="rounded-[16px] border border-[#C89A58]/20 bg-white p-5"
+                >
+                  <p className="text-[12px] uppercase tracking-[0.16em] font-bold text-[#C56F2B]">
+                    {period} before departure
+                  </p>
+                  <p className="mt-3 font-display text-[22px] text-[#2C2119]">
+                    {refund}
+                  </p>
+                  <p className="mt-2 text-[13px] leading-6 text-[#776D64]">
+                    {note}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 space-y-4 rounded-[16px] bg-[#2C2119] p-6 md:p-7 text-white">
+              {cancellationPolicy.slice(3).map((policy) => (
+                <div key={policy} className="flex gap-3">
+                  <span className="material-symbols-outlined text-[#E3B875] text-[20px] flex-shrink-0 mt-1">
+                    info
+                  </span>
+                  <p className="text-[14px] md:text-[15px] leading-7 text-white/75">
+                    {policy}
+                  </p>
                   </div>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </div>
