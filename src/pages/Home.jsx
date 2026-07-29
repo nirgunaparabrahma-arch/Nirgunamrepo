@@ -183,7 +183,7 @@ export default function Home() {
           alt="Hero Background"
           overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
         />
-        <div className="relative z-10 max-w-4xl scroll-reveal mt-10 md:mt-0 -translate-y-36 sm:translate-y-0">
+        <div className="relative z-10 max-w-4xl scroll-reveal mt-10 md:mt-0 -translate-y-80 sm:translate-y-0">
           <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.95] text-white mb-2 md:mb-4">{pageData.heroTitle}</h1>
           <h2 className="font-display text-2xl md:text-4xl italic font-light text-white/90 mb-6 md:mb-8">{pageData.heroSubtitle}</h2>
           <p className="font-body text-white/70 max-w-xl text-base lg:text-lg font-light leading-relaxed">
