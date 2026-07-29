@@ -69,7 +69,7 @@ export default function About() {
       <header className="relative min-h-screen w-full flex flex-col justify-center items-start px-[5%] pt-[90px] overflow-hidden bg-[#e6dfd1]">
         <HeroBackground
           src="/cvrabout.png"
-          mobileSrc="/cvrabout.png"
+          mobileSrc="/mbabout.png"
           alt="Hero"
           overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
         />

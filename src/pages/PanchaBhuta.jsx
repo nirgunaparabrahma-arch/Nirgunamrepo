@@ -122,7 +122,7 @@ export default function PanchaBhuta() {
       day: "DAY 2",
       title: "Jambukeshwar to Chidambaram",
       items: [
-        "01:00 – 04:00 — Travel to Jambukeshwar",
+        "01:00 AM – 04:00 AM — Travel to Jambukeshwar",
         "Morning Slot — Jambukeshwar & Srirangam temple visit",
         "Evening Slot — Brihadeshwar, K. Sundareshwar, Kumbakonam",
         "Night Slot — Reach Chidambaram",
@@ -243,7 +243,7 @@ export default function PanchaBhuta() {
       </span>
 
       <h1 className="mt-5 font-display text-5xl md:text-7xl font-medium">
-        Pancha Bhuta
+        Panchabhutam
       </h1>
 
       <p className="mt-5 max-w-2xl mx-auto text-white/80 text-base md:text-lg leading-8">
@@ -254,58 +254,67 @@ export default function PanchaBhuta() {
     </div>
   </div>
 
+  <button
+    type="button"
+    onClick={() => setShowModal(true)}
+    className="absolute z-20 bottom-8 right-6 md:bottom-12 md:right-10 h-[56px] px-8 md:px-10 rounded-[12px] bg-[#C56F2B] hover:bg-[#B06124] text-white text-[13px] uppercase font-bold tracking-widest transition-colors shadow-[0_12px_30px_rgba(0,0,0,0.25)]"
+  >
+    Register Now
+  </button>
+
 </section>
 
       {/* YATRA OVERVIEW */}
       <section className="py-20 px-6 md:px-10 bg-[#F7F2EB]">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-[12px] uppercase tracking-[0.3em] text-[#C89A58] font-semibold">
-              More Than 10 Sacred Kshetras
-            </span>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">
+            <h2 className="font-display text-4xl md:text-5xl">
               The Pancha Bhuta Journey
             </h2>
-            <p className="mt-6 text-[#776D64] text-[16px] leading-8">
-              In Vedic philosophy the material cosmos and the human body are composed of the five sacred elements—Earth, Water, Fire, Air and Space. Visiting all five kshetras is a transformative journey that harmonizes nature with the individual.
+            <p className="mt-6 text-[#5F554C] text-[16px] leading-8">
+              In Vedic philosophy the material cosmos and the human body are composed of the five sacred elements—
+              <span className="font-bold text-[#C56F2B]">Earth, Water, Fire, Air and Space</span>.
+              {' '}Visiting all five Kshetras is a transformative journey that harmonizes nature with the individual.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+          {/* Combined Trip Details */}
+          <div className="bg-[#FBF8F4] rounded-[20px] border border-[#5F554C]/40 px-6 py-8 md:px-10 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 lg:gap-5">
             {tripDetails.map((detail) => (
-              <div key={detail.label} className="bg-[#FBF8F4] rounded-[18px] p-6 border border-black/5 text-center">
+              <div key={detail.label} className="text-center">
                 <span className="text-[10px] uppercase tracking-[0.18em] text-[#9A6F3E] font-bold">
                   {detail.label}
                 </span>
                 <p className="font-display text-xl md:text-2xl mt-3">{detail.value}</p>
               </div>
             ))}
+            </div>
           </div>
 
-          <div className="bg-[#2C2119] rounded-[20px] p-8 md:p-10 text-white">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              <div>
-                <span className="text-[11px] uppercase tracking-[0.2em] text-[#C89A58] font-bold">
-                  Sacred Route
-                </span>
-                <p className="font-display text-2xl md:text-3xl mt-4 leading-relaxed">
-                  Tiruvannamalai — Jambukeshwar — Chidambaram — Ekambareshwar — Sri Kalahasti
+          {/* Regional Pricing */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 text-center py-3">
+            {regionalPricing.map((item) => (
+              <div key={item.region}>
+                <p className="font-display font-semibold text-[19px] md:text-[21px] text-[#2C2119]">
+                  <span>{item.region}:</span>{' '}
+                  <span className="text-[#C56F2B]">{item.price}/-</span>
                 </p>
               </div>
-              <div>
-                <span className="text-[11px] uppercase tracking-[0.2em] text-[#C89A58] font-bold">
-                  Regional Pricing
-                </span>
-                <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {regionalPricing.map((item) => (
-                    <div key={item.region} className="rounded-[12px] bg-white/[0.06] p-4 text-center">
-                      <p className="text-white/60 text-[11px] uppercase tracking-wider">{item.region}</p>
-                      <p className="font-display text-xl mt-2">{item.price}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            ))}
+          </div>
+
+          {/* Sacred Places */}
+          <p className="mt-8 text-center font-body font-semibold text-[15px] md:text-[17px] leading-relaxed text-[#4D4037]">
+            Tiruvannamalai — Jambukeshwar — Chidambaram — Ekambareshwar — Sri Kalahasti
+          </p>
+
+          <div className="mt-6 flex items-center justify-center gap-4 text-[#7A5736]">
+            <span aria-hidden="true" className="text-lg">✣</span>
+            <p className="font-display font-semibold text-[20px] md:text-[23px] text-center">
+              More Than 10 Sacred Kshetras
+            </p>
+            <span aria-hidden="true" className="text-lg">✣</span>
           </div>
         </div>
       </section>
@@ -313,6 +322,25 @@ export default function PanchaBhuta() {
       {/* ITINERARY */}
       <section className="py-20 px-6 md:px-10 bg-[#FDFBF8]">
         <div className="max-w-6xl mx-auto">
+
+          <div className="max-w-4xl mx-auto mb-14 rounded-[18px] border border-[#C89A58]/30 bg-[#FBF8F4] px-6 py-6 md:px-8">
+            <h3 className="font-display text-2xl text-center text-[#2C2119] mb-5">
+              Highlights
+            </h3>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                ['🛕', 'Sacred Temple Chanting'],
+                ['🧘', 'Meditation'],
+                ['📿', 'Satsang'],
+                ['🌙', 'Girivalam']
+              ].map(([icon, label]) => (
+                <div key={label} className="flex items-center justify-center gap-2 text-center text-[#5F554C]">
+                  <span aria-hidden="true" className="text-xl">{icon}</span>
+                  <span className="text-[13px] md:text-[14px] font-semibold">{label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div className="text-center mb-16">
             <span className="text-[12px] uppercase tracking-[0.3em] text-[#C89A58] font-semibold">
@@ -328,18 +356,18 @@ export default function PanchaBhuta() {
             {itinerary.map((day, index) => (
               <div
                 key={index}
-                className="bg-[#FBF8F4] border border-black/5 rounded-[20px] p-7 md:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)]"
+                className="bg-[#FBF8F4] border border-black/5 border-l-4 border-l-[#C89A58] rounded-[20px] p-7 md:p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)]"
               >
                 <div className="flex flex-col md:flex-row gap-6">
 
                   <div className="md:w-[150px] flex-shrink-0">
-                    <span className="inline-block px-4 py-2 rounded-full bg-[#C89A58]/10 text-[#9A6F3E] text-[12px] font-bold tracking-widest">
+                    <span className="inline-block px-4 py-2 rounded-full bg-[#C56F2B] text-white text-[12px] font-bold tracking-widest">
                       {day.day}
                     </span>
                   </div>
 
                   <div className="flex-1">
-                    <h3 className="font-display text-2xl md:text-3xl mb-5">
+                    <h3 className="font-display font-semibold text-2xl md:text-3xl mb-5 text-[#7A5736]">
                       {day.title}
                     </h3>
 
@@ -347,9 +375,9 @@ export default function PanchaBhuta() {
                       {day.items.map((item, itemIndex) => (
                         <div
                           key={itemIndex}
-                          className="flex items-start gap-3 text-[#776D64]"
+                          className="flex items-start gap-3 text-[#5F554C]"
                         >
-                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#C89A58] flex-shrink-0" />
+                          <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#D87428] flex-shrink-0" />
 
                           <p className="text-[15px] leading-7">
                             {item}
@@ -362,6 +390,15 @@ export default function PanchaBhuta() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 rounded-[18px] border border-[#C89A58]/30 bg-[#FBF8F4] px-6 py-6 md:px-8 text-center">
+            <p className="text-[15px] md:text-[16px] leading-7 text-[#5F554C]">
+              <span className="font-bold text-[#C56F2B]">₹ 2,999/- (non-refundable)</span> fee should be paid in advance at the time of registration.
+            </p>
+            <p className="mt-2 text-[15px] md:text-[16px] leading-7 text-[#5F554C]">
+              The full payment must be cleared at least 20 days before your departure date.
+            </p>
           </div>
 
         </div>
@@ -384,7 +421,7 @@ export default function PanchaBhuta() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             {/* CLOTHING */}
-            <div className="bg-[#FBF8F4] rounded-[20px] p-8 border border-black/5">
+            <div className="bg-[#FBF8F4] rounded-[20px] p-7 md:p-8 border border-black/5 shadow-[0_8px_30px_rgba(44,33,25,0.04)]">
               <div className="w-12 h-12 rounded-full bg-[#C89A58]/10 flex items-center justify-center mb-6">
                 <span className="material-symbols-outlined text-[#C89A58]">
                   checkroom
@@ -395,11 +432,11 @@ export default function PanchaBhuta() {
                 Clothing
               </h3>
 
-              <div className="space-y-4">
+              <div className="divide-y divide-[#C89A58]/15">
                 {clothing.map((item, index) => (
-                  <div key={index} className="flex gap-3">
-                    <span className="text-[#C89A58] mt-1">•</span>
-                    <p className="text-sm text-[#776D64] leading-6">
+                  <div key={index} className="flex gap-3 py-3 first:pt-0 last:pb-0">
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[17px] mt-0.5">check</span>
+                    <p className="text-[15px] text-[#5F554C] leading-6">
                       {item}
                     </p>
                   </div>
@@ -408,7 +445,7 @@ export default function PanchaBhuta() {
             </div>
 
             {/* DOCUMENTS */}
-            <div className="bg-[#FBF8F4] rounded-[20px] p-8 border border-black/5">
+            <div className="bg-[#FBF8F4] rounded-[20px] p-7 md:p-8 border border-black/5 shadow-[0_8px_30px_rgba(44,33,25,0.04)]">
               <div className="w-12 h-12 rounded-full bg-[#C89A58]/10 flex items-center justify-center mb-6">
                 <span className="material-symbols-outlined text-[#C89A58]">
                   description
@@ -419,11 +456,11 @@ export default function PanchaBhuta() {
                 Documents
               </h3>
 
-              <div className="space-y-4">
+              <div className="divide-y divide-[#C89A58]/15">
                 {documents.map((item, index) => (
-                  <div key={index} className="flex gap-3">
-                    <span className="text-[#C89A58] mt-1">•</span>
-                    <p className="text-sm text-[#776D64] leading-6">
+                  <div key={index} className="flex gap-3 py-3 first:pt-0 last:pb-0">
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[17px] mt-0.5">check</span>
+                    <p className="text-[15px] text-[#5F554C] leading-6">
                       {item}
                     </p>
                   </div>
@@ -432,7 +469,7 @@ export default function PanchaBhuta() {
             </div>
 
             {/* PERSONAL ITEMS */}
-            <div className="bg-[#FBF8F4] rounded-[20px] p-8 border border-black/5">
+            <div className="bg-[#FBF8F4] rounded-[20px] p-7 md:p-8 border border-black/5 shadow-[0_8px_30px_rgba(44,33,25,0.04)]">
               <div className="w-12 h-12 rounded-full bg-[#C89A58]/10 flex items-center justify-center mb-6">
                 <span className="material-symbols-outlined text-[#C89A58]">
                   backpack
@@ -443,11 +480,11 @@ export default function PanchaBhuta() {
                 Personal Items
               </h3>
 
-              <div className="space-y-4">
+              <div className="divide-y divide-[#C89A58]/15">
                 {personalItems.map((item, index) => (
-                  <div key={index} className="flex gap-3">
-                    <span className="text-[#C89A58] mt-1">•</span>
-                    <p className="text-sm text-[#776D64] leading-6">
+                  <div key={index} className="flex gap-3 py-3 first:pt-0 last:pb-0">
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[17px] mt-0.5">check</span>
+                    <p className="text-[15px] text-[#5F554C] leading-6">
                       {item}
                     </p>
                   </div>
@@ -478,17 +515,17 @@ export default function PanchaBhuta() {
             {considerations.map((item, index) => (
               <div
                 key={index}
-                className="bg-[#F7F2EB] rounded-[20px] p-8 border border-black/5"
+                className="bg-[#F7F2EB] rounded-[20px] p-7 md:p-8 border border-black/5 border-t-4 border-t-[#C89A58] shadow-[0_8px_30px_rgba(44,33,25,0.04)]"
               >
-                <span className="text-[#C89A58] text-sm font-bold">
+                <span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-[#C56F2B] text-white text-[12px] font-bold">
                   0{index + 1}
                 </span>
 
-                <h3 className="font-display text-2xl mt-3 mb-4">
+                <h3 className="font-display font-semibold text-2xl mt-5 mb-3 text-[#7A5736]">
                   {item.title}
                 </h3>
 
-                <p className="text-[#776D64] text-[15px] leading-7">
+                <p className="text-[#5F554C] text-[16px] leading-7 max-w-[52ch]">
                   {item.text}
                 </p>
               </div>
@@ -515,16 +552,18 @@ export default function PanchaBhuta() {
               { title: "What Is Included", icon: "check_circle", items: inclusions },
               { title: "What Is Not Included", icon: "cancel", items: exclusions },
             ].map((group) => (
-              <div key={group.title} className="bg-[#FBF8F4] rounded-[20px] p-8 md:p-10 border border-black/5">
+              <div key={group.title} className="bg-[#FBF8F4] rounded-[20px] p-7 md:p-10 border border-black/5 shadow-[0_8px_30px_rgba(44,33,25,0.04)]">
                 <div className="flex items-center gap-3 mb-7">
                   <span className="material-symbols-outlined text-[#C89A58] text-3xl">{group.icon}</span>
                   <h3 className="font-display text-2xl md:text-3xl">{group.title}</h3>
                 </div>
-                <div className="space-y-4">
+                <div className="divide-y divide-[#C89A58]/15">
                   {group.items.map((item) => (
-                    <div key={item} className="flex items-start gap-3">
-                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#C89A58] flex-shrink-0" />
-                      <p className="text-[#776D64] text-[14px] leading-7">{item}</p>
+                    <div key={item} className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
+                      <span className="material-symbols-outlined text-[#C56F2B] text-[18px] mt-1 flex-shrink-0">
+                        {group.icon === "check_circle" ? "check" : "close"}
+                      </span>
+                      <p className="text-[#5F554C] text-[15px] md:text-[16px] leading-7">{item}</p>
                     </div>
                   ))}
                 </div>
@@ -576,16 +615,18 @@ export default function PanchaBhuta() {
         </h2>
 
         <p className="mt-5 max-w-xl mx-auto text-[#776D64] leading-7">
-          Join the Pancha Bhuta Yatra and experience the sacred temples,
-          traditions and spiritual heritage of South India.
+          Join the Pancha Bhuta Yatra and Experience the Sacred Temples,
+          Traditions and Spiritual Heritage of South India.
         </p>
 
         <button
+          type="button"
           onClick={() => setShowModal(true)}
           className="mt-8 h-[56px] px-10 rounded-[12px] bg-[#C56F2B] hover:bg-[#B06124] text-white text-[13px] uppercase font-bold tracking-widest transition-colors"
         >
           Register Now
         </button>
+
       </section>
 
       <Footer />

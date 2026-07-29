@@ -11,9 +11,57 @@ import {
 } from "firebase/firestore";
 import { destinationDates } from "../data/yatraDates";
 
+function ItineraryHeader({ duration, isOpen, onClick, eyebrow }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-expanded={isOpen}
+      className="w-full rounded-[20px] border border-[#C89A58]/25 bg-[#FBF8F4] px-6 py-7 md:px-9 md:py-8 flex items-center justify-between gap-6 text-left shadow-[0_8px_28px_rgba(44,33,25,0.04)] hover:border-[#C89A58]/50 transition-colors"
+    >
+      <div>
+        {eyebrow && (
+          <span className="text-[11px] uppercase tracking-[0.22em] text-[#C89A58] font-bold">
+            {eyebrow}
+          </span>
+        )}
+        <h2 className="font-display text-[30px] md:text-[42px] text-[#2C2119] mt-1">
+          Yatra Itinerary
+        </h2>
+        <p className="font-display font-semibold text-[#C56F2B] text-[18px] md:text-[22px] mt-2">
+          {duration}
+        </p>
+      </div>
+      <span className={`material-symbols-outlined flex-shrink-0 w-11 h-11 rounded-full bg-[#C56F2B] text-white flex items-center justify-center transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+        expand_more
+      </span>
+    </button>
+  );
+}
+
 export default function KasiYatra() {
   const [showYatraModal, setShowYatraModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [openItinerary, setOpenItinerary] = useState(null);
+  const [openPackingGuides, setOpenPackingGuides] = useState({});
+
+  const togglePackingGuide = (guide) => {
+    setOpenPackingGuides((current) => ({
+      ...current,
+      [guide]: !current[guide]
+    }));
+  };
+  const [showExceptionalExclusions, setShowExceptionalExclusions] = useState(false);
+
+  const openAndScrollToItinerary = (itineraryKey) => {
+    setOpenItinerary(itineraryKey);
+
+    requestAnimationFrame(() => {
+      document
+        .getElementById(`kasi-itinerary-${itineraryKey}`)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -104,63 +152,66 @@ export default function KasiYatra() {
   const itinerary = [
     {
       date: "Day 1",
-      title: "Arrival in Varanasi",
+      title: "Kashi Temple Darshan",
       description:
-        "Arrive in Varanasi, check in and attend the orientation. In the evening, experience the Ganga Aarti at Dashashwamedh Ghat, followed by a gentle heritage walk."
+        "Hotel check-in — Kalabhairava Temple — Vishwanath Dham — Sakshi and Dundi Ganapati — Annapurna Temple — Vishalakshi Temple (Shaktipeeth)."
     },
     {
       date: "Day 2",
-      title: "Kashi Temple Darshan",
+      title: "Sacred Temples of Kashi",
       description:
-        "Begin with an early morning Ganga boat ride. Visit Kashi Vishwanath Temple, Annapurna Devi, Vishalakshi Devi, Kalabhairav and nearby sacred temples."
+        "Early Varahi Temple darshan — Two Gupta Mandirs — Tilbhandeshwar — Sankat Mochan Hanuman — Birla Mandir — Tulsi Das Mandir — Gavvalamma — Durga Temple — Three special places."
     },
     {
       date: "Day 3",
-      title: "Pancha Kroshi and Kashi Kshetras",
+      title: "Explore the Sacred Ghats",
       description:
-        "Visit important Kashi kshetras including Sankat Mochan, Durga Kund, Tulsi Manas Mandir and BHU Vishwanath. Spend the evening near the ghats."
+        "Explore the Ghats — Manikarnika Ghat — Ganga Ghat — Three special places."
     },
     {
       date: "Day 4",
-      title: "Sarnath",
+      title: "Free Day",
       description:
-        "Visit Dhamek Stupa, Mulagandha Kuti Vihar and the museum area. Return to Varanasi for spiritual activities."
+        "Free time for shopping and personal exploration."
+    }
+  ];
+
+  const extendedItinerary = [
+    {
+      date: "Day 1",
+      title: "Kashi Temple Darshan",
+      description:
+        "Hotel check-in — Kalabhairava Temple — Vishwanath Dham — Sakshi and Dundi Ganapati — Annapurna Temple — Vishalakshi Temple (Shaktipeeth)."
+    },
+    {
+      date: "Day 2",
+      title: "Sacred Temples of Kashi",
+      description:
+        "Early Varahi Temple darshan — Two Gupta Mandirs — Tilbhandeshwar — Sankat Mochan Hanuman — Birla Mandir — Tulsi Das Mandir — Gavvalamma — Durga Temple — Three special places."
+    },
+    {
+      date: "Day 3",
+      title: "Explore the Sacred Ghats",
+      description:
+        "Explore the Ghats — Manikarnika Ghat — Ganga Ghat — Three special places."
+    },
+    {
+      date: "Day 4",
+      title: "Gaya",
+      description:
+        "Travel to Gaya — Explore the sacred places — Return to Kashi."
     },
     {
       date: "Day 5",
-      title: "Prayagraj",
+      title: "Ayodhya",
       description:
-        "Depart for Prayagraj. Take a sacred bath at Triveni Sangam and attend puja. Visit Bade Hanuman Mandir, Alopi Devi and other local temples."
+        "Hotel checkout — Travel to Ayodhya — Explore Ayodhya — Depart for Naimisharanyam — Overnight stay."
     },
     {
       date: "Day 6",
-      title: "Ayodhya",
+      title: "Naimisharanyam and Prayagraj",
       description:
-        "Proceed to Ayodhya. Visit Shri Ram Janmabhoomi, Hanuman Garhi and Kanak Bhawan. Attend the evening Saryu Aarti and stay overnight."
-    },
-    {
-      date: "Day 7",
-      title: "Naimisharanya",
-      description:
-        "Depart for Naimisharanya. Visit Chakra Tirth, Lalita Devi Temple, Vyas Gaddi and Dadhichi Kund before continuing to the return-route stay."
-    },
-    {
-      date: "Day 8",
-      title: "Gaya",
-      description:
-        "Travel to Gaya. Visit Vishnupad Temple and perform rituals near the Falgu River. Optional Pind Daan can be arranged in advance."
-    },
-    {
-      date: "Day 9",
-      title: "Return to Varanasi",
-      description:
-        "Return to Varanasi. Enjoy free time for personal darshan, shopping, boating or additional temple visits. Attend the closing satsang."
-    },
-    {
-      date: "Day 10",
-      title: "Departure from Varanasi",
-      description:
-        "Buffer time is provided for traffic, rituals or pending darshan. Check out and depart from Varanasi."
+        "Explore Naimisharanyam and local temples — Travel to Prayagraj — Darshan and rituals — Trip ends."
     }
   ];
 
@@ -170,15 +221,18 @@ export default function KasiYatra() {
   const packageOptions = [
     {
       duration: "3 Nights / 4 Days",
-      price: "₹8,000"
+      price: "₹8,000",
+      itineraryKey: "four"
     },
     {
       duration: "5 Nights / 6 Days",
-      price: "₹12,000"
+      price: "₹12,000",
+      itineraryKey: "six"
     },
     {
       duration: "9 Nights / 10 Days",
-      price: "₹15,000"
+      price: "₹15,000",
+      itineraryKey: "ten"
     }
   ];
 
@@ -221,10 +275,10 @@ export default function KasiYatra() {
   // PACKAGE INCLUDES
   // -----------------------------
   const packageIncludes = [
-    "Local transport to important temples and itinerary locations.",
-    "AC triple-sharing accommodation.",
-    "Two meals a day.",
-    "Guidance and caretaker support."
+    "Local transport to important places.",
+    "Food is available at the stay area only.",
+    "Best AC accommodation on a triple-sharing basis during the Yatra.",
+    "Caretaker and guidance for the entire Yatra."
   ];
 
   // -----------------------------
@@ -232,10 +286,13 @@ export default function KasiYatra() {
   // -----------------------------
   const packageExcludes = [
     "Train or flight tickets.",
-    "Darshan or special-entry tickets.",
-    "Snacks, packaged water bottles and personal purchases.",
-    "Boating and optional ritual charges.",
-    "Medical emergency expenses."
+    "VIP Darshan, special Seva or Abhishekam tickets across all temples.",
+    "Food, snacks, water bottles and other refreshments.",
+    "Any medical or emergency evacuations if required.",
+    "Additional hotel accommodation.",
+    "Any additional expenses incurred for an early return from the Yatra due to personal reasons.",
+    "All expenses incurred due to unforeseen and unavoidable circumstances like roadblocks, bad weather or natural calamities.",
+    "Any kind of cost that is not mentioned in the cost inclusions above."
   ];
 
   // -----------------------------
@@ -282,12 +339,12 @@ export default function KasiYatra() {
   // ADDITIONAL TIPS
   // -----------------------------
   const additionalTips = [
-    "Begin early to avoid heavy crowds and daytime heat.",
-    "Keep footwear simple and identifiable.",
-    "Avoid carrying valuables into crowded temple areas.",
-    "Drink safe water and eat light food.",
-    "Remain with the group during transfers.",
-    "Use only authorised priests, guides, boats and transport verified by the organisers."
+    { icon: "wb_twilight", title: "Start Early", text: "Begin early to avoid heavy crowds and daytime heat." },
+    { icon: "footprint", title: "Simple Footwear", text: "Keep footwear simple, comfortable and easy to identify." },
+    { icon: "lock", title: "Protect Valuables", text: "Avoid carrying valuables into crowded temple areas." },
+    { icon: "water_bottle", title: "Stay Refreshed", text: "Drink safe water and choose light food during the journey." },
+    { icon: "groups", title: "Stay Together", text: "Remain with the group during temple visits and transfers." },
+    { icon: "verified_user", title: "Choose Verified Services", text: "Use only priests, guides, boats and transport verified by the organisers." }
   ];
 
   // -----------------------------
@@ -333,7 +390,7 @@ export default function KasiYatra() {
             </span>
 
             <h1 className="font-display text-[50px] md:text-[78px] leading-[1.05] text-white mt-5">
-              Sampoorna Kashi Yatra
+              Sampurna Kashi Yatra
             </h1>
 
             <p className="font-display italic text-[23px] md:text-[32px] text-white/90 mt-5">
@@ -342,8 +399,8 @@ export default function KasiYatra() {
 
             <p className="font-body text-white/75 text-[16px] md:text-[18px] leading-[1.8] mt-6 max-w-[760px]">
               A complete sacred circuit covering Kashi darshan,
-              Ganga rituals, ancestral offerings and the most revered
-              nearby kshetras.
+              Ganga rituals, Ancestral offerings and the most revered
+              nearby Kshetras.
             </p>
 
             {/* <button
@@ -369,102 +426,18 @@ export default function KasiYatra() {
 
           <div className="text-center mb-16">
 
-            <span className="text-[12px] uppercase tracking-[0.25em] text-[#C89A58] font-semibold">
-              The Sacred Journey
-            </span>
-
-            <h2 className="font-display text-[42px] md:text-[55px] mt-4">
-              Sampoorna Kashi Yatra
+            <h2 className="font-display text-[42px] md:text-[55px]">
+              Sampurna Kashi Yatra
             </h2>
 
-            <p className="font-body text-[#776D64] max-w-[760px] mx-auto mt-5 leading-[1.8]">
-              A tentative 9 Nights / 10 Days pilgrimage beginning
-              and ending in Varanasi, covering Kashi, Sarnath,
-              Prayagraj, Ayodhya, Naimisharanya and Gaya.
-            </p>
-
-          </div>
-
-          {/* Overview Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-            <div className="bg-[#FBF8F4] border border-black/5 rounded-[20px] p-8 text-center">
-
-              <span className="material-symbols-outlined text-[#C89A58] text-[38px]">
-                calendar_month
-              </span>
-
-              <h3 className="font-display text-[23px] mt-5">
-                9 Nights / 10 Days
-              </h3>
-
-              <p className="text-[#776D64] text-[14px] mt-3">
-                Complete sacred circuit
-              </p>
-
-            </div>
-
-            <div className="bg-[#FBF8F4] border border-black/5 rounded-[20px] p-8 text-center">
-
-              <span className="material-symbols-outlined text-[#C89A58] text-[38px]">
-                location_on
-              </span>
-
-              <h3 className="font-display text-[23px] mt-5">
-                Varanasi
-              </h3>
-
-              <p className="text-[#776D64] text-[14px] mt-3">
-                Arrival and departure
-              </p>
-
-            </div>
-
-            <div className="bg-[#FBF8F4] border border-black/5 rounded-[20px] p-8 text-center">
-
-              <span className="material-symbols-outlined text-[#C89A58] text-[38px]">
-                currency_rupee
-              </span>
-
-              <h3 className="font-display text-[23px] mt-5">
-                ₹15,000
-              </h3>
-
-              <p className="text-[#776D64] text-[14px] mt-3">
-                Package price
-              </p>
-
-            </div>
-
-          </div>
-
-          {/* Route */}
-          <div className="mt-10 bg-[#FBF8F4] rounded-[20px] border border-black/5 py-8 px-6 md:py-12 md:px-10 text-center">
-
-            <span className="text-[11px] uppercase tracking-[0.2em] text-[#C89A58] font-bold">
-              Yatra Route
-            </span>
-
-            <p className="font-display text-[20px] md:text-[27px] mt-5 leading-[1.8]">
-              Varanasi
-              <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-              Sarnath
-              <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-              Prayagraj
-              <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-              Ayodhya
-              <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-              Naimisharanya
-              <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-              Gaya
-              <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-              Varanasi
+            <p className="font-display italic font-semibold text-[#C56F2B] text-[20px] md:text-[24px] mx-auto mt-5 leading-relaxed">
+              In Kashi, every step is a step toward liberation.
             </p>
 
           </div>
 
           {/* Package Options */}
-          <div className="mt-10">
+          <div>
 
             <div className="text-center mb-8">
 
@@ -481,11 +454,14 @@ export default function KasiYatra() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
               {packageOptions.map((packageItem, index) => (
-                <div
+                <button
+                  type="button"
                   key={index}
-                  className="bg-[#FBF8F4] border border-black/5 rounded-[18px] p-7 text-center"
+                  onClick={() => openAndScrollToItinerary(packageItem.itineraryKey)}
+                  aria-label={`View the ${packageItem.duration} itinerary`}
+                  className="group relative w-full bg-[#FBF8F4] border border-black/5 rounded-[18px] p-7 pb-11 text-center cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-[#C89A58]/45 hover:shadow-[0_14px_34px_rgba(44,33,25,0.09)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C56F2B] focus-visible:ring-offset-2"
                 >
-                  <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
+                  <span className="material-symbols-outlined text-[#C89A58] text-[32px] transition-transform duration-300 group-hover:scale-110">
                     temple_hindu
                   </span>
 
@@ -496,49 +472,46 @@ export default function KasiYatra() {
                   <p className="text-[#C56F2B] font-bold text-[18px] mt-3">
                     {packageItem.price}
                   </p>
-                </div>
+
+                  <span
+                    aria-hidden="true"
+                    className="material-symbols-outlined absolute right-4 bottom-4 text-[#C89A58] text-[24px] transition-transform duration-300 group-hover:translate-x-1"
+                  >
+                    arrow_forward
+                  </span>
+                </button>
               ))}
 
             </div>
 
-          </div>
-
-          {/* Custom Trip Note */}
-          <div className="mt-10 bg-[#2C2119] rounded-[20px] p-8 md:p-10 text-center">
-
-            <span className="material-symbols-outlined text-[#D5A760] text-[38px]">
-              travel_explore
-            </span>
-
-            <h3 className="font-display text-[28px] text-white mt-4">
-              Customise Your Trip
-            </h3>
-
-            <p className="text-white/70 text-[15px] leading-[1.8] mt-4">
-              Kashi + Ayodhya + Naimisharanya + Prayagraj
-              <span className="text-[#D5A760] mx-3">|</span>
-              Kashi + Gaya
-            </p>
-
-          </div>
-
-          {/* Walking Notice */}
-          <div className="mt-8 bg-[#FFF7EA] border border-[#C89A58]/20 rounded-[18px] p-7 flex flex-col md:flex-row gap-5">
-
-            <span className="material-symbols-outlined text-[#C89A58] text-[34px] flex-shrink-0">
-              directions_walk
-            </span>
-
-            <div>
-              <h3 className="font-display text-[22px]">
-                Walking in Kashi
+            <div className="mt-8 rounded-[20px] border border-[#C89A58]/30 bg-[#FBF8F4] px-6 py-8 md:px-10 md:py-9">
+              <h3 className="font-display text-center text-[27px] md:text-[31px] text-[#2C2119]">
+                Highlights
               </h3>
 
-              <p className="text-[#776D64] text-[14px] leading-[1.8] mt-2">
-                Walking is required to navigate the narrow and crowded
-                lanes of Kashi. Volunteers will assist yatris and
-                caretakers will support senior citizens.
-              </p>
+              <div className="mt-7 grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-6">
+                {[
+                  ["🪔", "Experience Ganga Aarthi"],
+                  ["🔥", "Essence of Manikarnika"],
+                  ["🧘", "Meditation at Kashi Ghats"],
+                  ["📿", "Satsang"]
+                ].map(([icon, highlight]) => (
+                  <div
+                    key={highlight}
+                    className="flex items-center justify-center gap-3 text-center"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="flex-shrink-0 text-[23px]"
+                    >
+                      {icon}
+                    </span>
+                    <p className="text-[13px] md:text-[14px] font-semibold leading-relaxed text-[#5F554C]">
+                      {highlight}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
 
           </div>
@@ -553,24 +526,16 @@ export default function KasiYatra() {
 
         <div className="max-w-[1100px] mx-auto">
 
-          <div className="text-center mb-20">
-
-            <span className="text-[12px] uppercase tracking-[0.25em] text-[#C89A58] font-semibold">
-              Sacred Circuit
-            </span>
-
-            <h2 className="font-display text-[42px] md:text-[55px] mt-4">
-              Yatra Itinerary
-            </h2>
-
-            <p className="text-[#776D64] max-w-[700px] mx-auto mt-5 leading-[1.8]">
-              A tentative ten-day spiritual journey through Kashi
-              and the most revered nearby sacred destinations.
-            </p>
-
+          <div id="kasi-itinerary-four" className="scroll-mt-28">
+            <ItineraryHeader
+              duration="3 Nights / 4 Days"
+              isOpen={openItinerary === "four"}
+              onClick={() => setOpenItinerary(openItinerary === "four" ? null : "four")}
+            />
           </div>
 
-          <div className="relative">
+          {openItinerary === "four" && (
+          <div className="relative mt-14">
 
             {/* Timeline Vertical Line */}
             <div className="absolute left-[24px] md:left-[120px] top-0 bottom-0 w-[1px] bg-[#C89A58]/30" />
@@ -614,6 +579,159 @@ export default function KasiYatra() {
             </div>
 
           </div>
+          )}
+
+          <div id="kasi-itinerary-six" className="mt-6 scroll-mt-28">
+            <ItineraryHeader
+              duration="5 Nights / 6 Days"
+              isOpen={openItinerary === "six"}
+              onClick={() => setOpenItinerary(openItinerary === "six" ? null : "six")}
+            />
+          </div>
+
+          {openItinerary === "six" && (
+          <div>
+            {/* Yatra Route */}
+            <div className="mt-8 bg-[#FBF8F4] rounded-[20px] border border-black/5 py-8 px-6 md:py-12 md:px-10 text-center">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-[#C89A58] font-bold">
+                Yatra Route
+              </span>
+
+              <p className="font-display text-[20px] md:text-[27px] mt-5 leading-[1.8]">
+                Varanasi
+                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
+                Sarnath
+                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
+                Prayagraj
+                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
+                Ayodhya
+                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
+                Naimisharanya
+                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
+                Gaya
+                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
+                Varanasi
+              </p>
+            </div>
+
+            <div className="relative mt-14">
+              <div className="absolute left-[24px] md:left-[120px] top-0 bottom-0 w-[1px] bg-[#C89A58]/30" />
+
+              <div className="flex flex-col gap-12">
+                {extendedItinerary.map((item, index) => (
+                  <div key={index} className="relative flex gap-8 md:gap-16">
+                    <div className="w-[50px] md:w-[100px] flex-shrink-0 text-right">
+                      <span className="text-[12px] md:text-[14px] font-bold text-[#C89A58]">
+                        {item.date}
+                      </span>
+                    </div>
+
+                    <div className="relative z-10 w-[10px] h-[10px] mt-1 rounded-full bg-[#C89A58] ring-8 ring-[#FDFBF8] flex-shrink-0" />
+
+                    <div className="bg-[#FBF8F4] border border-black/5 rounded-[18px] p-6 md:p-8 flex-1">
+                      <h3 className="font-display text-[23px] md:text-[27px]">
+                        {item.title}
+                      </h3>
+                      <p className="font-body text-[14px] md:text-[15px] text-[#776D64] leading-[1.8] mt-3">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          )}
+
+          <div id="kasi-itinerary-ten" className="mt-6 scroll-mt-28">
+            <ItineraryHeader
+              duration="9 Nights / 10 Days"
+              isOpen={openItinerary === "ten"}
+              onClick={() => setOpenItinerary(openItinerary === "ten" ? null : "ten")}
+            />
+          </div>
+
+          {openItinerary === "ten" && (
+          <div className="mt-8 rounded-[22px] border border-[#C89A58]/25 bg-[#FBF8F4] p-7 md:p-10 shadow-[0_10px_35px_rgba(44,33,25,0.04)]">
+            <div className="max-w-[900px] mx-auto text-center">
+              <p className="text-[#5F554C] text-[16px] md:text-[17px] leading-8">
+                We will explore handpicked local destinations specially crafted by Nirgunam.
+              </p>
+
+              <p className="mt-4 text-[12px] uppercase tracking-[0.18em] text-[#9A6F3E] font-bold">
+                Spiritual one-day Yatras across Kashi
+              </p>
+
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+                {['Ashtabhairav Yatra', 'Nava Durga Yatra', '12 Aditya Yatra'].map((yatra) => (
+                  <span
+                    key={yatra}
+                    className="inline-flex items-center gap-2 rounded-full border border-[#C89A58]/30 bg-[#FFF7EA] px-4 py-2 text-[13px] md:text-[14px] font-semibold text-[#7A5736]"
+                  >
+                    <span aria-hidden="true" className="text-[#C56F2B]">✣</span>
+                    {yatra}
+                  </span>
+                ))}
+              </div>
+
+              <p className="mt-5 text-[#5F554C] text-[15px] md:text-[16px] leading-7">
+                Pilgrims can choose their desired Yatra during registration.
+              </p>
+            </div>
+
+            <div className="mt-9 grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="group rounded-[18px] bg-gradient-to-b from-[#FFF9EF] to-[#FFF1DA] border border-[#C89A58]/25 p-7 shadow-[0_10px_30px_rgba(122,87,54,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(122,87,54,0.12)]">
+                <div className="w-12 h-12 rounded-full bg-[#C56F2B] text-white flex items-center justify-center mb-5">
+                  <span className="material-symbols-outlined text-[25px]">nights_stay</span>
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#C56F2B] font-bold">Sacred Significance</span>
+                <h4 className="font-display text-[23px] text-[#7A5736] mt-2">Significance of Nine Nights</h4>
+                <p className="mt-3 text-[#5F554C] text-[15px] leading-7">
+                  Nine sacred nights in Kashi symbolize a complete inner passage—traditionally associated with <span className="font-semibold text-[#A95D25]">Moksha, purification and spiritual renewal.</span>
+                </p>
+              </div>
+
+              <div className="group rounded-[18px] bg-gradient-to-b from-[#FFF9EF] to-[#FFF1DA] border border-[#C89A58]/25 p-7 shadow-[0_10px_30px_rgba(122,87,54,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(122,87,54,0.12)]">
+                <div className="w-12 h-12 rounded-full bg-[#C56F2B] text-white flex items-center justify-center mb-5">
+                  <span className="material-symbols-outlined text-[25px]">all_inclusive</span>
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#C56F2B] font-bold">Cycle of Life</span>
+                <h4 className="font-display text-[23px] text-[#7A5736] mt-2">Womb Connection</h4>
+                <p className="mt-3 text-[#5F554C] text-[15px] leading-7">
+                  As nine months in the womb prepare a soul for birth, nine nights in Kashi represent an inward return—believed to help one <span className="font-semibold text-[#A95D25]">move beyond the cycle of rebirth.</span>
+                </p>
+              </div>
+
+              <div className="group rounded-[18px] bg-gradient-to-b from-[#FFF9EF] to-[#FFF1DA] border border-[#C89A58]/25 p-7 shadow-[0_10px_30px_rgba(122,87,54,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(122,87,54,0.12)]">
+                <div className="w-12 h-12 rounded-full bg-[#C56F2B] text-white flex items-center justify-center mb-5">
+                  <span className="material-symbols-outlined text-[25px]">auto_awesome</span>
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#C56F2B] font-bold">Grace of Kashi</span>
+                <h4 className="font-display text-[23px] text-[#7A5736] mt-2">Kashi Labh</h4>
+                <p className="mt-3 text-[#5F554C] text-[15px] leading-7">
+                  Kashi Labh is the sacred faith that continuous nights in this holy city invite Shiva’s grace and <span className="font-semibold text-[#A95D25]">cleanse the burdens accumulated through life.</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          )}
+
+          <div className="mt-8 rounded-[18px] border border-[#C89A58]/25 bg-[#FFF9F0] p-6 md:p-7">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <span className="material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#C56F2B] text-white">
+                payments
+              </span>
+
+              <div className="space-y-2">
+                <p className="text-[15px] md:text-[16px] leading-7 text-[#5F554C]">
+                  <span className="font-bold text-[#C56F2B]">₹2,999/- non-refundable</span> fee should be paid in advance at the time of registration.
+                </p>
+                <p className="text-[15px] md:text-[16px] font-semibold leading-7 text-[#2C2119]">
+                  The full payment must be cleared at least 20 days before your departure date.
+                </p>
+              </div>
+            </div>
+          </div>
 
           {/* Tentative Itinerary Notice */}
           <div className="mt-16 bg-[#FFF7EA] border border-[#C89A58]/20 rounded-[18px] p-7 md:p-8">
@@ -644,6 +762,27 @@ export default function KasiYatra() {
 
           </div>
 
+          {/* Walking Notice */}
+          <div className="mt-8 bg-[#FFF7EA] border border-[#C89A58]/20 rounded-[18px] p-7 flex flex-col md:flex-row gap-5">
+
+            <span className="material-symbols-outlined text-[#C89A58] text-[34px] flex-shrink-0">
+              directions_walk
+            </span>
+
+            <div>
+              <h3 className="font-display text-[22px]">
+                Walking in Kashi
+              </h3>
+
+              <p className="text-[#776D64] text-[14px] leading-[1.8] mt-2">
+                Walking is required to navigate the narrow and crowded
+                lanes of Kashi. Volunteers will assist yatris and
+                caretakers will support senior citizens.
+              </p>
+            </div>
+
+          </div>
+
         </div>
 
       </section>
@@ -663,7 +802,7 @@ export default function KasiYatra() {
             Preparation and Packing Guide
           </h2>
 
-          <p className="font-body text-[#776D64] max-w-[760px] mx-auto mt-6 leading-[1.9]">
+          <p className="font-body text-[#655A50] text-[16px] md:text-[17px] max-w-[760px] mx-auto mt-6 leading-[1.9]">
             A Kashi Yatra is spiritually enriching and physically
             active. Light packing, modest clothing, comfortable
             footwear, hydration and personal medicines will make
@@ -681,33 +820,46 @@ export default function KasiYatra() {
 
         <div className="max-w-[1200px] mx-auto">
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
 
             {/* Clothing */}
-            <div className="bg-[#FBF8F4] rounded-[20px] border border-black/5 p-8">
+            <div className="bg-[#FBF8F4] rounded-[20px] border border-[#C89A58]/20 p-6 md:p-8 shadow-[0_8px_28px_rgba(44,33,25,0.04)]">
 
-              <div className="flex items-center gap-3 mb-7">
+              <button
+                type="button"
+                onClick={() => togglePackingGuide("clothing")}
+                aria-expanded={Boolean(openPackingGuides.clothing)}
+                className="w-full flex items-center justify-between gap-4 text-left"
+              >
+                <span className="flex items-center gap-3">
 
-                <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
-                  checkroom
+                  <span className="w-11 h-11 rounded-full bg-[#C56F2B]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[25px]">
+                      checkroom
+                    </span>
+                  </span>
+
+                  <span className="font-display text-[27px]">
+                    Clothing
+                  </span>
                 </span>
 
-                <h3 className="font-display text-[27px]">
-                  Clothing
-                </h3>
+                <span className={`material-symbols-outlined text-[#C56F2B] transition-transform duration-300 ${openPackingGuides.clothing ? "rotate-180" : ""}`}>
+                  expand_more
+                </span>
+              </button>
 
-              </div>
-
-              <ul className="space-y-4">
+              {openPackingGuides.clothing && (
+              <ul className="space-y-3 mt-7">
 
                 {clothing.map((item, index) => (
                   <li
                     key={index}
-                    className="flex gap-3 text-[14px] text-[#776D64] leading-[1.7]"
+                    className="flex gap-3 rounded-[12px] bg-white/75 px-4 py-3 text-[15px] text-[#5F554C] leading-[1.7]"
                   >
 
-                    <span className="text-[#C89A58] mt-1 flex-shrink-0">
-                      •
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[18px] mt-[3px] flex-shrink-0">
+                      check_circle
                     </span>
 
                     <span>
@@ -718,34 +870,48 @@ export default function KasiYatra() {
                 ))}
 
               </ul>
+              )}
 
             </div>
 
             {/* Documents */}
-            <div className="bg-[#FBF8F4] rounded-[20px] border border-black/5 p-8">
+            <div className="bg-[#FBF8F4] rounded-[20px] border border-[#C89A58]/20 p-6 md:p-8 shadow-[0_8px_28px_rgba(44,33,25,0.04)]">
 
-              <div className="flex items-center gap-3 mb-7">
+              <button
+                type="button"
+                onClick={() => togglePackingGuide("documents")}
+                aria-expanded={Boolean(openPackingGuides.documents)}
+                className="w-full flex items-center justify-between gap-4 text-left"
+              >
+                <span className="flex items-center gap-3">
 
-                <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
-                  description
+                  <span className="w-11 h-11 rounded-full bg-[#C56F2B]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[25px]">
+                      description
+                    </span>
+                  </span>
+
+                  <span className="font-display text-[27px]">
+                    Documents
+                  </span>
                 </span>
 
-                <h3 className="font-display text-[27px]">
-                  Documents
-                </h3>
+                <span className={`material-symbols-outlined text-[#C56F2B] transition-transform duration-300 ${openPackingGuides.documents ? "rotate-180" : ""}`}>
+                  expand_more
+                </span>
+              </button>
 
-              </div>
-
-              <ul className="space-y-4">
+              {openPackingGuides.documents && (
+              <ul className="space-y-3 mt-7">
 
                 {documents.map((item, index) => (
                   <li
                     key={index}
-                    className="flex gap-3 text-[14px] text-[#776D64] leading-[1.7]"
+                    className="flex gap-3 rounded-[12px] bg-white/75 px-4 py-3 text-[15px] text-[#5F554C] leading-[1.7]"
                   >
 
-                    <span className="text-[#C89A58] mt-1 flex-shrink-0">
-                      •
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[18px] mt-[3px] flex-shrink-0">
+                      check_circle
                     </span>
 
                     <span>
@@ -756,34 +922,48 @@ export default function KasiYatra() {
                 ))}
 
               </ul>
+              )}
 
             </div>
 
             {/* Personal Items */}
-            <div className="bg-[#FBF8F4] rounded-[20px] border border-black/5 p-8">
+            <div className="bg-[#FBF8F4] rounded-[20px] border border-[#C89A58]/20 p-6 md:p-8 shadow-[0_8px_28px_rgba(44,33,25,0.04)]">
 
-              <div className="flex items-center gap-3 mb-7">
+              <button
+                type="button"
+                onClick={() => togglePackingGuide("personal")}
+                aria-expanded={Boolean(openPackingGuides.personal)}
+                className="w-full flex items-center justify-between gap-4 text-left"
+              >
+                <span className="flex items-center gap-3">
 
-                <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
-                  backpack
+                  <span className="w-11 h-11 rounded-full bg-[#C56F2B]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[25px]">
+                      backpack
+                    </span>
+                  </span>
+
+                  <span className="font-display text-[27px]">
+                    Personal Items
+                  </span>
                 </span>
 
-                <h3 className="font-display text-[27px]">
-                  Personal Items
-                </h3>
+                <span className={`material-symbols-outlined text-[#C56F2B] transition-transform duration-300 ${openPackingGuides.personal ? "rotate-180" : ""}`}>
+                  expand_more
+                </span>
+              </button>
 
-              </div>
-
-              <ul className="space-y-4">
+              {openPackingGuides.personal && (
+              <ul className="space-y-3 mt-7">
 
                 {personalItems.map((item, index) => (
                   <li
                     key={index}
-                    className="flex gap-3 text-[14px] text-[#776D64] leading-[1.7]"
+                    className="flex gap-3 rounded-[12px] bg-white/75 px-4 py-3 text-[15px] text-[#5F554C] leading-[1.7]"
                   >
 
-                    <span className="text-[#C89A58] mt-1 flex-shrink-0">
-                      •
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[18px] mt-[3px] flex-shrink-0">
+                      check_circle
                     </span>
 
                     <span>
@@ -794,6 +974,7 @@ export default function KasiYatra() {
                 ))}
 
               </ul>
+              )}
 
             </div>
 
@@ -908,6 +1089,66 @@ export default function KasiYatra() {
 
             </div>
 
+          </div>
+
+          <div className="mt-10 rounded-[22px] border border-[#C89A58]/25 bg-[#FFF9F0] p-7 md:p-10 shadow-[0_10px_35px_rgba(44,33,25,0.05)]">
+            <div className="flex flex-col md:flex-row md:items-start gap-5">
+              <div className="w-12 h-12 rounded-full bg-[#C56F2B] text-white flex items-center justify-center flex-shrink-0">
+                <span className="material-symbols-outlined text-[26px]">
+                  event_busy
+                </span>
+              </div>
+
+              <div>
+                <h3 className="font-display text-[30px] md:text-[36px] text-[#2C2119]">
+                  Refund and Cancellation Policy
+                </h3>
+                <p className="mt-3 max-w-[850px] text-[15px] md:text-[16px] leading-7 text-[#655A50]">
+                  Our priority is to ensure you have a smooth and enjoyable journey. However, the following cancellation policy applies.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                ["60–41 days", "Full payment refunded", "Excluding the non-refundable deposit"],
+                ["40–31 days", "75% refunded", "Excluding the non-refundable deposit"],
+                ["30–18 days", "50% refunded", "Excluding the non-refundable deposit"]
+              ].map(([period, refund, note]) => (
+                <div
+                  key={period}
+                  className="rounded-[16px] border border-[#C89A58]/20 bg-white p-5"
+                >
+                  <p className="text-[12px] uppercase tracking-[0.16em] font-bold text-[#C56F2B]">
+                    {period} before departure
+                  </p>
+                  <p className="mt-3 font-display text-[22px] text-[#2C2119]">
+                    {refund}
+                  </p>
+                  <p className="mt-2 text-[13px] leading-6 text-[#776D64]">
+                    {note}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 space-y-4 rounded-[16px] bg-[#2C2119] p-6 md:p-7 text-white">
+              {[
+                "No refund will be issued when cancellation is requested less than 17 days before departure.",
+                "Refunds will not be issued if you cannot attend the Yatra due to heavy rains, floods, traffic jams, vehicle breakdowns or personal medical emergencies.",
+                "Your booking cannot be transferred to another date if you are unable to attend the Yatra.",
+                "If the Yatra is cancelled due to natural calamities, political unrest or other circumstances beyond our control, the same cancellation policy will apply."
+              ].map((policy) => (
+                <div key={policy} className="flex gap-3">
+                  <span className="material-symbols-outlined text-[#E3B875] text-[20px] flex-shrink-0 mt-1">
+                    info
+                  </span>
+                  <p className="text-[14px] md:text-[15px] leading-7 text-white/75">
+                    {policy}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>
@@ -1115,28 +1356,32 @@ export default function KasiYatra() {
 
             {additionalTips.map((tip, index) => (
               <div
-                key={index}
-                className="bg-[#FBF8F4] border border-black/5 rounded-[18px] p-7"
+                key={tip.title}
+                className="group relative overflow-hidden bg-gradient-to-br from-[#FFF9F0] to-[#FBF3E8] border border-[#C89A58]/20 rounded-[20px] p-7 shadow-[0_8px_28px_rgba(44,33,25,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(44,33,25,0.09)]"
               >
+
+                <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-[#C56F2B] via-[#E3B875] to-transparent" />
 
                 <div className="flex items-center justify-between">
 
-                  <div className="w-11 h-11 rounded-full bg-[#C89A58]/10 flex items-center justify-center">
-
-                    <span className="text-[#C89A58] text-[14px] font-bold">
-                      {String(index + 1).padStart(2, "0")}
+                  <div className="w-12 h-12 rounded-full bg-[#C56F2B] text-white flex items-center justify-center shadow-[0_6px_16px_rgba(197,111,43,0.2)]">
+                    <span className="material-symbols-outlined text-[24px]">
+                      {tip.icon}
                     </span>
-
                   </div>
 
-                  <span className="material-symbols-outlined text-[#C89A58]/50 text-[28px]">
-                    temple_hindu
+                  <span className="text-[#C89A58]/55 text-[12px] font-bold tracking-[0.18em]">
+                    TIP {String(index + 1).padStart(2, "0")}
                   </span>
 
                 </div>
 
-                <p className="text-[#776D64] text-[15px] leading-[1.8] mt-6">
-                  {tip}
+                <h3 className="font-display text-[23px] text-[#2C2119] mt-6">
+                  {tip.title}
+                </h3>
+
+                <p className="text-[#655A50] text-[15px] leading-[1.8] mt-3">
+                  {tip.text}
                 </p>
 
               </div>
@@ -1161,11 +1406,21 @@ export default function KasiYatra() {
               Please Note
             </span>
 
-            <h2 className="font-display text-[42px] md:text-[55px] mt-4">
-              Exceptional Cost Exclusions
-            </h2>
+            <button
+              type="button"
+              onClick={() => setShowExceptionalExclusions(!showExceptionalExclusions)}
+              aria-expanded={showExceptionalExclusions}
+              className="mx-auto mt-4 flex items-center justify-center gap-4 text-center"
+            >
+              <span className="font-display text-[42px] md:text-[55px]">
+                Exceptional Cost Exclusions
+              </span>
+              <span className={`material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#C56F2B] text-white transition-transform duration-300 ${showExceptionalExclusions ? "rotate-180" : ""}`}>
+                expand_more
+              </span>
+            </button>
 
-            <p className="text-[#776D64] max-w-[740px] mx-auto mt-5 leading-[1.8]">
+            <p className="text-[#655A50] text-[16px] md:text-[17px] max-w-[740px] mx-auto mt-5 leading-[1.9]">
               Costs caused by personal requirements, emergencies,
               delays or circumstances outside the organiser's control
               are not included in the package.
@@ -1173,27 +1428,52 @@ export default function KasiYatra() {
 
           </div>
 
-          <div className="bg-[#FBF8F4] border border-black/5 rounded-[20px] p-8 md:p-12">
+          {showExceptionalExclusions && (
+          <div className="rounded-[22px] border border-[#C89A58]/20 bg-gradient-to-br from-[#FFF9F0] to-[#F8EFE3] p-6 md:p-10 shadow-[0_12px_38px_rgba(44,33,25,0.05)]">
 
-            <div className="space-y-6">
+            <div className="mb-7 flex items-center gap-4 rounded-[16px] bg-[#2C2119] px-5 py-4 text-white">
+              <span className="material-symbols-outlined flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-[#E3B875]">
+                receipt_long
+              </span>
+              <p className="text-[14px] md:text-[15px] leading-7 text-white/75">
+                Please review these possible additional costs before confirming your Yatra.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
               {exclusions.map((item, index) => (
                 <div
                   key={index}
-                  className="flex gap-5 border-b border-black/5 pb-6 last:border-b-0 last:pb-0"
+                  className="group flex gap-4 rounded-[16px] border border-[#C89A58]/15 bg-white/80 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#C89A58]/35 hover:shadow-[0_10px_24px_rgba(44,33,25,0.06)]"
                 >
 
-                  <div className="w-9 h-9 rounded-full bg-[#C89A58]/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[#C56F2B]/10 flex items-center justify-center flex-shrink-0">
 
-                    <span className="text-[#C89A58] text-[13px] font-bold">
-                      {index + 1}
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[20px]">
+                      {[
+                        "hotel",
+                        "payments",
+                        "directions_bus",
+                        "medical_services",
+                        "flight_takeoff",
+                        "trending_up",
+                        "thunderstorm",
+                        "event_busy",
+                        "add_circle"
+                      ][index]}
                     </span>
 
                   </div>
 
-                  <p className="text-[#776D64] text-[14px] md:text-[15px] leading-[1.9] pt-1">
-                    {item}
-                  </p>
+                  <div>
+                    <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-[#B9773F]">
+                      Exclusion {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-[#5F554C] text-[14px] md:text-[15px] leading-[1.8] mt-1.5">
+                      {item}
+                    </p>
+                  </div>
 
                 </div>
               ))}
@@ -1201,6 +1481,7 @@ export default function KasiYatra() {
             </div>
 
           </div>
+          )}
 
         </div>
 
@@ -1283,7 +1564,7 @@ export default function KasiYatra() {
       <section className="relative min-h-[520px] flex items-center overflow-hidden">
 
         <HeroBackground
-          src="/kashi-cta.jpg"
+          src="/lowpickashi.png"
           alt="Kashi Ganga Aarti"
           overlayClassName="bg-black/65"
         />
@@ -1311,7 +1592,7 @@ export default function KasiYatra() {
               onClick={() => setShowYatraModal(true)}
               className="inline-flex items-center justify-center mt-9 h-[56px] px-9 rounded-[12px] bg-[#C56F2B] hover:bg-[#AF5F22] text-white text-[12px] uppercase font-bold tracking-widest transition-colors"
             >
-              Register for Kashi Yatra
+              Register Now
             </button>
 
           </div>
@@ -1361,7 +1642,7 @@ export default function KasiYatra() {
               </span>
 
               <h2 className="font-display text-[32px] md:text-[42px] mt-3">
-                Register for Kashi Yatra
+                Register Now
               </h2>
 
               <p className="text-white/65 text-[14px] leading-[1.7] mt-3 max-w-[560px]">
