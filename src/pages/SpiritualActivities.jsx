@@ -81,14 +81,14 @@ export default function SpiritualActivities() {
       {/* PROJECT TANDAVAM SECTION */}
       <section className="py-[120px] px-[5%] lg:px-[8%] bg-[#FCFAF6] border-b border-black/5">
         <div className="max-w-[1200px] mx-auto">
-          <div className="max-w-[900px]">
+          <div className="max-w-[900px] mx-auto text-center">
             <span className="text-[13px] uppercase tracking-[0.2em] text-[#D8782B] font-semibold mb-6 block">
               Sacred Action
             </span>
             <h2 className="font-display font-medium text-[46px] md:text-[58px] leading-[1.05] text-[#241812] tracking-[-0.03em] mb-8">
               Project Tandavam
             </h2>
-            <div className="font-body text-[#655B52] max-w-[680px]">
+            <div className="font-body text-[#655B52] max-w-[760px] mx-auto flex flex-col items-center">
               <h3 className="font-display text-[25px] md:text-[29px] font-semibold text-[#C56F2B]">
                 Unleash the Divine Energy Within
               </h3>
