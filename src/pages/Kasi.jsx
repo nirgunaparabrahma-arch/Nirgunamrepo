@@ -84,7 +84,7 @@ export default function KasiYatra() {
     name: "",
     phone: "",
     pilgrims: "1",
-    destination: "Sampoorna Kashi Yatra",
+    destination: "Sampurna Kashi",
     type: "",
     senior: "No",
     city: "",
@@ -143,7 +143,7 @@ export default function KasiYatra() {
         name: "",
         phone: "",
         pilgrims: "1",
-        destination: "Sampoorna Kashi Yatra",
+        destination: "Sampurna Kashi",
         type: "",
         senior: "No",
         city: "",
@@ -1836,30 +1836,14 @@ export default function KasiYatra() {
                     Destination
                   </label>
 
-                  <select
+                  <input
                     id="destination"
+                    type="text"
                     name="destination"
                     value={formData.destination}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full h-[50px] px-4 rounded-[10px] bg-white border border-black/10 outline-none focus:border-[#C89A58] text-[14px]"
-                  >
-                    <option value="Sampoorna Kashi Yatra">
-                      Sampoorna Kashi Yatra
-                    </option>
-
-                    <option value="Kashi and Gaya">
-                      Kashi and Gaya
-                    </option>
-
-                    <option value="Kashi, Ayodhya, Prayagraj and Naimisharanya">
-                      Kashi, Ayodhya, Prayagraj and Naimisharanya
-                    </option>
-
-                    <option value="Custom Kashi Yatra">
-                      Custom Kashi Yatra
-                    </option>
-                  </select>
+                    readOnly
+                    className="w-full h-[50px] px-4 rounded-[10px] bg-[#F5F0E9] border border-black/10 outline-none text-[14px] text-[#5F554C] cursor-default"
+                  />
 
                 </div>
 

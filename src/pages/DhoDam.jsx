@@ -14,6 +14,21 @@ export default function DhoDham() {
   const [showItinerary, setShowItinerary] = useState(false);
   const [openCarryGuides, setOpenCarryGuides] = useState({});
   const [showImportantInformation, setShowImportantInformation] = useState(false);
+  const [showAdditionalTips, setShowAdditionalTips] = useState(false);
+  const [navHeight, setNavHeight] = useState(104);
+
+  useEffect(() => {
+    const navbar = document.getElementById("main-nav");
+    if (!navbar) return undefined;
+
+    const updateNavHeight = () => setNavHeight(navbar.getBoundingClientRect().height);
+    const resizeObserver = new ResizeObserver(updateNavHeight);
+
+    updateNavHeight();
+    resizeObserver.observe(navbar);
+
+    return () => resizeObserver.disconnect();
+  }, []);
 
   const toggleCarryGuide = (guide) => {
     setOpenCarryGuides((current) => ({
@@ -299,6 +314,34 @@ export default function DhoDham() {
       ================================= */}
       <Navbar />
 
+      <nav
+        aria-label="Breadcrumb"
+        style={{ top: `${navHeight}px` }}
+        className="fixed left-0 z-40 w-full border-y border-[#C89A58]/20 bg-[#FBF8F4]/95 px-[5%] py-2.5 shadow-sm backdrop-blur-md transition-[top] duration-700 md:left-[5%] md:w-auto md:rounded-full md:border md:px-3 md:py-2 md:shadow-[0_8px_30px_rgba(44,33,25,0.14)]"
+      >
+        <ol className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6E6258]">
+          <li className="flex items-center">
+            <img
+              src="/cvrdhodham.png"
+              alt=""
+              aria-hidden="true"
+              className="h-8 w-8 rounded-full border border-[#C89A58]/30 object-cover"
+            />
+          </li>
+          <li>
+            <Link to="/yatra#shrines-we-cover" className="transition-colors hover:text-[#C56F2B]">
+              Yatra
+            </Link>
+          </li>
+          <li aria-hidden="true" className="material-symbols-outlined text-[16px] text-[#C89A58]">
+            chevron_right
+          </li>
+          <li aria-current="page" className="max-w-[55vw] truncate text-[#2C2119] md:max-w-none">
+            Dho Dham Yatra
+          </li>
+        </ol>
+      </nav>
+
 
       {/* ================================
           HERO SECTION
@@ -318,12 +361,6 @@ export default function DhoDham() {
         <div className="relative z-10 w-full px-[5%] lg:px-[8%] pb-40 md:pb-20">
 
           <div className="max-w-[850px]">
-
-            <Link to="/yatra#shrines-we-cover" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 text-white text-[12px] font-bold tracking-widest uppercase transition-all backdrop-blur-sm mb-8 w-fit">
-              <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-              <span>Back to Yatra</span>
-            </Link>
-            <br />
 
             <span className="text-[12px] uppercase tracking-[0.3em] text-[#E3B875] font-semibold">
               Sacred Yatra
@@ -1038,14 +1075,25 @@ export default function DhoDham() {
             Travel Mindfully
           </span>
 
-          <h2 className="font-display text-[42px] mt-4">
-            Additional Tips
-          </h2>
+          <button
+            type="button"
+            onClick={() => setShowAdditionalTips(!showAdditionalTips)}
+            aria-expanded={showAdditionalTips}
+            className="mx-auto mt-4 flex items-center justify-center gap-4 text-center"
+          >
+            <span className="font-display text-[42px]">
+              Additional Tips
+            </span>
+            <span className={`material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#C56F2B] text-white transition-transform duration-300 ${showAdditionalTips ? "rotate-180" : ""}`}>
+              expand_more
+            </span>
+          </button>
 
           <p className="text-[#655A50] text-[16px] max-w-[650px] mx-auto mt-5 leading-[1.8]">
             A few thoughtful preparations can make your Himalayan Yatra safer, lighter and more meaningful.
           </p>
 
+          {showAdditionalTips && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
 
             {additionalTips.map((tip, index) => (
@@ -1082,6 +1130,7 @@ export default function DhoDham() {
             ))}
 
           </div>
+          )}
 
         </div>
 

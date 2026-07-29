@@ -60,7 +60,8 @@ export default function Journey() {
       eyebrow: "2024 - PRESENT",
       title: "Nirgunam Foundation",
       text: "Nirgunam was officially announced on Maha Shivaratri 2026 as a space for seekers of truth and inner transformation. Under the guidance of an enlightened master from Tiruvannamalai, revelations naturally blossomed into a path of self-inquiry, awareness and oneness.",
-      fallbackImg: "/logowall2.png"
+      fallbackImg: "/logowall2.png",
+      mobileSrcImg: "/mblogo.png"
     }
   ]);
 
@@ -134,7 +135,7 @@ export default function Journey() {
                   <span className="text-[11px] uppercase tracking-[0.2em] text-[#C89A58] font-semibold mb-3">{event.eyebrow}</span>
                   <h3 className={`font-display font-medium leading-[1.1] text-[#2C2119] tracking-[-0.03em] mb-4 ${event._id === "02" ? "text-[18px] sm:text-[24px] whitespace-nowrap" : "text-[28px]"}`}>{event.title}</h3>
                   <div className="w-full rounded-[16px] overflow-hidden bg-[#FBF8F4] border border-black/5 aspect-[16/9] mb-5">
-                    <img src={event.fallbackImg} alt={event.title} className="w-full h-full object-cover" />
+                    <img src={event.mobileSrcImg || event.fallbackImg} alt={event.title} className="w-full h-full object-cover" />
                   </div>
                   <p className="font-body text-[#776D64] text-[15px] leading-[1.8] font-light">{event.text}</p>
                 </div>

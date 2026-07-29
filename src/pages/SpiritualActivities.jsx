@@ -88,13 +88,54 @@ export default function SpiritualActivities() {
             <h2 className="font-display font-medium text-[46px] md:text-[58px] leading-[1.05] text-[#241812] tracking-[-0.03em] mb-8">
               Project Tandavam
             </h2>
-            <div className="font-body text-[#766C63] text-[18px] leading-[1.9] font-light space-y-5 max-w-[620px]">
-              <p>
-                Project Tandavam is a movement that transforms spiritual awareness into purposeful action. It brings seekers together to serve, learn and create meaningful change within the community.
+            <div className="font-body text-[#655B52] max-w-[680px]">
+              <h3 className="font-display text-[25px] md:text-[29px] font-semibold text-[#C56F2B]">
+                Unleash the Divine Energy Within
+              </h3>
+
+              <p className="mt-5 text-[16px] md:text-[17px] font-semibold leading-7 text-[#2D221A]">
+                Are you ready to be part of an extraordinary, high-energy group performance that brings the fierce, majestic power of Lord Shiva’s cosmic dance to life?
               </p>
-              <p>
-                Inspired by the rhythm of transformation, the project connects inner growth with collective responsibility—turning devotion into service and intention into impact.
+
+              <p className="mt-4 text-[15px] md:text-[16px] leading-7">
+                Project Tandavam is a dedicated team initiative where passion meets devotion. We are bringing together a focused group of energetic individuals to train, synchronize and execute a powerful Shiva Tandav performance that will leave audiences spellbound.
               </p>
+
+              <div className="mt-7 rounded-[18px] border border-[#C89A58]/20 bg-[#FFF9F0] p-5 md:p-6">
+                <h4 className="font-display text-[22px] font-semibold text-[#2D221A]">
+                  What We Are Looking For
+                </h4>
+                <div className="mt-4 space-y-3 text-[14px] md:text-[15px] leading-7">
+                  <p><span className="font-bold text-[#C56F2B]">High Energy &amp; Passion:</span> People who can bring intensity, strength and presence to every move.</p>
+                  <p><span className="font-bold text-[#C56F2B]">Dedication &amp; Commitment:</span> Individuals willing to invest their precious time, effort and heart into mastering this divine art form.</p>
+                  <p><span className="font-bold text-[#C56F2B]">Team Spirit:</span> Performers who thrive in a unified group dynamic to create seamless, explosive collective energy.</p>
+                </div>
+              </div>
+
+              <div className="mt-5 rounded-[18px] border border-[#C89A58]/20 bg-white p-5 md:p-6">
+                <h4 className="font-display text-[22px] font-semibold text-[#2D221A]">
+                  Why Join Project Tandavam?
+                </h4>
+                <div className="mt-4 space-y-3 text-[14px] md:text-[15px] leading-7">
+                  <p><span className="font-bold text-[#C56F2B]">Perform a Divine Art Form:</span> Connect deeply with the cosmic power and grace of Lord Shiva.</p>
+                  <p><span className="font-bold text-[#C56F2B]">Intense Training:</span> Build strength, rhythm, expression and physical endurance through structured team practice.</p>
+                  <p><span className="font-bold text-[#C56F2B]">Unforgettable Stage Energy:</span> Be part of a captivating, large-scale group act that creates an undeniable impact.</p>
+                </div>
+              </div>
+
+              <p className="mt-6 font-display italic text-[19px] md:text-[21px] font-semibold text-[#7A5736]">
+                “Experience the power. Channel the devotion. Become the Tandav.”
+              </p>
+
+              <div className="mt-6 flex items-start gap-3 rounded-[16px] bg-[#2D221A] px-5 py-5 text-white">
+                <span aria-hidden="true" className="text-[21px]">📩</span>
+                <div>
+                  <h4 className="font-display text-[20px] text-[#E3B875]">How to Participate</h4>
+                  <p className="mt-2 text-[14px] leading-6 text-white/75">
+                    If you are ready to dedicate your time and channel your inner warrior, we want you on our team. Registration is now open.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
