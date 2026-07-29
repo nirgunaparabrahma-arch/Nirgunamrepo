@@ -134,7 +134,7 @@ export default function About() {
               { icon: 'trip_origin', title: 'Seeing The Formless', desc: 'He sees everything and everyone as Nirguna Parabrahman — the ultimate formless reality beyond names and shapes.' },
               { icon: 'eco', title: 'No Rules Or Dependency', desc: 'People can experience true peace and detachment without complicated rituals or relying blindly on a teacher.' },
               { icon: 'tips_and_updates', title: 'Find Your Own Light', desc: 'His invitation to everyone is to become their own light — standing strong and unshaken on their own feet.' },
-              { icon: 'all_inclusive', title: 'Everyone is Equal', desc: 'He recognizes himself in all beings and all things, claiming no standing above any other. Boundless in nature, he finds complete fulfillment in simply being nothing.' }
+              { icon: 'all_inclusive', title: 'Slow Down', desc: 'Slowing down is not about doing less. It is about seeing more.' }
             ].map((card, i) => (
               <div key={i} className="bg-[#2C241E] rounded-3xl p-10 hover:bg-[#342b24] transition-all text-center flex flex-col items-center justify-center min-h-[280px]">
                 <span className="material-symbols-outlined text-[#E5D5C1] text-3xl mb-6 opacity-80">{card.icon}</span>

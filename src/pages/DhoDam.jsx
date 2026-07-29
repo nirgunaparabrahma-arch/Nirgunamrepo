@@ -246,9 +246,21 @@ export default function DhoDham() {
   // ADDITIONAL TIPS
   // -----------------------------
   const additionalTips = [
-    "Carry dry fruits and energy bars for quick snacking.",
-    "Use plastic bags to waterproof your belongings.",
-    "Respect the local customs and traditions."
+    {
+      icon: "nutrition",
+      title: "Keep Your Energy Up",
+      description: "Carry dry fruits and energy bars for quick nourishment during travel and trekking."
+    },
+    {
+      icon: "waterproof",
+      title: "Protect Your Belongings",
+      description: "Pack essential belongings in waterproof pouches or sealed bags to keep them dry."
+    },
+    {
+      icon: "volunteer_activism",
+      title: "Honour Local Traditions",
+      description: "Respect local customs, temple practices and the traditions of the Himalayan communities."
+    }
   ];
 
   // -----------------------------
@@ -834,26 +846,39 @@ export default function DhoDham() {
             Additional Tips
           </h2>
 
+          <p className="text-[#655A50] text-[16px] max-w-[650px] mx-auto mt-5 leading-[1.8]">
+            A few thoughtful preparations can make your Himalayan Yatra safer, lighter and more meaningful.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
 
             {additionalTips.map((tip, index) => (
 
               <div
-                key={index}
-                className="bg-[#FBF8F4] border border-black/5 rounded-[18px] p-8"
+                key={tip.title}
+                className="group relative overflow-hidden bg-gradient-to-br from-[#FFF9F0] to-[#FBF3E8] border border-[#C89A58]/20 rounded-[20px] p-7 text-left shadow-[0_8px_28px_rgba(44,33,25,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(44,33,25,0.09)]"
               >
 
-                <div className="w-10 h-10 rounded-full bg-[#C89A58]/10 flex items-center justify-center mx-auto">
+                <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-[#C56F2B] via-[#E3B875] to-transparent" />
 
-                  <span className="text-[#C89A58] font-bold">
-                    {index + 1}
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-full bg-[#C56F2B] text-white flex items-center justify-center shadow-[0_6px_16px_rgba(197,111,43,0.2)]">
+                    <span className="material-symbols-outlined text-[24px]">
+                      {tip.icon}
+                    </span>
+                  </div>
+
+                  <span className="text-[#C89A58]/60 text-[11px] font-bold tracking-[0.18em]">
+                    TIP {String(index + 1).padStart(2, "0")}
                   </span>
-
                 </div>
 
-                <p className="text-[#776D64] text-[14px] leading-[1.7] mt-5">
-                  {tip}
+                <h3 className="font-display text-[23px] text-[#2C2119] mt-6">
+                  {tip.title}
+                </h3>
+
+                <p className="text-[#655A50] text-[15px] leading-[1.8] mt-3">
+                  {tip.description}
                 </p>
 
               </div>

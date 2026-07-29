@@ -593,26 +593,29 @@ export default function KasiYatra() {
           {openItinerary === "six" && (
           <div>
             {/* Yatra Route */}
-            <div className="mt-8 bg-[#FBF8F4] rounded-[20px] border border-black/5 py-8 px-6 md:py-12 md:px-10 text-center">
+            <div className="mt-8 bg-[#FBF8F4] rounded-[20px] border border-black/5 py-8 px-6 md:py-12 md:px-10 text-center overflow-hidden">
               <span className="text-[11px] uppercase tracking-[0.2em] text-[#C89A58] font-bold">
                 Yatra Route
               </span>
 
-              <p className="font-display text-[20px] md:text-[27px] mt-5 leading-[1.8]">
-                Varanasi
-                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-                Sarnath
-                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-                Prayagraj
-                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-                Ayodhya
-                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-                Naimisharanya
-                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-                Gaya
-                <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
-                Varanasi
-              </p>
+              <div className="mt-5 flex flex-wrap items-center justify-center gap-y-3 font-display text-[18px] sm:text-[20px] md:text-[27px] leading-[1.8]">
+                {[
+                  "Varanasi",
+                  "Sarnath",
+                  "Prayagraj",
+                  "Ayodhya",
+                  "Naimisharanya",
+                  "Gaya",
+                  "Varanasi"
+                ].map((place, index, route) => (
+                  <span key={`${place}-${index}`} className="inline-flex items-center whitespace-nowrap">
+                    <span>{place}</span>
+                    {index < route.length - 1 && (
+                      <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
+                    )}
+                  </span>
+                ))}
+              </div>
             </div>
 
             <div className="relative mt-14">
