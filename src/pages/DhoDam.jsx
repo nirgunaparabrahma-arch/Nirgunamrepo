@@ -410,29 +410,31 @@ export default function DhoDham() {
 
 
           {/* Route */}
-          <div className="mt-10 bg-[#FBF8F4] rounded-[20px] border border-black/5 py-8 md:py-12 text-center">
+          <div className="mt-10 bg-[#FBF8F4] rounded-[20px] border border-black/5 px-5 py-8 md:px-8 md:py-12 text-center overflow-hidden">
 
             <span className="text-[11px] uppercase tracking-[0.2em] text-[#C89A58] font-bold">
               Yatra Route
             </span>
 
-            <p className="font-display text-[22px] md:text-[28px] mt-5 leading-[1.7]">
-              Delhi
-              <span className="text-[#C89A58] mx-3">→</span>
-              Haridwar
-              <span className="text-[#C89A58] mx-3">→</span>
-              Tungnath
-              <span className="text-[#C89A58] mx-3">→</span>
-              Gaurikund
-              <span className="text-[#C89A58] mx-3">→</span>
-              Kedarnath
-              <span className="text-[#C89A58] mx-3">→</span>
-              Bhadrinath
-              <span className="text-[#C89A58] mx-3">→</span>
-              Mana
-              <span className="text-[#C89A58] mx-3">→</span>
-              Rishikesh
-            </p>
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-y-3 font-display text-[19px] sm:text-[22px] md:text-[28px] leading-[1.7]">
+              {[
+                "Delhi",
+                "Haridwar",
+                "Tungnath",
+                "Gaurikund",
+                "Kedarnath",
+                "Bhadrinath",
+                "Mana",
+                "Rishikesh"
+              ].map((place, index, route) => (
+                <span key={place} className="inline-flex items-center whitespace-nowrap">
+                  <span>{place}</span>
+                  {index < route.length - 1 && (
+                    <span className="text-[#C89A58] mx-2 md:mx-3">→</span>
+                  )}
+                </span>
+              ))}
+            </div>
 
           </div>
 
