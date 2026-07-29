@@ -80,8 +80,8 @@ export default function SpiritualActivities() {
 
       {/* PROJECT TANDAVAM SECTION */}
       <section className="py-[120px] px-[5%] lg:px-[8%] bg-[#FCFAF6] border-b border-black/5">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          <div className="order-2 lg:order-1">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="max-w-[900px]">
             <span className="text-[13px] uppercase tracking-[0.2em] text-[#D8782B] font-semibold mb-6 block">
               Sacred Action
             </span>
@@ -94,58 +94,85 @@ export default function SpiritualActivities() {
               </h3>
 
               <p className="mt-5 text-[16px] md:text-[17px] font-semibold leading-7 text-[#2D221A]">
-                Are you ready to be part of an extraordinary, high-energy group performance that brings the fierce, majestic power of Lord Shiva’s cosmic dance to life?
+                Are you ready to be part of an Extraordinary, High-Energy Group Performance that brings the Fierce, Majestic Power of Lord Shiva’s Cosmic Dance to Life?
               </p>
 
               <p className="mt-4 text-[15px] md:text-[16px] leading-7">
                 Project Tandavam is a dedicated team initiative where passion meets devotion. We are bringing together a focused group of energetic individuals to train, synchronize and execute a powerful Shiva Tandav performance that will leave audiences spellbound.
               </p>
+            </div>
+          </div>
 
-              <div className="mt-7 rounded-[18px] border border-[#C89A58]/20 bg-[#FFF9F0] p-5 md:p-6">
-                <h4 className="font-display text-[22px] font-semibold text-[#2D221A]">
-                  What We Are Looking For
-                </h4>
-                <div className="mt-4 space-y-3 text-[14px] md:text-[15px] leading-7">
+          <div className="mt-12 space-y-10 lg:space-y-14">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+              <div className="relative min-h-[340px] md:min-h-[440px] overflow-hidden rounded-[24px] border border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
+                <img
+                  src="/tan5.png"
+                  alt="Project Tandavam Shiva inspiration"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+              </div>
+
+              <div className="relative flex h-full flex-col justify-center overflow-hidden rounded-[24px] border border-[#C89A58]/25 bg-gradient-to-br from-[#FFF9F0] to-[#F8EDDF] p-7 md:p-10 shadow-[0_12px_32px_rgba(45,30,20,0.06)]">
+                <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#C56F2B] to-[#E3B875]" />
+                <div className="flex items-center gap-4">
+                  <span className="material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#C56F2B] text-[22px] text-white">
+                    groups
+                  </span>
+                  <h4 className="font-display text-[24px] md:text-[28px] font-semibold leading-tight text-[#2D221A]">
+                    What We Are Looking For
+                  </h4>
+                </div>
+                <div className="mt-7 space-y-5 font-body text-[15px] md:text-[16px] leading-7 text-[#655B52]">
                   <p><span className="font-bold text-[#C56F2B]">High Energy &amp; Passion:</span> People who can bring intensity, strength and presence to every move.</p>
                   <p><span className="font-bold text-[#C56F2B]">Dedication &amp; Commitment:</span> Individuals willing to invest their precious time, effort and heart into mastering this divine art form.</p>
                   <p><span className="font-bold text-[#C56F2B]">Team Spirit:</span> Performers who thrive in a unified group dynamic to create seamless, explosive collective energy.</p>
                 </div>
               </div>
+            </div>
 
-              <div className="mt-5 rounded-[18px] border border-[#C89A58]/20 bg-white p-5 md:p-6">
-                <h4 className="font-display text-[22px] font-semibold text-[#2D221A]">
-                  Why Join Project Tandavam?
-                </h4>
-                <div className="mt-4 space-y-3 text-[14px] md:text-[15px] leading-7">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+              <div className="relative flex h-full flex-col justify-center overflow-hidden rounded-[24px] border border-[#C89A58]/25 bg-gradient-to-br from-white to-[#FFF8EE] p-7 md:p-10 shadow-[0_12px_32px_rgba(45,30,20,0.06)]">
+                <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-[#7A5736] to-[#C89A58]" />
+                <div className="flex items-center gap-4">
+                  <span className="material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#7A5736] text-[22px] text-white">
+                    auto_awesome
+                  </span>
+                  <h4 className="font-display text-[24px] md:text-[28px] font-semibold leading-tight text-[#2D221A]">
+                    Why Join Project Tandavam?
+                  </h4>
+                </div>
+                <div className="mt-7 space-y-5 font-body text-[15px] md:text-[16px] leading-7 text-[#655B52]">
                   <p><span className="font-bold text-[#C56F2B]">Perform a Divine Art Form:</span> Connect deeply with the cosmic power and grace of Lord Shiva.</p>
                   <p><span className="font-bold text-[#C56F2B]">Intense Training:</span> Build strength, rhythm, expression and physical endurance through structured team practice.</p>
                   <p><span className="font-bold text-[#C56F2B]">Unforgettable Stage Energy:</span> Be part of a captivating, large-scale group act that creates an undeniable impact.</p>
                 </div>
               </div>
 
-              <p className="mt-6 font-display italic text-[19px] md:text-[21px] font-semibold text-[#7A5736]">
+              <div className="relative min-h-[340px] md:min-h-[440px] overflow-hidden rounded-[24px] border border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
+                <img
+                  src="/tan1.png"
+                  alt="Project Tandavam divine performance"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+              </div>
+            </div>
+
+            <div className="max-w-[900px] mx-auto text-center">
+              <p className="font-display italic text-[19px] md:text-[22px] font-semibold text-[#7A5736]">
                 “Experience the power. Channel the devotion. Become the Tandav.”
               </p>
-
-              <div className="mt-6 flex items-start gap-3 rounded-[16px] bg-[#2D221A] px-5 py-5 text-white">
-                <span aria-hidden="true" className="text-[21px]">📩</span>
+              <div className="mt-6 flex items-start gap-4 rounded-[18px] bg-[#2D221A] px-6 py-6 text-left text-white md:px-8">
+                <span aria-hidden="true" className="text-[22px]">📩</span>
                 <div>
-                  <h4 className="font-display text-[20px] text-[#E3B875]">How to Participate</h4>
-                  <p className="mt-2 text-[14px] leading-6 text-white/75">
+                  <h4 className="font-display text-[21px] text-[#E3B875]">How to Participate</h4>
+                  <p className="mt-2 font-body text-[14px] md:text-[15px] leading-6 text-white/75">
                     If you are ready to dedicate your time and channel your inner warrior, we want you on our team. Registration is now open.
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="order-1 lg:order-2">
-            <div className="w-full aspect-[4/3] rounded-[24px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
-              <img
-                src="/project-tandavam.png"
-                alt="Project Tandavam community initiative"
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
         </div>
