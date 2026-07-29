@@ -20,7 +20,7 @@ export default function Bhairavam() {
         {/* Cinematic Background */}
         <HeroBackground
           src="/cvrbhairavam.png"
-          mobileSrc="/cvrbhairavam.png"
+          mobileSrc="/mbbhairavam.png"
           alt="Bhairavam Meditation"
           imageClassName="object-right lg:object-center"
           overlayClassName="bg-gradient-to-b from-black/30 to-black/70"

@@ -229,6 +229,7 @@ export default function PanchaBhuta() {
 
   <HeroBackground
     src="/cvrpanchabutam.png"
+    mobileSrc="/mbpanchabutam.png"
     alt="Pancha Bhuta Sacred Yatra"
     imageClassName="object-center"
     overlayClassName="bg-black/45"

@@ -98,7 +98,7 @@ export default function Yatra() {
         {/* Cinematic Background */}
         <HeroBackground
           src="/cvryatra.png"
-          mobileSrc="/cvryatra.png"
+          mobileSrc="/mbyatra.png"
           alt="Yatra Meditation"
           imageClassName="object-center"
           overlayClassName="bg-gradient-to-b from-black/30 to-black/70"

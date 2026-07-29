@@ -285,6 +285,7 @@ export default function DhoDham() {
         {/* Background */}
         <HeroBackground
           src="/cvrdhodham.png"
+          mobileSrc="/mbdhodham.png"
           alt="Dho Dham"
           overlayClassName="bg-gradient-to-t from-black/80 via-black/40 to-black/10"
         />

@@ -61,6 +61,7 @@ export default function SpiritualActivities() {
       <section className="relative min-h-screen w-full flex items-center overflow-hidden bg-[#241812]">
         <HeroBackground
           src="/cvractivities.png"
+          mobileSrc="/mbactivities.png"
           alt="Spiritual Gathering"
           overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
         />

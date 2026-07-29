@@ -83,6 +83,7 @@ export default function Products() {
         {/* Split Background */}
         <HeroBackground
           src="/cvrproducts.png"
+          mobileSrc="/mbproducts.png"
           alt="Temple Altar"
           overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
         />

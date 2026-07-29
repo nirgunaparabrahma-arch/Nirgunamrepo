@@ -377,6 +377,7 @@ export default function KasiYatra() {
 
         <HeroBackground
           src="/cvrkashi.png"
+          mobileSrc="/mbkashi.png"
           alt="Sampoorna Kashi Yatra"
           overlayClassName="bg-gradient-to-t from-black/85 via-black/45 to-black/10"
         />
