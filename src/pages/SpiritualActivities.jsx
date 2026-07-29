@@ -152,7 +152,7 @@ export default function SpiritualActivities() {
 
               <div className="relative min-h-[340px] md:min-h-[440px] overflow-hidden rounded-[24px] border border-white/60 shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
                 <img
-                  src="/tan1.png"
+                  src="/tan6.png"
                   alt="Project Tandavam divine performance"
                   className="absolute inset-0 w-full h-full object-cover"
                 />

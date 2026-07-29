@@ -151,6 +151,7 @@ export default function Navbar() {
                   <option value="Bhairava Jayanti">Bhairava Jayanti</option>
                   <option value="Maha Shivratri">Maha Shivratri</option>
                   <option value="Retreat">Retreat</option>
+                  <option value="Project Tandavam">Project Tandavam</option>
                   <option value="General Enquiry">General Enquiry</option>
                 </select>
               </div>
