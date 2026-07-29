@@ -9,9 +9,6 @@ export default function Footer({ theme = "light" }) {
   const headingClass = isDark ? "text-white" : "text-[#2C2119]";
   const bodyClass = isDark ? "text-white/70" : "text-[#776D64]";
   const mutedClass = isDark ? "text-white/50" : "text-[#776D64]/80";
-  const iconClass = isDark ? "border-white/20 text-white/70 hover:text-white" : "border-black/10 text-[#776D64] hover:text-white";
-  const inputBgClass = isDark ? "bg-white/5 border-white/10 focus-within:border-[#C89A58]" : "bg-white border-black/10 focus-within:border-[#C89A58]";
-  const inputTextClass = isDark ? "text-white placeholder-white/40" : "text-[#2C2119] placeholder-[#776D64]/50";
 
   return (
     <footer className={`${bgClass} pt-[100px] px-[5%] border-t ${borderClass} relative overflow-hidden`}>
@@ -72,15 +69,9 @@ export default function Footer({ theme = "light" }) {
           {/* Column 5 */}
           <div className="flex flex-col">
             <h5 className={`text-[12px] uppercase tracking-[0.15em] font-bold mb-8 ${headingClass}`}>Stay Connected</h5>
-            <p className={`text-[14px] font-body ${bodyClass} leading-[1.8] font-light mb-6`}>
-              Receive reflections, updates and inspiration to guide your journey.
+            <p className={`text-[14px] font-body ${bodyClass} leading-[1.9] font-light`}>
+              Stay close to Nirgunam through sacred reflections, upcoming gatherings and meaningful updates that support your journey toward inner clarity and transformation.
             </p>
-            <div className={`flex h-[48px] rounded-[12px] border overflow-hidden shadow-sm transition-colors ${inputBgClass}`}>
-              <input type="email" placeholder="Enter your email" className={`w-full h-full px-4 text-[14px] bg-transparent border-none focus:ring-0 outline-none ${inputTextClass}`} />
-              <button className="h-full px-5 bg-[#5D6845] hover:bg-[#4a5337] transition-colors flex items-center justify-center group">
-                <span className="material-symbols-outlined text-white text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-              </button>
-            </div>
           </div>
 
         </div>

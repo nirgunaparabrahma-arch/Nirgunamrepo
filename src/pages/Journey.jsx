@@ -75,7 +75,7 @@ export default function Journey() {
       <section className="relative min-h-screen w-full flex flex-col justify-center items-start px-[5%] lg:px-[8%] pt-[90px] overflow-hidden">
         <HeroBackground
           src="/cvrjourney.png"
-          mobileSrc="/mbjourney1.png"
+          mobileSrc="/mbjourney2.png"
           alt="Hero"
           imageClassName="object-right"
           overlayClassName="bg-gradient-to-b from-black/30 to-black/70"

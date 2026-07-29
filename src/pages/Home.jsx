@@ -123,7 +123,7 @@ export default function Home() {
       name: "Kamala",
       role: "Secundrabad",
       quote: "As soon as I saw Moksha Lakshmi, I cannot explain my happiness. Devi is literally conveying a message of trust. After Devi stepped into my home, within a week unexpectedly I got a gift of gold worth 2.5 lakhs. I am so happy. I didn't see such form anywhere and I think nobody has seen such a form of Devi.",
-      fallbackImg: "https://lh3.googleusercontent.com/aida-public/AB6AXuAJca9I5iJmYt3TxuoNlo6KFcEdM6DFP3vgNTVpy6S4i3LMbGx-gBr1noPxmwf07cP6NUe4StZYDQbi0kTzTsfL6kQhCbikDlvxbJyWZAdXSxe4svu3ovgWmpHLMw4vqgFU0irkv17Bl0wX5RwdjjcLyGZNKNSmB3HUthu-zj9hGgNWJ1TJF3wzPwVj7bMNvoeJN6k183Oy3hgaz0gC2uTOmoDcq9rOJnvJ42RIa0yi3NnYL4XKmjeU6_JL58pzwMCi5ZLzEo6EjI4h"
+      fallbackImg: "kamala.jpeg"
     },
       {
       _id: 'fallback-t1',

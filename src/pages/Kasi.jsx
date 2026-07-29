@@ -85,6 +85,7 @@ export default function KasiYatra() {
     phone: "",
     pilgrims: "1",
     destination: "Sampoorna Kashi Yatra",
+    type: "",
     senior: "No",
     city: "",
     dates: destinationDates["Sampurna Kashi"],
@@ -107,10 +108,11 @@ export default function KasiYatra() {
       !formData.name ||
       !formData.phone ||
       !formData.destination ||
+      !formData.type ||
       !formData.city
     ) {
       alert(
-        "Please fill in your name, phone number, destination and city."
+        "Please fill in your name, phone number, destination, package type and city."
       );
       return;
     }
@@ -123,6 +125,7 @@ export default function KasiYatra() {
         phone: formData.phone,
         pilgrims: parseInt(formData.pilgrims, 10) || 1,
         destination: formData.destination,
+        type: formData.type,
         senior: formData.senior,
         city: formData.city,
         dates: formData.dates,
@@ -141,6 +144,7 @@ export default function KasiYatra() {
         phone: "",
         pilgrims: "1",
         destination: "Sampoorna Kashi Yatra",
+        type: "",
         senior: "No",
         city: "",
         dates: destinationDates["Sampurna Kashi"],
@@ -1691,7 +1695,7 @@ export default function KasiYatra() {
       ================================= */}
       {showYatraModal && (
         <div
-          className="fixed inset-0 z-[1000] bg-black/70 backdrop-blur-sm flex items-center justify-center px-4 py-8 overflow-y-auto"
+          className="fixed inset-0 z-[1000] bg-black/70 backdrop-blur-sm flex items-start md:items-center justify-center px-4 py-4 md:py-8 overflow-hidden"
           onClick={() => {
             if (!submitting) {
               setShowYatraModal(false);
@@ -1700,12 +1704,12 @@ export default function KasiYatra() {
         >
 
           <div
-            className="relative w-full max-w-[760px] bg-[#FDFBF8] rounded-[22px] shadow-2xl overflow-hidden"
+            className="relative w-full max-w-[760px] max-h-[calc(100dvh-2rem)] md:max-h-[calc(100dvh-4rem)] bg-[#FDFBF8] rounded-[22px] shadow-2xl overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
 
             {/* Modal Header */}
-            <div className="relative bg-[#2C2119] px-7 md:px-10 py-8 text-white">
+            <div className="sticky top-0 z-20 bg-[#2C2119] px-7 md:px-10 py-8 text-white">
 
               <button
                 type="button"
@@ -1854,6 +1858,40 @@ export default function KasiYatra() {
 
                     <option value="Custom Kashi Yatra">
                       Custom Kashi Yatra
+                    </option>
+                  </select>
+
+                </div>
+
+                {/* Package Type */}
+                <div>
+
+                  <label
+                    htmlFor="type"
+                    className="block text-[12px] uppercase tracking-[0.12em] text-[#5F554C] font-bold mb-2"
+                  >
+                    Select Type
+                  </label>
+
+                  <select
+                    id="type"
+                    name="type"
+                    value={formData.type}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full h-[50px] px-4 rounded-[10px] bg-white border border-black/10 outline-none focus:border-[#C89A58] text-[14px]"
+                  >
+                    <option value="" disabled>
+                      Select package type
+                    </option>
+                    <option value="3 Nights / 4 Days - ₹8,000/-">
+                      3 Nights / 4 Days — ₹8,000/-
+                    </option>
+                    <option value="5 Nights / 6 Days - ₹12,000/-">
+                      5 Nights / 6 Days — ₹12,000/-
+                    </option>
+                    <option value="9 Nights / 10 Days - ₹15,000/-">
+                      9 Nights / 10 Days — ₹15,000/-
                     </option>
                   </select>
 

@@ -188,13 +188,22 @@ export default function Products() {
           </div>
 
           {/* Right: Product Image */}
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-1/2 flex flex-col gap-6">
             <div className="w-full h-[600px] rounded-[20px] overflow-hidden shadow-[0_20px_40px_rgba(42,31,24,0.08)]">
               <img
                 src="/prdlingam.png"
                 alt="Aadi Lingam"
                 className="w-full h-full object-cover"
               />
+            </div>
+            <div className="bg-[#FCFAF6] border border-black/5 rounded-[20px] p-6 flex items-start gap-4">
+              <span className="material-symbols-outlined text-[#C7954D] text-[24px] flex-shrink-0">
+                filter_vintage
+              </span>
+              <p className="text-[14px] font-body text-[#776D64] leading-relaxed">
+                <span className="font-semibold text-[#5F554C]">Note:</span>{" "}
+                Image shown is for illustration purposes. The actual Jagadadi Lingam may differ slightly in finish, texture and detailing.
+              </p>
             </div>
           </div>
         </div>
@@ -205,13 +214,22 @@ export default function Products() {
         <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-16 xl:gap-24 items-center lg:items-start">
 
           {/* Left: Product Image */}
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-1/2 flex flex-col gap-6">
             <div className="w-full h-[520px] rounded-[20px] overflow-hidden shadow-[0_20px_40px_rgba(42,31,24,0.08)]">
               <img
                 src="/bhairavakavacham1.jpg"
                 alt="Parad Lingam Coming Soon"
                 className="w-full h-full object-cover mix-blend-multiply opacity-90"
               />
+            </div>
+            <div className="bg-[#FCFAF6] border border-black/5 rounded-[20px] p-6 flex items-start gap-4">
+              <span className="material-symbols-outlined text-[#C7954D] text-[24px] flex-shrink-0">
+                filter_vintage
+              </span>
+              <p className="text-[14px] font-body text-[#776D64] leading-relaxed">
+                <span className="font-semibold text-[#5F554C]">Note:</span>{" "}
+                Image shown is for illustration purposes. The actual Bhairava Kavacham may differ slightly in finish, texture and detailing.
+              </p>
             </div>
           </div>
 
