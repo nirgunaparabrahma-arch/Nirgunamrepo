@@ -162,7 +162,7 @@ export default function SpiritualActivities() {
 
             <div className="max-w-[900px] mx-auto text-center">
               <p className="font-display italic text-[19px] md:text-[22px] font-semibold text-[#7A5736]">
-                “Experience the power. Channel the devotion. Become the Tandav.”
+                “Experience the Power. Channel the Devotion. Become the Tandav.”
               </p>
               <div className="mt-6 flex items-start gap-4 rounded-[18px] bg-[#2D221A] px-6 py-6 text-left text-white md:px-8">
                 <span aria-hidden="true" className="text-[22px]">📩</span>
