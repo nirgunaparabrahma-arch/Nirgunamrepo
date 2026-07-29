@@ -191,7 +191,7 @@ export default function Products() {
           <div className="w-full lg:w-1/2">
             <div className="w-full h-[600px] rounded-[20px] overflow-hidden shadow-[0_20px_40px_rgba(42,31,24,0.08)]">
               <img
-                src="/jagadadi.jpeg"
+                src="/prdlingam.png"
                 alt="Aadi Lingam"
                 className="w-full h-full object-cover"
               />

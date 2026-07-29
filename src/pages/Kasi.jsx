@@ -382,7 +382,7 @@ export default function KasiYatra() {
           overlayClassName="bg-gradient-to-t from-black/85 via-black/45 to-black/10"
         />
 
-        <div className="relative z-10 w-full px-[5%] lg:px-[8%] pb-20">
+        <div className="relative z-10 w-full px-[5%] lg:px-[8%] pb-40 md:pb-20">
 
           <div className="max-w-[900px]">
 
@@ -415,6 +415,14 @@ export default function KasiYatra() {
           </div>
 
         </div>
+
+        <button
+          type="button"
+          onClick={() => setShowYatraModal(true)}
+          className="absolute z-20 bottom-8 right-6 md:bottom-12 md:right-10 h-[56px] px-8 md:px-10 rounded-[12px] bg-[#C56F2B] hover:bg-[#B06124] text-white text-[13px] uppercase font-bold tracking-widest transition-colors shadow-[0_12px_30px_rgba(0,0,0,0.25)]"
+        >
+          Register Now
+        </button>
 
       </section>
 
