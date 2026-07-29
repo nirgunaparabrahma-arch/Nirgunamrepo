@@ -10,6 +10,15 @@ import { destinationDates } from "../data/yatraDates";
 export default function DhoDham() {
   const [showYatraModal, setShowYatraModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [showItinerary, setShowItinerary] = useState(false);
+  const [openCarryGuides, setOpenCarryGuides] = useState({});
+
+  const toggleCarryGuide = (guide) => {
+    setOpenCarryGuides((current) => ({
+      ...current,
+      [guide]: !current[guide]
+    }));
+  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -252,7 +261,7 @@ export default function DhoDham() {
       description: "Carry dry fruits and energy bars for quick nourishment during travel and trekking."
     },
     {
-      icon: "waterproof",
+      icon: "shield",
       title: "Protect Your Belongings",
       description: "Pack essential belongings in waterproof pouches or sealed bags to keep them dry."
     },
@@ -304,7 +313,7 @@ export default function DhoDham() {
 
 
         {/* Hero Content */}
-        <div className="relative z-10 w-full px-[5%] lg:px-[8%] pb-20">
+        <div className="relative z-10 w-full px-[5%] lg:px-[8%] pb-40 md:pb-20">
 
           <div className="max-w-[850px]">
 
@@ -466,20 +475,29 @@ export default function DhoDham() {
 
         <div className="max-w-[1100px] mx-auto">
 
-          <div className="text-center mb-20">
+          <button
+            type="button"
+            onClick={() => setShowItinerary(!showItinerary)}
+            aria-expanded={showItinerary}
+            className="w-full rounded-[20px] border border-[#C89A58]/25 bg-[#FBF8F4] px-6 py-7 md:px-9 md:py-8 flex items-center justify-between gap-6 text-left shadow-[0_8px_28px_rgba(44,33,25,0.04)] hover:border-[#C89A58]/50 transition-colors"
+          >
+            <div>
+              <span className="text-[11px] uppercase tracking-[0.22em] text-[#C89A58] font-bold">
+                Journey Through The Himalayas
+              </span>
+              <h2 className="font-display text-[30px] md:text-[42px] text-[#2C2119] mt-1">
+                Yatra Itinerary
+              </h2>
+            </div>
 
-            <span className="text-[12px] uppercase tracking-[0.25em] text-[#C89A58] font-semibold">
-              Journey Through The Himalayas
+            <span className={`material-symbols-outlined flex-shrink-0 w-11 h-11 rounded-full bg-[#C56F2B] text-white flex items-center justify-center transition-transform duration-300 ${showItinerary ? "rotate-180" : ""}`}>
+              expand_more
             </span>
-
-            <h2 className="font-display text-[42px] md:text-[55px] mt-4">
-              Yatra Itinerary
-            </h2>
-
-          </div>
+          </button>
 
 
-          <div className="relative">
+          {showItinerary && (
+          <div className="relative mt-14">
 
             {/* Timeline Line */}
             <div className="absolute left-[24px] md:left-[120px] top-0 bottom-0 w-[1px] bg-[#C89A58]/30" />
@@ -528,6 +546,7 @@ export default function DhoDham() {
             </div>
 
           </div>
+          )}
 
         </div>
 
@@ -549,32 +568,57 @@ export default function DhoDham() {
             Optional Places
           </h2>
 
-          <p className="text-[#776D64] mt-5">
-            Yatris can visit these places during their free time based on
-            their own interest.
+          <p className="text-[#655A50] text-[16px] max-w-[680px] mx-auto mt-5 leading-[1.8]">
+            Enrich your journey with these optional sacred destinations, subject to available time and local conditions.
           </p>
 
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-12">
 
             {[
-              "Triyuginarayan",
-              "Vasudhara Falls",
-              "Mathura"
+              {
+                name: "Triyuginarayan",
+                icon: "local_fire_department",
+                description: "Visit the sacred temple associated with the divine wedding of Shiva and Parvati."
+              },
+              {
+                name: "Vasudhara Falls",
+                icon: "water",
+                description: "Experience the serene Himalayan waterfall flowing through the mountains near Mana."
+              },
+              {
+                name: "Mathura",
+                icon: "temple_hindu",
+                description: "Explore the sacred birthplace of Sri Krishna and its timeless devotional atmosphere."
+              }
             ].map((place, index) => (
 
               <div
-                key={index}
-                className="bg-[#FBF8F4] border border-black/5 rounded-[16px] p-7"
+                key={place.name}
+                className="group relative overflow-hidden bg-gradient-to-br from-[#FFF9F0] to-[#FBF3E8] border border-[#C89A58]/20 rounded-[20px] p-7 text-left shadow-[0_8px_28px_rgba(44,33,25,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(44,33,25,0.09)]"
               >
 
-                <span className="material-symbols-outlined text-[#C89A58] text-[30px]">
-                  landscape
-                </span>
+                <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-[#C56F2B] via-[#E3B875] to-transparent" />
+
+                <div className="flex items-center justify-between">
+                  <span className="w-12 h-12 rounded-full bg-[#C56F2B] text-white flex items-center justify-center shadow-[0_6px_16px_rgba(197,111,43,0.2)]">
+                    <span className="material-symbols-outlined text-[25px]">
+                      {place.icon}
+                    </span>
+                  </span>
+
+                  <span className="text-[10px] uppercase tracking-[0.18em] text-[#B9773F] font-bold">
+                    Optional {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
 
                 <h3 className="font-display text-[22px] mt-4">
-                  {place}
+                  {place.name}
                 </h3>
+
+                <p className="text-[#655A50] text-[14px] leading-[1.8] mt-3">
+                  {place.description}
+                </p>
 
               </div>
 
@@ -614,25 +658,36 @@ export default function DhoDham() {
           </div>
 
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
 
             {/* Clothing */}
             <div className="bg-[#FBF8F4] rounded-[20px] border border-black/5 p-8">
 
-              <div className="flex items-center gap-3 mb-7">
+              <button
+                type="button"
+                onClick={() => toggleCarryGuide("clothing")}
+                aria-expanded={Boolean(openCarryGuides.clothing)}
+                className="w-full flex items-center justify-between gap-4 text-left"
+              >
+                <span className="flex items-center gap-3">
 
-                <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
-                  checkroom
+                  <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
+                    checkroom
+                  </span>
+
+                  <span className="font-display text-[27px]">
+                    Clothing
+                  </span>
                 </span>
 
-                <h3 className="font-display text-[27px]">
-                  Clothing
-                </h3>
+                <span className={`material-symbols-outlined text-[#C56F2B] transition-transform duration-300 ${openCarryGuides.clothing ? "rotate-180" : ""}`}>
+                  expand_more
+                </span>
+              </button>
 
-              </div>
 
-
-              <ul className="space-y-4">
+              {openCarryGuides.clothing && (
+              <ul className="space-y-4 mt-7">
 
                 {clothing.map((item, index) => (
 
@@ -654,6 +709,7 @@ export default function DhoDham() {
                 ))}
 
               </ul>
+              )}
 
             </div>
 
@@ -661,20 +717,31 @@ export default function DhoDham() {
             {/* Documents */}
             <div className="bg-[#FBF8F4] rounded-[20px] border border-black/5 p-8">
 
-              <div className="flex items-center gap-3 mb-7">
+              <button
+                type="button"
+                onClick={() => toggleCarryGuide("documents")}
+                aria-expanded={Boolean(openCarryGuides.documents)}
+                className="w-full flex items-center justify-between gap-4 text-left"
+              >
+                <span className="flex items-center gap-3">
 
-                <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
-                  description
+                  <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
+                    description
+                  </span>
+
+                  <span className="font-display text-[27px]">
+                    Documents
+                  </span>
                 </span>
 
-                <h3 className="font-display text-[27px]">
-                  Documents
-                </h3>
+                <span className={`material-symbols-outlined text-[#C56F2B] transition-transform duration-300 ${openCarryGuides.documents ? "rotate-180" : ""}`}>
+                  expand_more
+                </span>
+              </button>
 
-              </div>
 
-
-              <ul className="space-y-4">
+              {openCarryGuides.documents && (
+              <ul className="space-y-4 mt-7">
 
                 {documents.map((item, index) => (
 
@@ -696,6 +763,7 @@ export default function DhoDham() {
                 ))}
 
               </ul>
+              )}
 
             </div>
 
@@ -703,20 +771,31 @@ export default function DhoDham() {
             {/* Personal Items */}
             <div className="bg-[#FBF8F4] rounded-[20px] border border-black/5 p-8">
 
-              <div className="flex items-center gap-3 mb-7">
+              <button
+                type="button"
+                onClick={() => toggleCarryGuide("personal")}
+                aria-expanded={Boolean(openCarryGuides.personal)}
+                className="w-full flex items-center justify-between gap-4 text-left"
+              >
+                <span className="flex items-center gap-3">
 
-                <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
-                  backpack
+                  <span className="material-symbols-outlined text-[#C89A58] text-[32px]">
+                    backpack
+                  </span>
+
+                  <span className="font-display text-[27px]">
+                    Personal Items
+                  </span>
                 </span>
 
-                <h3 className="font-display text-[27px]">
-                  Personal Items
-                </h3>
+                <span className={`material-symbols-outlined text-[#C56F2B] transition-transform duration-300 ${openCarryGuides.personal ? "rotate-180" : ""}`}>
+                  expand_more
+                </span>
+              </button>
 
-              </div>
 
-
-              <ul className="space-y-4">
+              {openCarryGuides.personal && (
+              <ul className="space-y-4 mt-7">
 
                 {personalItems.map((item, index) => (
 
@@ -738,6 +817,7 @@ export default function DhoDham() {
                 ))}
 
               </ul>
+              )}
 
             </div>
 
@@ -909,32 +989,64 @@ export default function DhoDham() {
               Important Information
             </h2>
 
+            <p className="text-[#655A50] text-[16px] max-w-[700px] mx-auto mt-5 leading-[1.8]">
+              Please review these possible additional expenses before confirming your Himalayan Yatra.
+            </p>
+
           </div>
 
 
-          <div className="bg-[#FBF8F4] border border-black/5 rounded-[20px] p-8 md:p-12">
+          <div className="rounded-[22px] border border-[#C89A58]/20 bg-gradient-to-br from-[#FFF9F0] to-[#F8EFE3] p-6 md:p-10 shadow-[0_12px_38px_rgba(44,33,25,0.05)]">
 
-            <h3 className="font-display text-[28px] mb-8">
-              Expenses Not Included
-            </h3>
+            <div className="mb-7 flex flex-col sm:flex-row sm:items-center gap-4 rounded-[16px] bg-[#2C2119] px-5 py-5 text-white">
+              <span className="material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-white/10 text-[#E3B875]">
+                receipt_long
+              </span>
 
+              <div>
+                <h3 className="font-display text-[26px] md:text-[30px]">
+                  Expenses Not Included
+                </h3>
+                <p className="text-white/65 text-[13px] md:text-[14px] mt-1 leading-6">
+                  These costs may apply depending on personal needs, emergencies or circumstances beyond the organiser’s control.
+                </p>
+              </div>
+            </div>
 
-            <div className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
               {exclusions.map((item, index) => (
 
                 <div
                   key={index}
-                  className="flex gap-4"
+                  className="group flex gap-4 rounded-[16px] border border-[#C89A58]/15 bg-white/80 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#C89A58]/35 hover:shadow-[0_10px_24px_rgba(44,33,25,0.06)]"
                 >
 
-                  <span className="text-[#C89A58] font-bold">
-                    {index + 1}.
+                  <span className="w-10 h-10 rounded-full bg-[#C56F2B]/10 flex items-center justify-center flex-shrink-0">
+                    <span className="material-symbols-outlined text-[#C56F2B] text-[20px]">
+                      {[
+                        "hotel",
+                        "payments",
+                        "directions_bus",
+                        "emergency",
+                        "medical_services",
+                        "flight_takeoff",
+                        "trending_up",
+                        "thunderstorm",
+                        "add_circle",
+                        "warning"
+                      ][index]}
+                    </span>
                   </span>
 
-                  <p className="text-[14px] text-[#776D64] leading-[1.8]">
-                    {item}
-                  </p>
+                  <div>
+                    <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-[#B9773F]">
+                      Exclusion {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-[14px] md:text-[15px] text-[#5F554C] leading-[1.8] mt-1.5">
+                      {item}
+                    </p>
+                  </div>
 
                 </div>
 
