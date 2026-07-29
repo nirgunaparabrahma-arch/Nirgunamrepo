@@ -22,7 +22,14 @@ export default function Yatra() {
   });
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (window.location.hash) {
+      const element = document.getElementById(window.location.hash.substring(1));
+      if (element) {
+        setTimeout(() => element.scrollIntoView({ behavior: "smooth" }), 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   const handleInputChange = (e) => {
@@ -290,7 +297,7 @@ export default function Yatra() {
       </section>
 
       {/* SHRINES WE COVER SECTION */}
-      <section className="py-[120px] px-[5%] lg:px-[8%] bg-[#FDFBF8] border-t border-black/5">
+      <section id="shrines-we-cover" className="py-[120px] px-[5%] lg:px-[8%] bg-[#FDFBF8] border-t border-black/5">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
             <div>

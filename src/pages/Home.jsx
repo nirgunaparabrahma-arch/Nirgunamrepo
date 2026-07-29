@@ -179,7 +179,7 @@ export default function Home() {
       <header className="relative min-h-screen w-full flex flex-col justify-center items-start px-[5%] pt-32 pb-[420px] sm:pb-[350px] lg:pb-[320px] overflow-hidden">
         <HeroBackground
           src="/heroimg.webp"
-          mobileSrc="/mbhome.png"
+          mobileSrc="/mbhome1.png"
           alt="Hero Background"
           overlayClassName="bg-gradient-to-b from-black/30 to-black/70"
         />

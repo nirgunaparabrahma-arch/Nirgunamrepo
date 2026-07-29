@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import HeroBackground from "../components/HeroBackground";
@@ -246,7 +247,12 @@ export default function PanchaBhuta() {
 
   {/* Hero Content */}
   <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
-    <div className="text-center text-white max-w-4xl">
+    <div className="text-center text-white max-w-4xl flex flex-col items-center">
+
+      <Link to="/yatra#shrines-we-cover" className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/25 border border-white/20 text-white text-[12px] font-bold tracking-widest uppercase transition-all backdrop-blur-sm mb-8 w-fit">
+        <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+        <span>Back to Yatra</span>
+      </Link>
 
       <span className="text-[12px] uppercase tracking-[0.3em] text-[#E8C58B] font-semibold">
         Sacred Yatra

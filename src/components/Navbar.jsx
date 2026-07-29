@@ -66,6 +66,8 @@ export default function Navbar() {
     return () => window.removeEventListener('open-join-nirgunam', openJoinModal);
   }, []);
 
+  const isYatraActive = ['/yatra', '/kasi', '/dho-dham', '/pancha-bhuta'].includes(location.pathname);
+
   return (
     <>
       <nav 
@@ -84,7 +86,7 @@ export default function Navbar() {
           <Link to="/about" className={`text-[11px] font-semibold uppercase tracking-widest border-b-2 transition-all duration-500 ${location.pathname === '/about' ? (scrolled ? 'border-secondary text-on-surface pb-1' : 'border-white text-white pb-1') : (scrolled ? 'border-transparent text-[#4e4541]' : 'border-transparent text-white/80')}`}>About</Link>
           <Link to="/journey" className={`text-[11px] font-semibold uppercase tracking-widest border-b-2 transition-all duration-500 ${location.pathname === '/journey' ? (scrolled ? 'border-secondary text-on-surface pb-1' : 'border-white text-white pb-1') : (scrolled ? 'border-transparent text-[#4e4541]' : 'border-transparent text-white/80')}`}>Journey</Link>
           <Link to="/bhairavam" className={`text-[11px] font-semibold uppercase tracking-widest border-b-2 transition-all duration-500 ${location.pathname === '/bhairavam' ? (scrolled ? 'border-secondary text-on-surface pb-1' : 'border-white text-white pb-1') : (scrolled ? 'border-transparent text-[#4e4541]' : 'border-transparent text-white/80')}`}>Bhairavam</Link>
-          <Link to="/yatra" className={`text-[11px] font-semibold uppercase tracking-widest border-b-2 transition-all duration-500 ${location.pathname === '/yatra' ? (scrolled ? 'border-secondary text-on-surface pb-1' : 'border-white text-white pb-1') : (scrolled ? 'border-transparent text-[#4e4541]' : 'border-transparent text-white/80')}`}>Yatra</Link>
+          <Link to="/yatra" className={`text-[11px] font-semibold uppercase tracking-widest border-b-2 transition-all duration-500 ${isYatraActive ? (scrolled ? 'border-secondary text-on-surface pb-1' : 'border-white text-white pb-1') : (scrolled ? 'border-transparent text-[#4e4541]' : 'border-transparent text-white/80')}`}>Yatra</Link>
           <Link to="/products" className={`text-[11px] font-semibold uppercase tracking-widest border-b-2 transition-all duration-500 ${location.pathname === '/products' ? (scrolled ? 'border-secondary text-on-surface pb-1' : 'border-white text-white pb-1') : (scrolled ? 'border-transparent text-[#4e4541]' : 'border-transparent text-white/80')}`}>Products</Link>
           <Link to="/spiritual-activities" className={`text-[11px] font-semibold uppercase tracking-widest border-b-2 transition-all duration-500 ${location.pathname === '/spiritual-activities' ? (scrolled ? 'border-secondary text-on-surface pb-1' : 'border-white text-white pb-1') : (scrolled ? 'border-transparent text-[#4e4541]' : 'border-transparent text-white/80')}`}>Spiritual Activities</Link>
           <Link to="/contact" className={`text-[11px] font-semibold uppercase tracking-widest border-b-2 transition-all duration-500 ${location.pathname === '/contact' ? (scrolled ? 'border-secondary text-on-surface pb-1' : 'border-white text-white pb-1') : (scrolled ? 'border-transparent text-[#4e4541]' : 'border-transparent text-white/80')}`}>Contact</Link>
