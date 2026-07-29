@@ -52,6 +52,8 @@ export default function KasiYatra() {
     }));
   };
   const [showExceptionalExclusions, setShowExceptionalExclusions] = useState(false);
+  const [showHealthConditions, setShowHealthConditions] = useState(false);
+  const [showAdditionalTips, setShowAdditionalTips] = useState(false);
 
   const openAndScrollToItinerary = (itineraryKey) => {
     setOpenItinerary(itineraryKey);
@@ -609,12 +611,10 @@ export default function KasiYatra() {
               <div className="mt-5 flex flex-wrap items-center justify-center gap-y-3 font-display text-[18px] sm:text-[20px] md:text-[27px] leading-[1.8]">
                 {[
                   "Varanasi",
-                  "Sarnath",
-                  "Prayagraj",
-                  "Ayodhya",
-                  "Naimisharanya",
                   "Gaya",
-                  "Varanasi"
+                  "Ayodhya",
+                  "Naimisharanyam",
+                  "Prayagraj"
                 ].map((place, index, route) => (
                   <span key={`${place}-${index}`} className="inline-flex items-center whitespace-nowrap">
                     <span>{place}</span>
@@ -1179,9 +1179,19 @@ export default function KasiYatra() {
               Travel Safely
             </span>
 
-            <h2 className="font-display text-[42px] md:text-[55px] mt-4">
-              Health and Important Conditions
-            </h2>
+            <button
+              type="button"
+              onClick={() => setShowHealthConditions(!showHealthConditions)}
+              aria-expanded={showHealthConditions}
+              className="mx-auto mt-4 flex items-center justify-center gap-4 text-center"
+            >
+              <span className="font-display text-[42px] md:text-[55px]">
+                Health and Important Conditions
+              </span>
+              <span className={`material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#C56F2B] text-white transition-transform duration-300 ${showHealthConditions ? "rotate-180" : ""}`}>
+                expand_more
+              </span>
+            </button>
 
             <p className="text-[#776D64] max-w-[720px] mx-auto mt-5 leading-[1.8]">
               Proper preparation, personal medicines and awareness of
@@ -1191,6 +1201,7 @@ export default function KasiYatra() {
 
           </div>
 
+          {showHealthConditions && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
             {/* Medical Supplies */}
@@ -1283,6 +1294,7 @@ export default function KasiYatra() {
             </div>
 
           </div>
+          )}
 
         </div>
 
@@ -1353,9 +1365,19 @@ export default function KasiYatra() {
               Travel Mindfully
             </span>
 
-            <h2 className="font-display text-[42px] md:text-[55px] mt-4">
-              Additional Tips
-            </h2>
+            <button
+              type="button"
+              onClick={() => setShowAdditionalTips(!showAdditionalTips)}
+              aria-expanded={showAdditionalTips}
+              className="mx-auto mt-4 flex items-center justify-center gap-4 text-center"
+            >
+              <span className="font-display text-[42px] md:text-[55px]">
+                Additional Tips
+              </span>
+              <span className={`material-symbols-outlined flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-[#C56F2B] text-white transition-transform duration-300 ${showAdditionalTips ? "rotate-180" : ""}`}>
+                expand_more
+              </span>
+            </button>
 
             <p className="text-[#776D64] max-w-[680px] mx-auto mt-5 leading-[1.8]">
               Simple precautions can make temple visits, transfers and
@@ -1364,6 +1386,7 @@ export default function KasiYatra() {
 
           </div>
 
+          {showAdditionalTips && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {additionalTips.map((tip, index) => (
@@ -1400,6 +1423,7 @@ export default function KasiYatra() {
             ))}
 
           </div>
+          )}
 
         </div>
 
