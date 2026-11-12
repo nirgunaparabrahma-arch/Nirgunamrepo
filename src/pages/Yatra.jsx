@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import HeroBackground from '../components/HeroBackground';
@@ -8,6 +8,32 @@ import { Link } from 'react-router-dom';
 import { destinationDates, destinationCardDates, normalizeDestinationName } from '../data/yatraDates';
 
 export default function Yatra() {
+  const galleryRef = useRef(null);
+  const [galleryEdges, setGalleryEdges] = useState({ start: true, end: false });
+  useEffect(() => {
+    const gallery = galleryRef.current;
+    if (!gallery) return;
+    const updateEdges = () => {
+      setGalleryEdges({
+        start: gallery.scrollLeft <= 2,
+        end: gallery.scrollLeft >= gallery.scrollWidth - gallery.clientWidth - 2
+      });
+    };
+    updateEdges();
+    gallery.addEventListener('scroll', updateEdges, { passive: true });
+    const observer = new ResizeObserver(updateEdges);
+    observer.observe(gallery);
+    return () => {
+      gallery.removeEventListener('scroll', updateEdges);
+      observer.disconnect();
+    };
+  }, []);
+  const slideGallery = (direction) => {
+    const gallery = galleryRef.current;
+    if (!gallery) return;
+    const step = gallery.firstElementChild.getBoundingClientRect().width + 20;
+    gallery.scrollBy({ left: direction * step, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+  };
   const [submitting, setSubmitting] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -143,25 +169,37 @@ export default function Yatra() {
 
           <div className="w-full flex flex-col">
             {/* Yatra Group Gallery */}
-            <div className="flex gap-5 mb-12 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
-              {[
-                { src: '/kedgrp.jpeg', alt: 'Yatra group at Kedarnath Temple' },
-                { src: '/kasigrp.jpeg', alt: 'Yatra group at Tungnath Temple' },
-                { src: '/tungnathgrp.jpeg', alt: 'Yatra group in Kashi' }
-              ].map((photo) => (
-                <div
-                  key={photo.src}
-                  className="w-[85%] shrink-0 snap-start aspect-[4/3] rounded-[20px] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.06)] md:w-full"
-                >
-                  <img
-                    src={photo.src}
-                    alt={photo.alt}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
+            <div className="relative mb-12">
+              <div id="yatra-photo-slider" ref={galleryRef} role="region" aria-label="Yatra photo gallery" tabIndex={0} className="flex gap-5 overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden rounded-[20px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C89A58]">
+                {[
+              { image: '/kedgrp.jpeg', alt: 'Yatra group at Kedarnath Temple' },
+              { image: '/kasigrp.jpeg', alt: 'Yatra pilgrims visiting a temple together' },
+              { image: '/tungnathgrp.jpeg', alt: 'Yatra group gathered outside a temple' },
+              { image: '/ddg1.jpg', alt: 'Yatra pilgrims gathered at Kedarnath temple' },
+              { image: '/ddg2.jpg', alt: 'Yatra group outside a temple illuminated at dusk' },
+              { image: '/ddg3.jpg', alt: 'Yatra pilgrims meditating together inside a shrine' },
+              { image: '/ddg4.jpg', alt: 'Pilgrims beside the Om sculpture in the Himalayas' },
+              { image: '/ddg5.jpg', alt: 'Yatra pilgrims on the Tungnath mountain trail' },
+              { image: '/ddg6.jpg', alt: 'Yatra group visiting Badrinath temple' },
+              { image: '/ddg7.jpg', alt: 'Yatra group at Kedarnath temple at night' },
+              { image: '/ddg8.jpg', alt: 'Devotees gathered at illuminated Kedarnath temple' }
+            ].map((photo) => (
+                  <a key={photo.image} href={photo.image} target="_blank" rel="noopener noreferrer" aria-label={`${photo.alt} (opens full image in a new tab)`} className="block w-[85%] sm:w-[calc((100%_-_20px)/2)] md:w-[calc((100%_-_40px)/3)] shrink-0 snap-start aspect-[4/3] rounded-[20px] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.06)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C89A58]">
+                    <img src={photo.image} alt={photo.alt} loading="lazy" decoding="async" width="1800" height="1286" className="w-full h-full object-cover" />
+                  </a>
+                ))}
+              </div>
+              {!galleryEdges.start && (
+                <button type="button" onClick={() => slideGallery(-1)} aria-label="Previous Yatra photos" aria-controls="yatra-photo-slider" className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/60 text-[#7A5736]/80 shadow-lg border border-[#C89A58]/20 hover:bg-white/85 flex items-center justify-center transition-colors">
+                  <span className="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+                </button>
+              )}
+              {!galleryEdges.end && (
+                <button type="button" onClick={() => slideGallery(1)} aria-label="Next Yatra photos" aria-controls="yatra-photo-slider" className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-white/60 text-[#7A5736]/80 shadow-lg border border-[#C89A58]/20 hover:bg-white/85 flex items-center justify-center transition-colors">
+                  <span className="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                </button>
+              )}
             </div>
-
             {/* <h3 className="font-display text-[32px] text-[#2C2119] mb-8">Current Yatra Destinations</h3> */}
 
             {/* Destination Grid */}
