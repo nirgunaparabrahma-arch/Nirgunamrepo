@@ -5,7 +5,7 @@ import HeroBackground from '../components/HeroBackground';
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
-import { destinationDates, destinationCardDates } from '../data/yatraDates';
+import { destinationDates, destinationCardDates, normalizeDestinationName } from '../data/yatraDates';
 
 export default function Yatra() {
   const [submitting, setSubmitting] = useState(false);
@@ -34,11 +34,19 @@ export default function Yatra() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => (
-      name === 'destination'
-        ? { ...prev, destination: value, dates: destinationDates[value] }
-        : { ...prev, [name]: value }
-    ));
+
+    if (name === 'destination') {
+      const normalizedDestination = normalizeDestinationName(value);
+
+      setFormData(prev => ({
+        ...prev,
+        destination: normalizedDestination,
+        dates: normalizedDestination === 'General Enquiry' ? null : destinationDates[normalizedDestination] ?? ''
+      }));
+      return;
+    }
+
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -135,7 +143,7 @@ export default function Yatra() {
 
           <div className="w-full flex flex-col">
             {/* Yatra Group Gallery */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+            <div className="flex gap-5 mb-12 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
               {[
                 { src: '/kedgrp.jpeg', alt: 'Yatra group at Kedarnath Temple' },
                 { src: '/kasigrp.jpeg', alt: 'Yatra group at Tungnath Temple' },
@@ -143,7 +151,7 @@ export default function Yatra() {
               ].map((photo) => (
                 <div
                   key={photo.src}
-                  className="w-full aspect-[4/3] rounded-[20px] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.06)]"
+                  className="w-[85%] shrink-0 snap-start aspect-[4/3] rounded-[20px] overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.06)] md:w-full"
                 >
                   <img
                     src={photo.src}
@@ -233,7 +241,7 @@ export default function Yatra() {
                     <select name="destination" required value={formData.destination} onChange={handleInputChange} className="w-full h-[56px] px-4 rounded-[12px] border border-black/[0.08] bg-white text-[#2C2119] font-body text-[15px] outline-none focus:border-[#C89A58] transition-colors appearance-none cursor-pointer">
                       <option value="" disabled>Select destination</option>
                       <option value="Sampurna Kashi">Sampurna Kashi</option>
-                      <option value="Dho-Dham">Dho-Dham</option>
+                      <option value="Dho Dham">Dho Dham</option>
                       <option value="Panchabhutam">Panchabhutam</option>
                       <option value="General Enquiry">General Enquiry</option>
                     </select>

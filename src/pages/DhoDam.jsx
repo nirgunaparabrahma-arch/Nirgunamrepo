@@ -44,7 +44,7 @@ export default function DhoDham() {
     destination: "Dho Dham",
     senior: "No",
     city: "",
-    dates: destinationDates["Dho-Dham"],
+    dates: destinationDates["Dho Dham"],
     requirements: ""
   });
 
@@ -100,7 +100,7 @@ export default function DhoDham() {
         destination: "Dho Dham",
         senior: "No",
         city: "",
-        dates: destinationDates["Dho-Dham"],
+        dates: destinationDates["Dho Dham"],
         requirements: ""
       });
 

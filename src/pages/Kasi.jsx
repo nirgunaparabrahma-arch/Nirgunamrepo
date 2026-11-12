@@ -218,18 +218,12 @@ export default function KasiYatra() {
     },
     {
       date: "Day 4",
-      title: "Gaya",
-      description:
-        "Travel to Gaya — Explore the sacred places — Return to Kashi."
-    },
-    {
-      date: "Day 5",
       title: "Ayodhya",
       description:
         "Hotel checkout — Travel to Ayodhya — Explore Ayodhya — Depart for Naimisharanyam — Overnight stay."
     },
     {
-      date: "Day 6",
+      date: "Day 5",
       title: "Naimisharanyam and Prayagraj",
       description:
         "Explore Naimisharanyam and local temples — Travel to Prayagraj — Darshan and rituals — Trip ends."
@@ -242,17 +236,17 @@ export default function KasiYatra() {
   const packageOptions = [
     {
       duration: "3 Nights / 4 Days",
-      price: "₹8,000",
+      price: "₹10,000",
       itineraryKey: "four"
     },
     {
-      duration: "5 Nights / 6 Days",
-      price: "₹12,000",
+      duration: "4 Nights / 5 Days",
+      price: "₹14,000",
       itineraryKey: "six"
     },
     {
       duration: "9 Nights / 10 Days",
-      price: "₹15,000",
+      price: "₹16,000",
       itineraryKey: "ten"
     }
   ];
@@ -296,6 +290,7 @@ export default function KasiYatra() {
   // PACKAGE INCLUDES
   // -----------------------------
   const packageIncludes = [
+    "Sleeper Class Train Tickets - Complimentary",
     "Local transport to important places.",
     "Food is available at the stay area only.",
     "Best AC accommodation on a triple-sharing basis during the Yatra.",
@@ -306,7 +301,7 @@ export default function KasiYatra() {
   // PACKAGE EXCLUDES
   // -----------------------------
   const packageExcludes = [
-    "Train or flight tickets.",
+    "Flight tickets.",
     "VIP Darshan, special Seva or Abhishekam tickets across all temples.",
     "Food, snacks, water bottles and other refreshments.",
     "Any medical or emergency evacuations if required.",
@@ -647,7 +642,7 @@ export default function KasiYatra() {
 
           <div id="kasi-itinerary-six" className="mt-6 scroll-mt-28">
             <ItineraryHeader
-              duration="5 Nights / 6 Days"
+              duration="4 Nights / 5 Days"
               isOpen={openItinerary === "six"}
               onClick={() => setOpenItinerary(openItinerary === "six" ? null : "six")}
             />
@@ -664,7 +659,6 @@ export default function KasiYatra() {
               <div className="mt-5 flex flex-wrap items-center justify-center gap-y-3 font-display text-[18px] sm:text-[20px] md:text-[27px] leading-[1.8]">
                 {[
                   "Varanasi",
-                  "Gaya",
                   "Ayodhya",
                   "Naimisharanyam",
                   "Prayagraj"
@@ -1176,9 +1170,9 @@ export default function KasiYatra() {
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                ["60–41 days", "Full payment refunded", "Excluding the non-refundable deposit"],
-                ["40–31 days", "75% refunded", "Excluding the non-refundable deposit"],
-                ["30–18 days", "50% refunded", "Excluding the non-refundable deposit"]
+                ["60–41 days", "Full payment Refund", "Excluding the non-refundable deposit"],
+                ["40–31 days", "75% Refund", "Excluding the non-refundable deposit"],
+                ["30–18 days", "50% Refund", "Excluding the non-refundable deposit"]
               ].map(([period, refund, note]) => (
                 <div
                   key={period}
@@ -1672,7 +1666,7 @@ export default function KasiYatra() {
 
             <p className="text-white/75 text-[16px] md:text-[18px] leading-[1.9] max-w-[760px] mx-auto mt-6">
               Join a complete pilgrimage through Kashi, Prayagraj,
-              Ayodhya, Naimisharanya and Gaya with guidance,
+              Ayodhya and Naimisharanya with guidance,
               accommodation, transport and spiritual support.
             </p>
 
@@ -1868,14 +1862,14 @@ export default function KasiYatra() {
                     <option value="" disabled>
                       Select package type
                     </option>
-                    <option value="3 Nights / 4 Days - ₹8,000/-">
-                      3 Nights / 4 Days — ₹8,000/-
+                    <option value="3 Nights / 4 Days - ₹10,000/-">
+                      3 Nights / 4 Days — ₹10,000/-
                     </option>
-                    <option value="5 Nights / 6 Days - ₹12,000/-">
-                      5 Nights / 6 Days — ₹12,000/-
+                    <option value="4 Nights / 5 Days - ₹14,000/-">
+                      4 Nights / 5 Days — ₹14,000/-
                     </option>
-                    <option value="9 Nights / 10 Days - ₹15,000/-">
-                      9 Nights / 10 Days — ₹15,000/-
+                    <option value="9 Nights / 10 Days - ₹16,000/-">
+                      9 Nights / 10 Days — ₹16,000/-
                     </option>
                   </select>
 
