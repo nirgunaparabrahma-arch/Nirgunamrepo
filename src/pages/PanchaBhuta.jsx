@@ -235,9 +235,9 @@ export default function PanchaBhuta() {
   ];
 
   const cancellationPolicy = [
-    "Cancellation 40–26 days before departure: full payment refunded excluding the non-refundable deposit.",
-    "Cancellation 25–16 days before departure: 75% refunded excluding the non-refundable deposit.",
-    "Cancellation 15–8 days before departure: 50% refunded excluding the non-refundable deposit.",
+    "Cancellation 40–26 days before departure: full payment refund excluding the non-refundable deposit.",
+    "Cancellation 25–16 days before departure: 75% refund excluding the non-refundable deposit.",
+    "Cancellation 15–8 days before departure: 50% refund excluding the non-refundable deposit.",
     "No refund for cancellations requested less than 7 days before departure.",
     "Refunds will not be issued when a participant cannot attend due to heavy rain, floods, traffic jams, vehicle breakdowns or personal medical emergencies.",
     "Bookings cannot be transferred to another date when a participant is unable to attend.",
@@ -633,9 +633,9 @@ export default function PanchaBhuta() {
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                ["40–26 days", "Full payment refunded", "Excluding the non-refundable deposit"],
-                ["25–16 days", "75% refunded", "Excluding the non-refundable deposit"],
-                ["15–8 days", "50% refunded", "Excluding the non-refundable deposit"]
+                ["40–26 days", "Full payment refund", "Excluding the non-refundable deposit"],
+                ["25–16 days", "75% refund", "Excluding the non-refundable deposit"],
+                ["15–8 days", "50% refund", "Excluding the non-refundable deposit"]
               ].map(([period, refund, note]) => (
                 <div
                   key={period}

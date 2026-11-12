@@ -941,9 +941,9 @@ export default function DhoDham() {
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
-                ["60–41 days", "Full payment refunded", "Excluding the non-refundable deposit"],
-                ["40–31 days", "75% refunded", "Excluding the non-refundable deposit"],
-                ["30–18 days", "50% refunded", "Excluding the non-refundable deposit"]
+                ["60–41 days", "Full payment refund", "Excluding the non-refundable deposit"],
+                ["40–31 days", "75% refund", "Excluding the non-refundable deposit"],
+                ["30–18 days", "50% refund", "Excluding the non-refundable deposit"]
               ].map(([period, refund, note]) => (
                 <div key={period} className="rounded-[16px] border border-[#C89A58]/20 bg-white p-5">
                   <p className="text-[12px] uppercase tracking-[0.16em] font-bold text-[#C56F2B]">
