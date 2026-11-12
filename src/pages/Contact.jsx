@@ -91,7 +91,7 @@ export default function Contact() {
 
             <div>
               <span className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[#B08955] font-bold mb-2"><FaInstagram /> INSTAGRAM</span>
-              <a href="https://www.instagram.com/nirgunaparabrahma?igsh=YWQ5OWFjb2xpd2Jj" target="_blank" rel="noopener noreferrer" className="font-display text-2xl text-[#2C2119] hover:text-[#B08955] transition-colors break-all">@nirgunaparabrahma</a>
+              <a href="https://www.instagram.com/nirgunamfoundation?vrfl=YWQ5OWFjb2xpd2Jj" target="_blank" rel="noopener noreferrer" className="font-display text-2xl text-[#2C2119] hover:text-[#B08955] transition-colors break-all">@nirgunamfoundation</a>
             </div>
 
             <div>
