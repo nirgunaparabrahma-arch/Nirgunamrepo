@@ -64,7 +64,7 @@ export default function Home() {
   const [events, setEvents] = useState([
     {
       _id: 'fallback-1',
-      title: 'Bhairava Jayanti ',
+      title: 'Project Thandavam',
       date: '1st Dec 2026',
       location: 'Bangalore',
       image: null,
@@ -77,14 +77,6 @@ export default function Home() {
       location: 'Bangalore',
       image: null,
       fallbackImg: 'mistylingam.png'
-    },
-    {
-      _id: 'fallback-3',
-      title: 'Guru Poornima',
-      date: '18th Jul 2027',
-      location: 'Bangalore',
-      image: null,
-      fallbackImg: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCg4MEcPfpbWVp3qnpKFjdSudl0_rfJGyP1npAPuySqJ7UESDBTHVqb0_lOX_C5xisbCvraPaR_JttIkdoKGos8m2fXDGfP2H-mnu5Go9i8u58yMUEJtXhjgMneWmYDC1G2B3tsK-vstYSamuDxv1Lz2zZnAscZqIm538E4DC_lS0o4o0WNhLkqA2gerfLhIkniX9Vz4H-qWubDL7aUT7usr50i4iU-Eh6dvc7tG7RtnYOpthZDWXIeXAEbZK7Z8ycRFyLFWsg3EJOQ'
     },
     {
       _id: 'fallback-4',
@@ -336,7 +328,7 @@ export default function Home() {
               View All Retreats <span className="material-symbols-outlined text-sm">arrow_outward</span>
             </Link> */}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {events.map((evt, idx) => (
               <div key={evt._id} className="group scroll-reveal" style={{ transitionDelay: `${idx * 100}ms` }}>
                 <div className="rounded-image overflow-hidden mb-8 aspect-[16/10] minimal-shadow">
